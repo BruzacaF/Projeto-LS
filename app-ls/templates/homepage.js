@@ -1,12 +1,13 @@
 import { createGamePage } from './gamePage.js';
+import runPreLoader from '../animations/pre-loader.js';
 
 
 
 
-document.body.onload = homePage();
+document.body.onload = runPreLoader();
 
 function homePage() {
-    
+
     let app = document.getElementById('app');
     app.innerHTML = '';
 
