@@ -1,4 +1,4 @@
-import homePage from './homePage.js';
+
 
 
 function createGamePage() {
@@ -21,11 +21,6 @@ function createGamePage() {
     main.appendChild(keyboard);
     boxWord.appendChild(chances);
     addMakeGuessEvent();
-
-
-
-
-
 
 
 
@@ -94,7 +89,6 @@ function createWordToGuess() {
 }
 
 
-
 function createKeyboard() {
     let keyboard = document.createElement('keyboard');
     let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -102,9 +96,9 @@ function createKeyboard() {
 
     for (let letter of alphabet) {
         let button = document.createElement('button');
-        button.textContent = letter;
         button.id = `key-${letter}`;
         button.classList.add('key');
+        button.textContent = letter; // Add this line to set the button text
         keyboard.appendChild(button);
     }
 
@@ -113,10 +107,9 @@ function createKeyboard() {
 
 function makeGuess() {
     let buttons = document.querySelectorAll('.key');
-
+    
     buttons.forEach(button => {
         if (button === this) {
-            button.disabled = true;
             button.classList.toggle("guessed");
             let letter = button.textContent;
             let wordArray = word.split('');
@@ -128,33 +121,39 @@ function makeGuess() {
                 if (letter === wordArray[i]) {
                     wordLetters[i].textContent = letter;
                     isLetterInWord = true;
-                    wordLetters[i].classList.toggle("correct");
-
-
-
+                    wordLetters[i].classList.add('letterCorrect');
+                    button.classList.add('keyCorrect');
+                    
+                
                 }
             }
 
             if (!isLetterInWord) {
                 chances--;
                 let boxChances = document.getElementById('boxChances');
-                boxChances.textContent = `Chances: ${chances}`;
+                boxChances.textContent = `Chances: ${chances}`;   
+                button.classList.add('keyIncorrect');
 
-                if (chances === 0) {
-                    restartGame();
-                }
+              
             }
+            if (chances === 0) {
+                gameOver(true);
+                
+            }
+
             if (isWordGuessed()) {
-                createPopUp();
+                gameOver(false);
             }
+        
         }
+       
     });
 }
 
 function addMakeGuessEvent() {
     let buttons = document.querySelectorAll('.key');
     for (let button of buttons) {
-        button.addEventListener('click', makeGuess);
+        button.addEventListener('click', makeGuess.bind(button));
     }
 }
 
@@ -168,7 +167,7 @@ function isWordGuessed() {
     return true;
 }
 
-function createPopUp () {
+function createPopUp (message) {
 
     // CREATING POPUP AND BACKGROUND
     let popUpBackground = document.createElement('div');
@@ -180,7 +179,7 @@ function createPopUp () {
     let closeButton = document.createElement('div');
     closeButton.textContent = 'X';
     let text = document.createElement('h1');
-    text.textContent = 'You won!';
+    text.textContent = message;
     let button = document.createElement('button');
     button.textContent = 'Play again';
     let button2 = document.createElement('button');
@@ -241,8 +240,20 @@ function createPopUp () {
     // }, 3000);
 }
 
+async function gameOver(bool) {
+    if (bool === true) {
+        setTimeout(() => {
+            createPopUp('Game Over!');
+        }
+        , 1000);
+    } else {
+        setTimeout(() => {
+            createPopUp('You won!');
+        }
+        , 1000);
+    }
 
-
+}
 
 
 
