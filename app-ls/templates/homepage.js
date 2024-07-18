@@ -4,7 +4,7 @@ import runPreLoader from '../animations/pre-loader.js';
 
 
 
-document.body.onload = runPreLoader();
+document.body.onload = createGamePage();
 
 function homePage() {
 

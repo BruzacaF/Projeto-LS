@@ -1,4 +1,4 @@
-import homePage from './homePage.js';
+
 
 
 function createGamePage() {
@@ -14,25 +14,13 @@ function createGamePage() {
 
     let boxWord = createWordToGuess();
     let keyboard = createKeyboard();
-    let chances = createChances();
-
-
+    
+   
     main.appendChild(boxWord);
     main.appendChild(keyboard);
-    boxWord.appendChild(chances);
     addMakeGuessEvent();
 
-
-
-
-
-
-
-
-
-
 }
-
 
 
 
@@ -56,11 +44,27 @@ function getRandomWord() {
 
 
 function createChances() {
+    let container = document.createElement('div');
     let box = document.createElement('div');
+    let box2 = document.createElement('div');
+    let box3 = document.createElement('div');
+    
     box.id = 'boxChances';
-    box.classList.add('chances');
+
+    container.classList.add('chances');
+    box.classList.add('card');
+    box2.classList.add('card-upper');
+    box3.classList.add('card-lower');
+    
     box.textContent = `Chances: ${chances}`;
-    return box;
+    box2.textContent = 'Jogador 1';
+    box3.textContent = 'Pontuação: 0';
+    
+    container.appendChild(box);
+    container.appendChild(box2);
+    container.appendChild(box3);
+
+    return container;
 }
 
 function restartGame(restart) {
@@ -75,24 +79,39 @@ function restartGame(restart) {
 
 function createWordToGuess() {
     let box = document.createElement('div');
+    let containerLetters = document.createElement('div');
+
     box.id = 'boxWord';
+    box.classList.add('boxWord');
+    containerLetters.id = 'containerLetters';
+    containerLetters.classList.add('containerLetters');
+
+
+
+    
 
     let hideWord = word.replace(/[a-z]/g, ' ');
-    box.textContent = '';
+    containerLetters.textContent = '';
+
+    let chances = createChances();
+    box.appendChild(chances);
+    box.appendChild(containerLetters);
+    
 
     for (let i = 0; i < word.length; i++) {
         let span = document.createElement('span');
         span.className = 'letter';
         span.id = `letter-${i}`;
         span.textContent = hideWord[i];
-        box.appendChild(span);
+        containerLetters.appendChild(span);
 
     }
+
+    
 
     return box
 
 }
-
 
 
 function createKeyboard() {
@@ -102,9 +121,9 @@ function createKeyboard() {
 
     for (let letter of alphabet) {
         let button = document.createElement('button');
-        button.textContent = letter;
         button.id = `key-${letter}`;
         button.classList.add('key');
+        button.textContent = letter; // Add this line to set the button text
         keyboard.appendChild(button);
     }
 
@@ -113,10 +132,9 @@ function createKeyboard() {
 
 function makeGuess() {
     let buttons = document.querySelectorAll('.key');
-
+    
     buttons.forEach(button => {
         if (button === this) {
-            button.disabled = true;
             button.classList.toggle("guessed");
             let letter = button.textContent;
             let wordArray = word.split('');
@@ -128,33 +146,39 @@ function makeGuess() {
                 if (letter === wordArray[i]) {
                     wordLetters[i].textContent = letter;
                     isLetterInWord = true;
-                    wordLetters[i].classList.toggle("correct");
-
-
-
+                    wordLetters[i].classList.add('letterCorrect');
+                    button.classList.add('keyCorrect');
+                    
+                
                 }
             }
 
             if (!isLetterInWord) {
                 chances--;
                 let boxChances = document.getElementById('boxChances');
-                boxChances.textContent = `Chances: ${chances}`;
+                boxChances.textContent = `Chances: ${chances}`;   
+                button.classList.add('keyIncorrect');
 
-                if (chances === 0) {
-                    restartGame();
-                }
+              
             }
+            if (chances === 0) {
+                gameOver(true);
+                
+            }
+
             if (isWordGuessed()) {
-                createPopUp();
+                gameOver(false);
             }
+        
         }
+       
     });
 }
 
 function addMakeGuessEvent() {
     let buttons = document.querySelectorAll('.key');
     for (let button of buttons) {
-        button.addEventListener('click', makeGuess);
+        button.addEventListener('click', makeGuess.bind(button));
     }
 }
 
@@ -168,7 +192,7 @@ function isWordGuessed() {
     return true;
 }
 
-function createPopUp () {
+function createPopUp (message) {
 
     // CREATING POPUP AND BACKGROUND
     let popUpBackground = document.createElement('div');
@@ -180,7 +204,7 @@ function createPopUp () {
     let closeButton = document.createElement('div');
     closeButton.textContent = 'X';
     let text = document.createElement('h1');
-    text.textContent = 'You won!';
+    text.textContent = message;
     let button = document.createElement('button');
     button.textContent = 'Play again';
     let button2 = document.createElement('button');
@@ -241,6 +265,20 @@ function createPopUp () {
     // }, 3000);
 }
 
+async function gameOver(bool) {
+    if (bool === true) {
+        setTimeout(() => {
+            createPopUp('Game Over!');
+        }
+        , 1000);
+    } else {
+        setTimeout(() => {
+            createPopUp('You won!');
+        }
+        , 1000);
+    }
+
+}
 
 
 

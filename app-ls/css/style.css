@@ -1,7 +1,24 @@
+:root {
+    --button_radius: 0.75em;
+    --button_color: #e8e8e8;
+    --button_outline_color: #000000;
+    --hover_offset: 4px;
+    --active_offset: 5px;
+    --shadow_color: rgba(0, 0, 0, 0.5);
+    --glitch_offset: 2px;
+}
+
+
+
+
+
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-transform: uppercase;
 
 }
 
@@ -15,7 +32,9 @@ body {
 
     height: 100%;
     width: 100%;
-    z-index: 1;
+    z-index: -1;
+    background-color: #f3f3f3;
+
 
 }
 
@@ -51,10 +70,6 @@ body {
     cursor: pointer;
 }
 
-
-
-
-
 #gamePage {
     display: flex;
     flex-direction: column;
@@ -62,19 +77,116 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
+    gap: 1.4rem;
 
 }
 
-#boxWord {
-    background-color: burlywood;
+.boxWord {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    height: 500px;
+
+}
+
+.boxWord .containerLetters {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 200px;
+
+    background: cadetblue;
+}
+
+.boxWord .chances {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+
+
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+    font-size: 30px;
+    color: #2b2b2b;
+
+}
+
+.boxWord .chances .card {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    height: 50vh;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 400px;
+    height: 60px;
+    background: green;
+    color: #f0f0f0;
+    border-radius: 10px;
 
 }
+
+.boxWord .chances .upperCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 400px;
+    height: 60px;
+    background: navy;
+    color: #2b2b2b;
+    border-radius: 10px;
+
+}
+
+.boxWord .chances .lowerCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 400px;
+    height: 60px;
+    background: red;
+    color: #f0f0f0;
+    border-radius: 10px;
+
+}
+
+.boxWord .chances .card:hover {
+    background-color: #FFE87C;
+    cursor: pointer;
+}
+
+.boxWord .chances .card:hover+.upperCard {
+    height: 300px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.boxWord .chances .card:hover+.lowerCard {
+    top: 20.2em;
+}
+
+
 
 
 
@@ -96,19 +208,13 @@ body {
     font-size: 40px;
     font-weight: bold;
     color: #2b2b2b;
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    transform: translateY(-0.2em);
+    border: 3px solid #2b2b2b;
 }
 
 
-#boxWord .chances {
-    display: flex;
-    position: absolute;
-
-    width: 100%;
-    height: 50px;
-    top: 0px;
-    left: 0px;
-    font-size: 30px;
-}
 
 
 
@@ -130,34 +236,82 @@ body {
     align-items: center;
     align-content: flex-start;
 
-    width: 80%;
+    width: 60%;
     height: fit-content;
+    gap: 15px;
+
 }
 
-.keyboard .key {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.keyboard button.key {
+
+
+
+    cursor: pointer;
+
+    font-size: 20px;
+    display: block;
+    border: 3px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
     width: 70px;
     height: 70px;
-    margin: 5px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: bold;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
 
-    color: #2b2b2b;
+
+}
+
+.keyboard button.keyCorrect {
+
+    font-size: 20px;
+    display: block;
+    border: 3px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    width: 70px;
+    height: 70px;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: press 1s ease-in-out;
+    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    transform: translate(calc(1 * var(--active_offset)),
+            calc(1 * var(--active_offset)));
+    background-color: green;
+
+}
+
+.keyboard button.keyIncorrect {
+
+    font-size: 20px;
+    display: block;
+    border: 3px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    width: 70px;
+    height: 70px;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: press 1s ease-in-out;
+    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    transform: translate(calc(1 * var(--active_offset)),
+            calc(1 * var(--active_offset)));
+    background-color: red;
+
 }
 
 
 /*-------------------------- EFFECT ------------------- */
 
-.correct {
-    background-color: green;
+.letterCorrect {
+    background: green;
     color: #f0f0f0;
     animation: blink 0.5s ease-in-out;
+    text-transform: uppercase;
 }
+
+
 
 @keyframes blink {
     0% {
@@ -173,15 +327,8 @@ body {
     }
 }
 
-.key.guessed {
-    background-color: red;
-    color: #f0f0f0;
-    animation: blink 0.5s ease-in-out;
-    opacity: 0;
-}
 
-
-
+/*-------------------------------- end of effects ----------------------------- */
 .popUpBackground {
     display: flex;
     justify-content: center;
@@ -287,7 +434,7 @@ body {
 .loader {
     width: 100%;
     height: 100%;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -297,13 +444,13 @@ body {
     left: 0;
     z-index: 101;
 
-    
+
 }
 
 .loader .boxLoader {
     width: 500px;
     height: 500px;
-    
+
     border-radius: 10px;
     z-index: 102;
     display: flex;
@@ -314,7 +461,7 @@ body {
 
 .loader .boxLoader .loaderText {
     font-size: 2rem;
-    
+
     margin-bottom: 20px;
     text-align: center;
     z-index: 103;
@@ -323,10 +470,9 @@ body {
 
 .loader .boxLoader .loaderText #textBox {
     font-size: 1.5rem;
-    
+
     margin-bottom: 20px;
     text-align: center;
     z-index: 105;
 
 }
-
