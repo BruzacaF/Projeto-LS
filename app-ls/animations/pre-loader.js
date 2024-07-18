@@ -7,6 +7,8 @@ function runPreLoader() {
     let app = document.getElementById('app');
     app.innerHTML = '';
 
+    document.body.setAttribute('data-theme', 'light');
+
 
     createPreLoader();
     doAnimation();

@@ -1,15 +1,20 @@
 import { createGamePage } from './gamePage.js';
 import runPreLoader from '../animations/pre-loader.js';
+import createHeader from '../templates/header.js';
 
 
-
-
-document.body.onload = createGamePage();
+document.body.onload = runPreLoader();
 
 function homePage() {
 
+    
+
     let app = document.getElementById('app');
     app.innerHTML = '';
+
+
+    let header = createHeader();
+    document.body.insertBefore(header, app);
 
 
     let homePage = document.createElement('div');

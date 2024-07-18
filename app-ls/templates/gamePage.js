@@ -31,7 +31,7 @@ function createGamePage() {
 
 
 
-const words = ['javascript', 'html', 'css'];
+const words = ['javascript', 'html', 'css', 'paralelepidocmaleas'];
 var chances = 6;
 var word = getRandomWord();
 
@@ -53,8 +53,8 @@ function createChances() {
 
     container.classList.add('chances');
     box.classList.add('card');
-    box2.classList.add('card-upper');
-    box3.classList.add('card-lower');
+    box2.classList.add('upperCard');
+    box3.classList.add('lowerCard');
     
     box.textContent = `Chances: ${chances}`;
     box2.textContent = 'Jogador 1';
