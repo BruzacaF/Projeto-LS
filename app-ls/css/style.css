@@ -32,7 +32,9 @@ body {
 
     height: 100%;
     width: 100%;
-    z-index: 1;
+    z-index: -1;
+    background-color: #f3f3f3;
+
 
 }
 
@@ -68,10 +70,6 @@ body {
     cursor: pointer;
 }
 
-
-
-
-
 #gamePage {
     display: flex;
     flex-direction: column;
@@ -79,19 +77,116 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
+    gap: 1.4rem;
 
 }
 
-#boxWord {
-    background-color: burlywood;
+.boxWord {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    height: 500px;
+
+}
+
+.boxWord .containerLetters {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 200px;
+
+    background: cadetblue;
+}
+
+.boxWord .chances {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+
+
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+    font-size: 30px;
+    color: #2b2b2b;
+
+}
+
+.boxWord .chances .card {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    height: 50vh;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 400px;
+    height: 60px;
+    background: green;
+    color: #f0f0f0;
+    border-radius: 10px;
 
 }
+
+.boxWord .chances .upperCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 400px;
+    height: 60px;
+    background: navy;
+    color: #2b2b2b;
+    border-radius: 10px;
+
+}
+
+.boxWord .chances .lowerCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 400px;
+    height: 60px;
+    background: red;
+    color: #f0f0f0;
+    border-radius: 10px;
+
+}
+
+.boxWord .chances .card:hover {
+    background-color: #FFE87C;
+    cursor: pointer;
+}
+
+.boxWord .chances .card:hover+.upperCard {
+    height: 300px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.boxWord .chances .card:hover+.lowerCard {
+    top: 20.2em;
+}
+
+
 
 
 
@@ -113,19 +208,13 @@ body {
     font-size: 40px;
     font-weight: bold;
     color: #2b2b2b;
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    transform: translateY(-0.2em);
+    border: 3px solid #2b2b2b;
 }
 
 
-#boxWord .chances {
-    display: flex;
-    position: absolute;
-
-    width: 100%;
-    height: 50px;
-    top: 0px;
-    left: 0px;
-    font-size: 30px;
-}
 
 
 
@@ -150,12 +239,12 @@ body {
     width: 60%;
     height: fit-content;
     gap: 15px;
-    
+
 }
 
 .keyboard button.key {
 
-    
+
 
     cursor: pointer;
 
