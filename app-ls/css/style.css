@@ -577,15 +577,11 @@ header .nav .navList .navItem {
 
 .letterCorrect {
     background: green;
-.letterCorrect {
-    background: green;
     color: #f0f0f0;
     animation: blink 0.5s ease-in-out;
     text-transform: uppercase;
     text-transform: uppercase;
 }
-
-
 
 
 
@@ -604,7 +600,6 @@ header .nav .navList .navItem {
 }
 
 
-/*-------------------------------- end of effects ----------------------------- */
 
 /*-------------------------------- end of effects ----------------------------- */
 .popUpBackground {

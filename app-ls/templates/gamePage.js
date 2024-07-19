@@ -48,11 +48,8 @@ function getRandomWord() {
 
 function createChances() {
     let container = document.createElement('div');
-    let container = document.createElement('div');
     let box = document.createElement('div');
-    let box2 = document.createElement('div');
-    let box3 = document.createElement('div');
-    
+
     let box2 = document.createElement('div');
     let box3 = document.createElement('div');
     
@@ -71,7 +68,6 @@ function createChances() {
     container.appendChild(box2);
     container.appendChild(box3);
 
-    return container;
     box2.textContent = 'Jogador 1';
     box3.textContent = 'Pontuação: 0';
     
@@ -96,7 +92,6 @@ function createWordToGuess() {
     let box = document.createElement('div');
     let containerLetters = document.createElement('div');
 
-    let containerLetters = document.createElement('div');
 
     box.id = 'boxWord';
     box.classList.add('boxWord');
@@ -117,7 +112,6 @@ function createWordToGuess() {
     let hideWord = word.replace(/[a-z]/g, ' ');
     containerLetters.textContent = '';
 
-    let chances = createChances();
     box.appendChild(chances);
     box.appendChild(containerLetters);
     
@@ -245,7 +239,6 @@ function isWordGuessed() {
 }
 
 function createPopUp (message) {
-function createPopUp (message) {
 
     // CREATING POPUP AND BACKGROUND
     let popUpBackground = document.createElement('div');
@@ -333,20 +326,7 @@ async function gameOver(bool) {
     }
 
 }
-async function gameOver(bool) {
-    if (bool === true) {
-        setTimeout(() => {
-            createPopUp('Game Over!');
-        }
-        , 1000);
-    } else {
-        setTimeout(() => {
-            createPopUp('You won!');
-        }
-        , 1000);
-    }
 
-}
 
 
 
