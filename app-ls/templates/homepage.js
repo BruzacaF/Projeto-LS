@@ -49,24 +49,5 @@ function homePage() {
     });
 }
 
-// h1 = document.createElement('h1');
-// startButton = document.createElement('button');
-// scoreButton = document.createElement('button');
-
-// h1.textContent = 'Hangman Game';
-// startButton.textContent = 'Start Game';
-// scoreButton.textContent = 'Score';
-
-// startButton.classList.add('button');
-// scoreButton.classList.add('button');
-
-// startButton.id = 'start';
-// scoreButton.id = 'score';
-
-// app.appendChild(h1);
-// app.appendChild(startButton);
-// app.appendChild(scoreButton);
-
-
 
 export default homePage;
