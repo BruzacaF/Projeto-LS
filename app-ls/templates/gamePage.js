@@ -7,11 +7,11 @@ function createGamePage() {
     let main = document.createElement('main');
 
     main.id = 'gamePage';
-
-
     app.innerHTML = '';
 
     app.appendChild(main);
+
+
 
     let boxWord = createWordToGuess();
     let keyboard = createKeyboard();
@@ -112,9 +112,6 @@ function createWordToGuess() {
     let hideWord = word.replace(/[a-z]/g, ' ');
     containerLetters.textContent = '';
 
-    box.appendChild(chances);
-    box.appendChild(containerLetters);
-    
     containerLetters.textContent = '';
 
     let chances = createChances();
@@ -304,12 +301,6 @@ function createPopUp (message) {
 
     
 
-    // setTimeout(() => {
-    //     popUp.style.display = 'none';
-    // }, 3000);
-    // setTimeout(() => {
-    //     createGamePage();
-    // }, 3000);
 }
 
 async function gameOver(bool) {
