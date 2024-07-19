@@ -1,6 +1,7 @@
 
 
 
+
 function createGamePage() {
     let app = document.getElementById('app');
     let main = document.createElement('main');
@@ -14,6 +15,8 @@ function createGamePage() {
 
     let boxWord = createWordToGuess();
     let keyboard = createKeyboard();
+    
+   
     
    
     main.appendChild(boxWord);
@@ -45,7 +48,11 @@ function getRandomWord() {
 
 function createChances() {
     let container = document.createElement('div');
+    let container = document.createElement('div');
     let box = document.createElement('div');
+    let box2 = document.createElement('div');
+    let box3 = document.createElement('div');
+    
     let box2 = document.createElement('div');
     let box3 = document.createElement('div');
     
@@ -57,6 +64,14 @@ function createChances() {
     box3.classList.add('lowerCard');
     
     box.textContent = `Chances: ${chances}`;
+    box2.textContent = 'Jogador 1';
+    box3.textContent = 'Pontuação: 0';
+    
+    container.appendChild(box);
+    container.appendChild(box2);
+    container.appendChild(box3);
+
+    return container;
     box2.textContent = 'Jogador 1';
     box3.textContent = 'Pontuação: 0';
     
@@ -81,7 +96,16 @@ function createWordToGuess() {
     let box = document.createElement('div');
     let containerLetters = document.createElement('div');
 
+    let containerLetters = document.createElement('div');
+
     box.id = 'boxWord';
+    box.classList.add('boxWord');
+    containerLetters.id = 'containerLetters';
+    containerLetters.classList.add('containerLetters');
+
+
+
+    
     box.classList.add('boxWord');
     containerLetters.id = 'containerLetters';
     containerLetters.classList.add('containerLetters');
@@ -97,6 +121,12 @@ function createWordToGuess() {
     box.appendChild(chances);
     box.appendChild(containerLetters);
     
+    containerLetters.textContent = '';
+
+    let chances = createChances();
+    box.appendChild(chances);
+    box.appendChild(containerLetters);
+    
 
     for (let i = 0; i < word.length; i++) {
         let span = document.createElement('span');
@@ -104,8 +134,11 @@ function createWordToGuess() {
         span.id = `letter-${i}`;
         span.textContent = hideWord[i];
         containerLetters.appendChild(span);
+        containerLetters.appendChild(span);
 
     }
+
+    
 
     
 
@@ -124,6 +157,7 @@ function createKeyboard() {
         button.id = `key-${letter}`;
         button.classList.add('key');
         button.textContent = letter; // Add this line to set the button text
+        button.textContent = letter; // Add this line to set the button text
         keyboard.appendChild(button);
     }
 
@@ -132,6 +166,7 @@ function createKeyboard() {
 
 function makeGuess() {
     let buttons = document.querySelectorAll('.key');
+    
     
     buttons.forEach(button => {
         if (button === this) {
@@ -150,6 +185,10 @@ function makeGuess() {
                     button.classList.add('keyCorrect');
                     
                 
+                    wordLetters[i].classList.add('letterCorrect');
+                    button.classList.add('keyCorrect');
+                    
+                
                 }
             }
 
@@ -164,13 +203,25 @@ function makeGuess() {
             if (chances === 0) {
                 gameOver(true);
                 
+                boxChances.textContent = `Chances: ${chances}`;   
+                button.classList.add('keyIncorrect');
+
+              
             }
+            if (chances === 0) {
+                gameOver(true);
+                
+            }
+
 
             if (isWordGuessed()) {
                 gameOver(false);
+                gameOver(false);
             }
         
+        
         }
+       
        
     });
 }
@@ -178,6 +229,7 @@ function makeGuess() {
 function addMakeGuessEvent() {
     let buttons = document.querySelectorAll('.key');
     for (let button of buttons) {
+        button.addEventListener('click', makeGuess.bind(button));
         button.addEventListener('click', makeGuess.bind(button));
     }
 }
@@ -193,6 +245,7 @@ function isWordGuessed() {
 }
 
 function createPopUp (message) {
+function createPopUp (message) {
 
     // CREATING POPUP AND BACKGROUND
     let popUpBackground = document.createElement('div');
@@ -204,6 +257,7 @@ function createPopUp (message) {
     let closeButton = document.createElement('div');
     closeButton.textContent = 'X';
     let text = document.createElement('h1');
+    text.textContent = message;
     text.textContent = message;
     let button = document.createElement('button');
     button.textContent = 'Play again';
@@ -265,6 +319,20 @@ function createPopUp (message) {
     // }, 3000);
 }
 
+async function gameOver(bool) {
+    if (bool === true) {
+        setTimeout(() => {
+            createPopUp('Game Over!');
+        }
+        , 1000);
+    } else {
+        setTimeout(() => {
+            createPopUp('You won!');
+        }
+        , 1000);
+    }
+
+}
 async function gameOver(bool) {
     if (bool === true) {
         setTimeout(() => {

@@ -469,7 +469,13 @@ header .nav .navList .navItem {
     box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
     transform: translateY(-0.2em);
     border: 3px solid #2b2b2b;
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    transform: translateY(-0.2em);
+    border: 3px solid #2b2b2b;
 }
+
+
 
 
 
@@ -555,6 +561,15 @@ header .nav .navList .navItem {
             calc(1 * var(--active_offset)));
     background-color: red;
 
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: press 1s ease-in-out;
+    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    transform: translate(calc(1 * var(--active_offset)),
+            calc(1 * var(--active_offset)));
+    background-color: red;
+
 }
 
 
@@ -562,10 +577,15 @@ header .nav .navList .navItem {
 
 .letterCorrect {
     background: green;
+.letterCorrect {
+    background: green;
     color: #f0f0f0;
     animation: blink 0.5s ease-in-out;
     text-transform: uppercase;
+    text-transform: uppercase;
 }
+
+
 
 
 
@@ -583,6 +603,8 @@ header .nav .navList .navItem {
     }
 }
 
+
+/*-------------------------------- end of effects ----------------------------- */
 
 /*-------------------------------- end of effects ----------------------------- */
 .popUpBackground {
@@ -691,6 +713,7 @@ header .nav .navList .navItem {
     width: 100%;
     height: 100%;
 
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -701,11 +724,13 @@ header .nav .navList .navItem {
     z-index: 101;
 
 
+
 }
 
 .loader .boxLoader {
     width: 500px;
     height: 500px;
+
 
     border-radius: 10px;
     z-index: 102;
@@ -718,6 +743,7 @@ header .nav .navList .navItem {
 .loader .boxLoader .loaderText {
     font-size: 2rem;
 
+
     margin-bottom: 20px;
     text-align: center;
     z-index: 103;
@@ -726,6 +752,7 @@ header .nav .navList .navItem {
 
 .loader .boxLoader .loaderText #textBox {
     font-size: 1.5rem;
+
 
     margin-bottom: 20px;
     text-align: center;
