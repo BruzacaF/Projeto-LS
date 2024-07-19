@@ -3,9 +3,11 @@ import runPreLoader from '../animations/pre-loader.js';
 import createHeader from '../templates/header.js';
 
 
-document.body.onload = runPreLoader();
+document.body.onload = homePage();
 
 function homePage() {
+
+    document.body.setAttribute('data-theme', 'light');
 
     
 
