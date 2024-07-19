@@ -19,9 +19,16 @@
     /* COMPONENT COLORS */
 
     --background-colors: #f0f0f0;
-    --surface-colors: #f0f0f0;
-    --error-color: #ff0000;
-    --success-color: #00ff00;
+    --surface-colors: #ebebeb;
+    --error-color: #ce6b60;
+    --success-color: #41916a;
+
+    /* POP UP COLORS */
+
+    --pop-up-background-color: rgba(0, 0, 0, 0.2);
+    --pop-up-surface-colors: #ebebeb;
+    --pop-up-error-color: #c60000;
+    --pop-up-success-color: #009900;
 
     /* COMPONENT TEXT COLORS */
 
@@ -35,14 +42,20 @@
     --button_color: #e8e8e8;
     --button_outline_color: #000000;
     --hover_offset: 4px;
-    --active_offset: 5px;
+    --active-offset0: 2px;
+    --active-offset: 5px;
     --active-offset2: 6px;
     --active-offset3: 7px;
-    --shadow_color: rgba(0, 0, 0, 0.7);
+    --shadow-color: rgba(0, 0, 0, 1);
+    --shadow_color: rgba(0, 0, 0, 0.6);
     --glitch_offset: 2px;
 
+    /* SWITCH ONLY */
 
+    --switch-border-color: #000000;
+    --switch-background-color: #f0f0f0;
 
+    
 
 }
 
@@ -50,26 +63,37 @@
 
 [data-theme="dark"] {
 
-    --primary-color: #55a7ad;
-    --secondary-color: #60c1c6;
-    --terciary-color: #b9e9e9;
+    /* COMPOSITION COLORS */
+    --primary-color: #383838;
+    --secondary-color: #565656;
+    --terciary-color: #6d6d6d;
 
-    --complemetary-color: #ad5b55;
+    --complemetary-color: #f8f8f8;
 
-    --analogous-color-1: #55ad87;
-    --analogous-color-2: #557bad;
+    --analogous-color-1: #565656;
+    --analogous-color-2: #6a6a6a;
 
     /* TEXT COLORS */
 
-    --on-primary-color: #0f0f0f;
-    --on-complementary-color: #f0f0f0;
+    --on-primary-color: #f8f8f8;
+    --on-complementary-color: #f8f8f8;
 
     /* COMPONENT COLORS */
 
-    --background-colors: #f0f0f0;
-    --surface-colors: #f0f0f0;
-    --error-color: #ff0000;
-    --success-color: #00ff00;
+    --background-colors: #383838;
+    --surface-colors: #565656;
+    --error-color: #c60000;
+    --success-color: #009900;
+
+    /* POP UP COLORS */
+
+    --pop-up-background-color: rgba(0, 0, 0, 0.2);
+    --pop-up-surface-colors: #6d6d6d;
+    --pop-up-error-color: #c60000;
+    --pop-up-success-color: #009900;
+
+
+
 
     /* COMPONENT TEXT COLORS */
 
@@ -77,15 +101,24 @@
     --on-surface-colors: #0f0f0f;
     --on-success-color: #f0f0f0;
 
+    /* extra and effects */
 
     --button_radius: 0.75em;
-    --button_color: #e8e8e8;
-    --button_outline_color: #000000;
+    --button_color: #565656;
+    --button_outline_color: #181818;
     --hover_offset: 4px;
-    --active_offset: 5px;
-    --shadow_color: rgba(0, 0, 0, 0.5);
+    --active-offset0: 2px;
+    --active-offset: 5px;
+    --active-offset2: 6px;
+    --active-offset3: 7px;
+    --shadow-color: rgba(0, 0, 0, 1);
+    --shadow_color: rgba(0, 0, 0, 0.6);
     --glitch_offset: 2px;
 
+    /* SWITCH ONLY */
+
+    --switch-border-color: #aaaaaa;
+    --switch-background-color: #181818;
 
 }
 
@@ -145,7 +178,7 @@ body {
     background-color: var(--primary-color);
     color: var(--on-primary-color);
     text-transform: uppercase;
-    box-shadow: 1px var(--active_offset) 3px var(--shadow_color);
+    box-shadow: 1px var(--active-offset) 3px var(--shadow_color);
     z-index: 1;
     flex: 1;
 
@@ -231,16 +264,16 @@ header .nav .navList .navItem {
 
 .slider {
     box-sizing: border-box;
-    border-radius: 5px;
-    border: 2px solid var(--on-primary-color);
-    box-shadow: 4px 4px var(--terciary-color);
+    border-radius: 3px;
+    border: 2px solid var(--switch-border-color);
+    box-shadow: var(--active-offset) var(--active-offset) var(--shadow_color);
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--secondary-color);
+    background-color: var(--switch-background-color);
     transition: 0.3s;
 }
 
@@ -250,12 +283,12 @@ header .nav .navList .navItem {
     content: "";
     height: 20px;
     width: 20px;
-    border: 2px solid var(--on-primary-color);
-    border-radius: 5px;
-    left: -2px;
+    border: 2px solid var(--switch-border-color);
+    border-radius: 3px;
+    left: -3px;
     bottom: 2px;
-    background-color: var(--secondary-color);
-    box-shadow: 0 1.5px 0 var(--terciary-color);
+    background-color: var(--switch-background-color);
+    box-shadow: var(--active-offset0) var(--active-offset0) var(--shadow_color);
     transition: 0.3s;
 }
 
@@ -293,22 +326,39 @@ header .nav .navList .navItem {
 .homePage h1 {
 
     font-size: 50px;
-    color: #2b2b2b;
+    color: var(--on-primary-color);
     margin-bottom: 20px;
 }
 
 .homePage button {
     height: 50px;
     width: 200px;
-
-    padding: 10px 20px;
-    font-size: 20px;
-    background-color: var(--analogous-color-2);
-    color: var(--on-primary-color);
-    border: 2px solid var(--on-primary-color);
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
-    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+
+    font-size: 1.5rem;  
+
+    width: 200px;
+    height: 50px;
+    background: var(--surface-colors);
+    color: var(--on-primary-color);
+    
+    border: 3px solid var(--on-surface-colors);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    
+
+
+}
+
+.homePage button:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+    transition: .3s ease-in;
 }
 
 #gamePage {
@@ -372,7 +422,7 @@ header .nav .navList .navItem {
     background: var(--primary-color);
     border-radius: 0 10px 10px 0;
     border: 3px solid var(--on-primary-color);
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
 
     align-self: center;
     z-index: 3;
@@ -387,12 +437,13 @@ header .nav .navList .navItem {
     align-items: center;
 
     align-self: center;
-
+    border-radius: 0 10px 10px 0;
+    border: 3px solid var(--on-primary-color);
     width: 200px;
     height: 60px;
     background: var(--secondary-color);
     z-index: 2;
-
+    transition: 1s ease-in-out;
     position: absolute;
     left: 0;
 
@@ -404,14 +455,14 @@ header .nav .navList .navItem {
     align-items: center;
 
     align-self: center;
-
+    border-radius: 0 10px 10px 0;
     width: 200px;
     height: 60px;
-
+    border: 3px solid var(--on-primary-color);
     background: var(--terciary-color);
 
     z-index: 1;
-
+    transition: 1s ease-in-out;
     position: absolute;
     left: 0;
 
@@ -422,6 +473,7 @@ header .nav .navList .navItem {
     transition: 1s ease-in-out;
     border-radius: 0;
     z-index: 3;
+    transition: 1s ease-in-out;
 
 
 }
@@ -432,6 +484,7 @@ header .nav .navList .navItem {
     box-shadow: var(--active-offset2) var(--active-offset2) 0 var(--shadow_color);
     border: 3px solid var(--on-primary-color);
     z-index: 2;
+    border-radius: 0;
 }
 
 .boxWord .chances .card:hover+.upperCard+.lowerCard {
@@ -440,6 +493,7 @@ header .nav .navList .navItem {
     box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
     z-index: 1;
     border: 3px solid var(--on-primary-color);
+    border-radius: 0;
 
 }
 
@@ -466,14 +520,12 @@ header .nav .navList .navItem {
     font-weight: bold;
     color: #2b2b2b;
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
     transform: translateY(-0.2em);
     border: 3px solid #2b2b2b;
-    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
-    transform: translateY(-0.2em);
-    border: 3px solid #2b2b2b;
+
 }
+
 
 
 
@@ -512,15 +564,15 @@ header .nav .navList .navItem {
 
     font-size: 20px;
     display: block;
-    border: 3px solid var(--button_outline_color);
+    border: 3px solid var(--on-surface-colors);
     border-radius: var(--button_radius);
     width: 70px;
     height: 70px;
-    background: var(--button_color);
-    color: var(--button_outline_color);
+    background: var(--surface-colors);
+    color: var(--on-primary-color);
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateY(-0.2em);
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
 
 
 }
@@ -529,18 +581,18 @@ header .nav .navList .navItem {
 
     font-size: 20px;
     display: block;
-    border: 3px solid var(--button_outline_color);
+    
     border-radius: var(--button_radius);
     width: 70px;
     height: 70px;
-    background: var(--button_color);
-    color: var(--button_outline_color);
+    background: var(--success-color);
+    color: var(--on-primary-color);
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     animation: press 1s ease-in-out;
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
-    transform: translate(calc(1 * var(--active_offset)),
-            calc(1 * var(--active_offset)));
-    background-color: green;
+    box-shadow: var(--active-offset0) var(--active-offset0) 0 var(--shadow-color);
+    transform: translate(calc(1 * var(--active-offset)),
+            calc(1 * var(--active-offset)));
+    
 
 }
 
@@ -548,38 +600,41 @@ header .nav .navList .navItem {
 
     font-size: 20px;
     display: block;
-    border: 3px solid var(--button_outline_color);
+    
     border-radius: var(--button_radius);
     width: 70px;
     height: 70px;
-    background: var(--button_color);
-    color: var(--button_outline_color);
-    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-    animation: press 1s ease-in-out;
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
-    transform: translate(calc(1 * var(--active_offset)),
-            calc(1 * var(--active_offset)));
-    background-color: red;
-
-    background: var(--button_color);
-    color: var(--button_outline_color);
-    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-    animation: press 1s ease-in-out;
-    box-shadow: var(--active_offset) var(--active_offset) 0 var(--shadow_color);
-    transform: translate(calc(1 * var(--active_offset)),
-            calc(1 * var(--active_offset)));
-    background-color: red;
-
+    background: var(--error-color);
+    color: var(--on-complementary-color);
+    transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+    
+    box-shadow: var(--active-offset0) var(--active-offset0) 0 var(--shadow-color);
+    transform: translate(calc(1 * var(--active-offset)),
+            calc(1 * var(--active-offset)));
 }
+
+
+.keyboard button.key:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+}
+
+.keyboard button.key:active {
+    transform: translate(calc(1 * var(--active-offset)),
+            calc(1 * var(--active-offset)));
+    
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow-color);
+}
+
 
 
 /*-------------------------- EFFECT ------------------- */
 
 .letterCorrect {
-    background: green;
-    color: #f0f0f0;
+    background-color: var(--success-color);
+    color: var(--on-primary-color);
     animation: blink 0.5s ease-in-out;
-    text-transform: uppercase;
     text-transform: uppercase;
 }
 
@@ -611,22 +666,23 @@ header .nav .navList .navItem {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    background-color: var(--pop-up-background-color);
+    backdrop-filter: blur(15px);
     z-index: 100;
 }
+
 
 .popUp {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    min-width: 400px;
     height: 50%;
-    background-color: #f0f0f0;
-    border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--pop-up-surface-colors);
+    border-radius: var(--button_radius);
+    box-shadow:var(--active-offset3) var(--active-offset3) rgba(0, 0, 0, 0.6);
     z-index: 101;
 
 }
@@ -649,20 +705,31 @@ header .nav .navList .navItem {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #2b2b2b;
-    color: #f0f0f0;
     font-size: 1rem;
     cursor: pointer;
-
     place-self: center end;
 
+    color: var(--on-error-color);
+    background-color: var(--pop-up-error-color);
+    border: 3px solid var(--on-surface-colors);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
 
+
+}
+
+.popUp .popUpContent .closeButton:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--active-offset0) var(--active-offset0) 0 var(--shadow-color);
+    transition: .2s ease-in;
 }
 
 .popUp .popUpContent .text-popUp {
     grid-area: title;
     font-size: 2rem;
-    color: #2b2b2b;
+    color: var(--on-surface-colors);
     margin-bottom: 20px;
     text-align: center;
 
@@ -675,7 +742,6 @@ header .nav .navList .navItem {
     width: 100%;
     gap: 20px;
     margin-top: 20px;
-
     position: inherit;
     bottom: 0;
 }
@@ -687,20 +753,61 @@ header .nav .navList .navItem {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 50px;
-    background-color: #2b2b2b;
-    color: #f0f0f0;
-    font-size: 1.5rem;
-    border: none;
-    border-radius: 5px;
+    font-size: 1.5rem;    
     cursor: pointer;
     margin-top: 20px;
-
     position: inherit;
     bottom: 0;
     left: 0;
+
+    
+    width: 200px;
+    height: 50px;
+    background: var(--pop-up-surface-colors);
+    color: var(--on-primary-color);
+    
+    border: 3px solid var(--on-surface-colors);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    
 }
+
+.popUp .popUpContent .button:hover {   
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+    transition: .3s ease-in;
+}
+
+.popUp .popUpContent .button:hover:nth-child(1){
+    background-color: var(--pop-up-success-color);
+
+}
+
+.popUp .popUpContent .button:hover:nth-child(2){
+    background-color: var(--pop-up-error-color);   
+}
+
+/* .popUp .popUpContent .button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+
+    width: 0%;
+    height: 100%;
+    background-color: var(--on-surface-colors);
+    
+     z-index: -1;
+    transition: 0.5s;
+}
+
+.popUp .popUpContent .button:hover::before {
+    width: 100%;
+    transition: 0.5s;
+} */
+
+
 
 /* ---------------------- LOADER AND ANIMATIONS ---------------------------- */
 
