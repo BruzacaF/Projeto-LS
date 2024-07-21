@@ -1,4 +1,4 @@
-
+import homePage from '../templates/homepage.js';
 
 
 
@@ -220,12 +220,19 @@ function createPopUp (message) {
     // ADD EVENT LISTENERS
 
     button.addEventListener('click', () => {
-        restartGame(true);
+        setTimeout(() => {
+            restartGame(true);
+        }
+        , 400);
     }
     );
 
+
     button2.addEventListener('click', () => {  
-        homePage();
+        setTimeout(() => {
+            homePage();
+        }
+        , 400);
 
     }
     );

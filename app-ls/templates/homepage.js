@@ -1,22 +1,18 @@
 import { createGamePage } from './gamePage.js';
 import runPreLoader from '../animations/pre-loader.js';
 import createHeader from '../templates/header.js';
+import createScorePage from '../templates/scorePage.js';
 
 
-document.body.onload = homePage();
+document.body.onload = createScorePage();
+
+
+
 
 function homePage() {
 
-    document.body.setAttribute('data-theme', 'light');
-
-    
-
     let app = document.getElementById('app');
     app.innerHTML = '';
-
-
-    let header = createHeader();
-    document.body.insertBefore(header, app);
 
 
     let homePage = document.createElement('div');
@@ -45,9 +41,25 @@ function homePage() {
 
 
     startButton.addEventListener('click', () => {
-        createGamePage();
+        setTimeout(() => {
+            createGamePage();
+        }
+        , 400);
     });
+
+    scoreButton.addEventListener('click', () => {
+        setTimeout(() => {
+            createScorePage();
+        }
+        , 400);
+    });
+
+    
 }
 
+
+let header = createHeader();
+document.body.setAttribute('data-theme', 'light');
+document.body.insertBefore(header, app);
 
 export default homePage;
