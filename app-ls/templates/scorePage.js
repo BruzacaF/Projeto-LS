@@ -29,12 +29,16 @@ function createScorePage() {
 
     let scoreTable = createTable();
 
-    
+
     scorePage.appendChild(backButton);
     scorePage.appendChild(scoreTitle);
     scorePage.appendChild(scoreTable);
 
     app.appendChild(scorePage);
+
+
+    
+
 
 
 
@@ -60,21 +64,26 @@ function createTable() {
 
     table.appendChild(tr);
 
-    let data = localStorage
+    let data = localStorage;
     data = Object.entries(data);
     data = data.filter(item => item[0] !== 'playerScore');
     data = data.map(item => JSON.parse(item[1]));
     data = data.sort((a, b) => b.score - a.score);
     data = data.slice(0, 10);
 
+    let rank = 1;
     for (let i = 0; i < data.length; i++) {
         let tr = document.createElement('tr');
         let td1 = document.createElement('td');
         let td2 = document.createElement('td');
         let td3 = document.createElement('td');
 
-
-        td1.innerHTML = i + 1; 
+        if (data[i].score === data[i - 1]?.score) {
+            td1.innerHTML = '-';
+        } else {
+            td1.innerHTML = rank;
+            rank++;
+        }
         td2.innerHTML = data[i].name;
         td3.innerHTML = data[i].score;
 
@@ -85,7 +94,6 @@ function createTable() {
         table.appendChild(tr);
     }
 
-    
     return table;
 }
 

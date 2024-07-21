@@ -1005,9 +1005,10 @@ header .nav .navList .navItem {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     width: 70%;
     height: 100%;
+
 }
 
 .scorePage .scoreTable tr {
@@ -1019,7 +1020,11 @@ header .nav .navList .navItem {
     height: 50px;
     background: var(--surface-colors);
     color: var(--on-primary-color);
+    border: 1px solid var(--on-surface-colors);
+
     font-size: 1.2rem;
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+ 
 }
 
 .scorePage .scoreTable th {
@@ -1031,6 +1036,7 @@ header .nav .navList .navItem {
     background: var(--primary-color);
     color: var(--on-primary-color);
     font-size: 1.2rem;
+    
 }
 
 .scorePage .scoreTable tr:nth-child(odd) {
