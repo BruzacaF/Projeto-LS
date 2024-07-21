@@ -92,9 +92,6 @@
     --pop-up-error-color: #c60000;
     --pop-up-success-color: #009900;
 
-
-
-
     /* COMPONENT TEXT COLORS */
 
     --on-error-color: #f0f0f0;
@@ -349,8 +346,6 @@ header .nav .navList .navItem {
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateY(-0.2em);
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
-    
-
 
 }
 
@@ -862,7 +857,189 @@ header .nav .navList .navItem {
 
 }
 
-/* ---------------------------------- TEST ---------------------------------- */
+
+/*------------------------------------------ INPUT RUN GAME --------------------------- */
+
+.boxUser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-self: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+
+.boxInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 600px;
+    height: 50px;
+}
+
+.boxInput input {
+    width: 100%;
+    height: 50px;
+    font-size: 1rem;
+    text-align: center;
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    color: var(--on-primary-color);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+
+
+}
+
+.boxInput input::placeholder {
+    color: var(--on-primary-color);
+    font-size: 1rem;
+}   
+
+.boxInput input:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+}
+
+
+
+@keyframes borderPulse {
+    0% {
+        border-color: var(--on-surface-colors);
+    }
+
+    50% {
+        border-color: var(--primary-color);
+    }
+
+    100% {
+        border-color: var(--on-surface-colors);
+    }
+
+}
+
+.boxInput button {
+    width: 100px;
+    height: 50px;
+    font-size: 1rem;
+    text-align: center;
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    color: var(--on-primary-color);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+}
+
+.boxInput button:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+}
+
+.boxInput button:active {
+    transform: translate(calc(1 * var(--active-offset)),
+            calc(1 * var(--active-offset)));
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow-color);
+}
+
+/* ------------------------------------ TABLE SCORE -------------------------------- */
+
+.scorePage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+
+.scorePage h1 {
+    font-size: 2rem;
+    color: var(--on-primary-color);
+    margin-bottom: 20px;
+}
+
+.scorePage .backButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;    
+    cursor: pointer;
+    margin-top: 20px;
+    position: inherit;
+    bottom: 0;
+    left: 0;
+
+    align-self: flex-start;
+
+    
+    width: 200px;
+    height: 50px;
+    background: var(--pop-up-surface-colors);
+    color: var(--on-primary-color);
+    
+    border: 3px solid var(--on-surface-colors);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+
+}
+
+.scorePage .backButton:hover {   
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+    transition: .3s ease-in;
+}
+
+
+
+.scorePage .scoreTable {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    width: 70%;
+    height: 100%;
+}
+
+.scorePage .scoreTable tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: var(--surface-colors);
+    color: var(--on-primary-color);
+    font-size: 1.2rem;
+}
+
+.scorePage .scoreTable th {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: var(--primary-color);
+    color: var(--on-primary-color);
+    font-size: 1.2rem;
+}
+
+.scorePage .scoreTable tr:nth-child(odd) {
+    background-color: var(--secondary-color);
+}
+
+
+
+/* ---------------------------------- MEDIA QUERY ---------------------------------- */
 
 
 @media only screen and (width: 1024px) {

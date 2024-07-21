@@ -5,7 +5,7 @@ import homePage from '../templates/homepage.js';
 
 
 
-function createScorePage (){
+function createScorePage() {
 
     let app = document.getElementById('app');
     app.innerHTML = '';
@@ -28,6 +28,7 @@ function createScorePage (){
 
 
     let scoreTable = createTable();
+
     
     scorePage.appendChild(backButton);
     scorePage.appendChild(scoreTitle);
@@ -39,7 +40,7 @@ function createScorePage (){
 
 }
 
-function createTable () {
+function createTable() {
     let table = document.createElement('table');
     table.id = 'scoreTable';
     table.className = 'scoreTable';
@@ -59,9 +60,32 @@ function createTable () {
 
     table.appendChild(tr);
 
-    let scores = JSON.parse(localStorage.getItem('scores')) || [];
-    scores.sort((a, b) => b.score - a.score);
+    let data = localStorage
+    data = Object.entries(data);
+    data = data.filter(item => item[0] !== 'playerScore');
+    data = data.map(item => JSON.parse(item[1]));
+    data = data.sort((a, b) => b.score - a.score);
+    data = data.slice(0, 10);
 
+    for (let i = 0; i < data.length; i++) {
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+
+
+        td1.innerHTML = i + 1; 
+        td2.innerHTML = data[i].name;
+        td3.innerHTML = data[i].score;
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+
+        table.appendChild(tr);
+    }
+
+    
     return table;
 }
 

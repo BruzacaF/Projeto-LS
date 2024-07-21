@@ -2,6 +2,7 @@ import { createGamePage } from './gamePage.js';
 import runPreLoader from '../animations/pre-loader.js';
 import createHeader from '../templates/header.js';
 import createScorePage from '../templates/scorePage.js';
+import {runGame} from '../templates/gamePage.js';
 
 
 document.body.onload = createScorePage();
@@ -42,7 +43,7 @@ function homePage() {
 
     startButton.addEventListener('click', () => {
         setTimeout(() => {
-            createGamePage();
+            runGame();
         }
         , 400);
     });
