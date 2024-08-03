@@ -55,7 +55,7 @@
     --switch-border-color: #000000;
     --switch-background-color: #f0f0f0;
 
-    
+
 
 }
 
@@ -134,6 +134,12 @@
     font-family: "Playwrite GB J", cursive;
     font-weight: bold;
     font-style: normal;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 
 
 }
@@ -151,7 +157,7 @@ body {
     overflow: hidden;
     z-index: 0;
 
-  
+
 }
 
 
@@ -335,13 +341,13 @@ header .nav .navList .navItem {
     align-items: center;
     cursor: pointer;
 
-    font-size: 1.5rem;  
+    font-size: 1.5rem;
 
     width: 200px;
     height: 50px;
     background: var(--surface-colors);
     color: var(--on-primary-color);
-    
+
     border: 3px solid var(--on-surface-colors);
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateY(-0.2em);
@@ -576,7 +582,7 @@ header .nav .navList .navItem {
 
     font-size: 20px;
     display: block;
-    
+
     border-radius: var(--button_radius);
     width: 70px;
     height: 70px;
@@ -587,7 +593,7 @@ header .nav .navList .navItem {
     box-shadow: var(--active-offset0) var(--active-offset0) 0 var(--shadow-color);
     transform: translate(calc(1 * var(--active-offset)),
             calc(1 * var(--active-offset)));
-    
+
 
 }
 
@@ -595,14 +601,14 @@ header .nav .navList .navItem {
 
     font-size: 20px;
     display: block;
-    
+
     border-radius: var(--button_radius);
     width: 70px;
     height: 70px;
     background: var(--error-color);
     color: var(--on-complementary-color);
     transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
-    
+
     box-shadow: var(--active-offset0) var(--active-offset0) 0 var(--shadow-color);
     transform: translate(calc(1 * var(--active-offset)),
             calc(1 * var(--active-offset)));
@@ -618,7 +624,7 @@ header .nav .navList .navItem {
 .keyboard button.key:active {
     transform: translate(calc(1 * var(--active-offset)),
             calc(1 * var(--active-offset)));
-    
+
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow-color);
 }
 
@@ -677,7 +683,7 @@ header .nav .navList .navItem {
     padding: 20px;
     background-color: var(--pop-up-surface-colors);
     border-radius: var(--button_radius);
-    box-shadow:var(--active-offset3) var(--active-offset3) rgba(0, 0, 0, 0.6);
+    box-shadow: var(--active-offset3) var(--active-offset3) rgba(0, 0, 0, 0.6);
     z-index: 101;
 
 }
@@ -748,40 +754,40 @@ header .nav .navList .navItem {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;    
+    font-size: 1.5rem;
     cursor: pointer;
     margin-top: 20px;
     position: inherit;
     bottom: 0;
     left: 0;
 
-    
+
     width: 200px;
     height: 50px;
     background: var(--pop-up-surface-colors);
     color: var(--on-primary-color);
-    
+
     border: 3px solid var(--on-surface-colors);
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateY(-0.2em);
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
-    
+
 }
 
-.popUp .popUpContent .button:hover {   
+.popUp .popUpContent .button:hover {
     transform: translate(calc(.5 * var(--hover_offset)),
             calc(.5 * var(--hover_offset)));
     box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
     transition: .3s ease-in;
 }
 
-.popUp .popUpContent .button:hover:nth-child(1){
+.popUp .popUpContent .button:hover:nth-child(1) {
     background-color: var(--pop-up-success-color);
 
 }
 
-.popUp .popUpContent .button:hover:nth-child(2){
-    background-color: var(--pop-up-error-color);   
+.popUp .popUpContent .button:hover:nth-child(2) {
+    background-color: var(--pop-up-error-color);
 }
 
 /* .popUp .popUpContent .button::before {
@@ -868,19 +874,30 @@ header .nav .navList .navItem {
     width: 100%;
     height: 100%;
     gap: 20px;
+    padding: 20px;
 }
+
+
+
+.boxUser button:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+}
+
+
 
 .boxInput {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    width: 600px;
+    width: 100%;
     height: 50px;
 }
 
 .boxInput input {
-    width: 100%;
+    width: 60%;
     height: 50px;
     font-size: 1rem;
     text-align: center;
@@ -897,7 +914,7 @@ header .nav .navList .navItem {
 .boxInput input::placeholder {
     color: var(--on-primary-color);
     font-size: 1rem;
-}   
+}
 
 .boxInput input:hover {
     transform: translate(calc(.5 * var(--hover_offset)),
@@ -923,7 +940,7 @@ header .nav .navList .navItem {
 }
 
 .boxInput button {
-    width: 100px;
+    width: 20%;
     height: 50px;
     font-size: 1rem;
     text-align: center;
@@ -933,19 +950,41 @@ header .nav .navList .navItem {
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateY(-0.2em);
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    cursor: pointer;
 }
 
 .boxInput button:hover {
     transform: translate(calc(.5 * var(--hover_offset)),
             calc(.5 * var(--hover_offset)));
     box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+    color: var(--on-success-color);
 }
 
-.boxInput button:active {
+.boxInput button#run:hover {
+    background: var(--success-color);
+}
+
+.boxInput button#back:hover {
+    background: var(--error-color);
+}
+
+.boxInput button#back:active {
     transform: translate(calc(1 * var(--active-offset)),
             calc(1 * var(--active-offset)));
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow-color);
+    background: var(--error-color);
 }
+
+.boxInput button#run:active {
+    transform: translate(calc(1 * var(--active-offset)),
+            calc(1 * var(--active-offset)));
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow-color);
+    background: var(--success-color);
+}
+
+
+
+
 
 /* ------------------------------------ TABLE SCORE -------------------------------- */
 
@@ -965,11 +1004,11 @@ header .nav .navList .navItem {
     margin-bottom: 20px;
 }
 
-.scorePage .backButton{
+.scorePage .backButton {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;    
+    font-size: 1rem;
     cursor: pointer;
     margin-top: 20px;
     position: inherit;
@@ -978,12 +1017,12 @@ header .nav .navList .navItem {
 
     align-self: flex-start;
 
-    
+
     width: 200px;
     height: 50px;
     background: var(--pop-up-surface-colors);
     color: var(--on-primary-color);
-    
+
     border: 3px solid var(--on-surface-colors);
     transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateY(-0.2em);
@@ -991,7 +1030,7 @@ header .nav .navList .navItem {
 
 }
 
-.scorePage .backButton:hover {   
+.scorePage .backButton:hover {
     transform: translate(calc(.5 * var(--hover_offset)),
             calc(.5 * var(--hover_offset)));
     box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
@@ -1024,7 +1063,7 @@ header .nav .navList .navItem {
 
     font-size: 1.2rem;
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
- 
+
 }
 
 .scorePage .scoreTable th {
@@ -1036,12 +1075,252 @@ header .nav .navList .navItem {
     background: var(--primary-color);
     color: var(--on-primary-color);
     font-size: 1.2rem;
-    
+
 }
 
 .scorePage .scoreTable tr:nth-child(odd) {
     background-color: var(--secondary-color);
 }
+
+/* ----------------- ABOUT PAGE ------------------------------- */
+
+.aboutPage {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    padding: 20px;
+
+    grid-template-areas: 'title title' 'Icons info';
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 2fr 8fr;
+
+
+}
+
+.aboutPage h1 {
+    grid-area: title;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--on-primary-color);
+    border: 3px solid var(--on-surface-colors);
+    background: var(--primary-color);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    border-radius: 10px;
+}
+
+.aboutPage .devInfos {
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: var(--on-primary-color);
+    text-align: justify;
+    align-items: flex-start;
+
+
+}
+
+
+
+.aboutPage .devInfos .mainContent>.card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+    padding: 20px;
+
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    border-radius: 10px;
+
+    font-size: 1.2rem;
+    color: var(--on-primary-color);
+    text-align: justify;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+
+}
+
+
+.aboutPage .devInfos .mainContent .card .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    color: var(--on-primary-color);
+    text-align: justify;
+    align-items: flex-start;
+}
+
+
+
+.aboutPage .devInfos .mainContent .card .cardIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100%;
+    border: 3px solid var(--on-surface-colors);
+    border-radius: 10px;
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+    text-justify: auto;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--surface-colors);
+}
+
+
+
+
+.aboutPage .devInfos .mainContent .card .cardIcon:hover {
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
+    transition: 0.5s ease-in-out;
+}
+
+
+
+.aboutPage .devInfos .mainContent .card .brandIcons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    font-size: 1rem;
+
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    border-radius: 10px;
+    padding: 10px;
+
+
+    transition: 0.5s ease-in-out;
+
+}
+
+.aboutPage .devInfos .mainContent .card .brandIcons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+
+
+}
+
+
+.aboutPage .devInfos .mainContent .card .brandIcons a img {
+    width: 100%;
+    height: 100%;
+
+    transition: 0.5s ease-in-out;
+
+}
+
+
+
+.aboutPage .devInfos .mainContent .card .brandIcons a img:hover {
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transition: 0.5s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.aboutPage .expandableIcons {
+    grid-area: Icons;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: fit-content;
+
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 1.2rem;
+
+}
+
+.aboutPage .expandableIcons img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border: 3px solid var(--on-surface-colors);
+    border-radius: 10px;
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.aboutPage .expandableIcons img:hover {
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
+    transition: 0.5s ease-in-out;
+}
+
+.aboutPage .expandableIcons img:active {
+    transform: translateY(0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transition: 0.5s ease-in-out;
+}
+
+
+
+
+
+
 
 
 
@@ -1066,6 +1345,11 @@ header .nav .navList .navItem {
 @media only screen and (width > 1440px) {
     .keyboard {
         max-width: 600px;
+    }
+
+    .mainContent {
+        width: 1200px;
+        height: 280px;
     }
 
 }

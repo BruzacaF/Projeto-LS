@@ -1,3 +1,6 @@
+import createAboutPage from '../templates/about.js';
+
+
 function createHeader() {
     const header = document.createElement('header');
     header.id = 'header';
@@ -64,6 +67,15 @@ function createHeader() {
         }
 
     });
+
+
+    about.addEventListener('click', () => {
+        setTimeout(() => {
+            createAboutPage();
+        }, 400);
+    }
+    );
+
 
 
 

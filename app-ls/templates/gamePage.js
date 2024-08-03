@@ -5,24 +5,42 @@ function runGame() {
     let app = document.getElementById('app');
     app.innerHTML = '';
 
+    
+    
+    
     let boxUser = document.createElement('div');
     boxUser.id = 'boxUser';
     boxUser.classList.add('boxUser');
-
+    
     let boxInput = document.createElement('div');
     boxInput.id = 'boxInput';
     boxInput.classList.add('boxInput');
-
+    
     let inputUser = document.createElement('input');
     inputUser.id = 'inputUser';
     inputUser.classList.add('inputUser');
     inputUser.placeholder = 'Digite seu nome';
+
     let buttonUser = document.createElement('button');
-    buttonUser.id = 'buttonUser';
+    buttonUser.id = 'run';
     buttonUser.classList.add('buttonUser');
     buttonUser.textContent = 'Iniciar';
 
 
+    let backButton = document.createElement('button');
+    backButton.id = 'back';
+    backButton.textContent = 'Back';
+    backButton.classList.add('buttonBack');
+    
+    backButton.addEventListener('click', () => {
+        setTimeout(() => {
+            homePage();
+        }
+        , 100);
+    });
+    
+    
+    
     buttonUser.addEventListener('click', () => {
         userName = inputUser.value;
         score = 0;
@@ -31,25 +49,22 @@ function runGame() {
             return;
         }
         else {
-            setTimeout(() => {      
-            
+            setTimeout(() => {
+                
                 createGamePage();
             }
-                , 400);
+            , 400);
         }
     });
-
-
+    
+    
     boxInput.appendChild(inputUser);
     boxInput.appendChild(buttonUser);
+    boxInput.appendChild(backButton);
     boxUser.appendChild(boxInput);
     app.appendChild(boxUser);
-
-    // app.appendChild(header);
-
-
-    // localStorage.setItem(playerScore(), JSON.stringify(playerScore()));
-
+    
+    
 }
 
 
@@ -74,23 +89,51 @@ function createGamePage() {
     main.appendChild(boxWord);
     main.appendChild(keyboard);
     addMakeGuessEvent();
-    
+
 
 }
+
+
+
+
+
 
 var userName = undefined;
 var score = undefined;
-const words = ['html', 'css'];
+var words = [];
 var guessedWords = [];
 var chances = 6;
-var word = getRandomWord();
+// words = getRandomWord();
+var word = 'undefined';
 
-
-
-function getRandomWord() {
-    let randomIndex = Math.floor(Math.random() * words.length);
-    return words[randomIndex];
+function randomWord() {
+    let random = Math.floor(Math.random() * words.length);
+    word = words[random];
 }
+
+
+
+
+// async function getRandomWord() {
+//     const url = 'https://a-randomizer-data-api.p.rapidapi.com/api/random/words?count=10';
+//     const options = {
+//         method: 'GET',
+//         headers: {
+//             'x-rapidapi-key': 'bdfadaf8a0msh764112675ed3a40p193489jsn10ab5292962b',
+//             'x-rapidapi-host': 'a-randomizer-data-api.p.rapidapi.com'
+//         }
+//     };
+    
+//     try {
+//         const response = await fetch(url, options);
+//         const result = await response.text();
+//         words = JSON.parse(result);
+//         return words;
+           
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
 
 
@@ -110,8 +153,8 @@ function createChances() {
     box3.classList.add('lowerCard');
 
     box.textContent = `Chances: ${chances}`;
-    box2.textContent = 'Jogador 1';
-    box3.textContent = 'Pontuação: 0';
+    box2.textContent = `${userName}`;
+    box3.textContent = `Pontos: ${score}`;
 
     container.appendChild(box);
     container.appendChild(box2);
@@ -144,10 +187,10 @@ function createWordToGuess() {
     for (let i = 0; i < words.length; i++) {
         if (guessedWords.includes(words[i])) {
             word = getRandomWord();
-            } else {
+        } else {
             word = words[i];
             break;
-        } 
+        }
         if (guessedWords.length === words.length) {
             saveScore();
             homePage();
@@ -198,7 +241,7 @@ function createKeyboard() {
 }
 
 function makeGuess() {
-    
+
     let buttons = document.querySelectorAll('.key');
 
     buttons.forEach(button => {
@@ -227,7 +270,9 @@ function makeGuess() {
 
             }
             if (chances === 0) {
+                completeWord();
                 gameOver(true);
+                
 
                 let buttons = document.querySelectorAll('.key');
                 for (let button of buttons) {
@@ -237,7 +282,7 @@ function makeGuess() {
             }
 
             if (isWordGuessed()) {
-                score++;
+                score += 10;
                 guessedWords.push(word);
                 gameOver(false);
             }
@@ -248,6 +293,15 @@ function makeGuess() {
 
     });
 }
+
+function completeWord() {
+    let wordArray = word.split('');
+    let wordLetters = document.querySelectorAll('.letter');
+    for (let i = 0; i < wordArray.length; i++) {
+        wordLetters[i].textContent = wordArray[i];
+    }
+}
+
 
 function addMakeGuessEvent() {
     let buttons = document.querySelectorAll('.key');
@@ -361,7 +415,6 @@ function saveScore() {
     let playerScore = {
         name: userName,
         score: score,
-        correctWords : guessedWords
     };
     let localStorageLength = localStorage.length;
     localStorage.setItem(localStorageLength + 1, JSON.stringify(playerScore));
