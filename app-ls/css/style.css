@@ -217,6 +217,7 @@ header .nav .navList {
     display: flex;
     flex-direction: row;
     position: relative;
+    margin-left: 40px;
 
 
     gap: 20px;
@@ -227,16 +228,36 @@ header .nav .navList {
 
 }
 
+
 header .nav .navList .navItem {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    height: 100%;
+    align-self: flex-end;
+    height: fit-content;
     padding: 0 20px;
     cursor: pointer;
     transition: 0.5s ease-in-out;
-
     font-size: 1.2rem;
+
+    border: 3px solid var(--on-primary-color);
+    background: var(--surface-colors);
+    color: var(--on-primary-color);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transform: translateY(-0.2em);
+
+}
+
+header .nav .navList .navItem:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+}
+
+header .nav .navList .navItem:active {
+    transform: translate(calc(1 * var(--active-offset)),
+            calc(1 * var(--active-offset)));
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow-color);
 }
 
 /* -------------------- switch darkmode ------------------------------- */
@@ -996,6 +1017,7 @@ header .nav .navList .navItem {
     width: 100%;
     height: 100%;
     gap: 20px;
+    padding: 20px;
 }
 
 .scorePage h1 {
@@ -1059,7 +1081,7 @@ header .nav .navList .navItem {
     height: 50px;
     background: var(--surface-colors);
     color: var(--on-primary-color);
-    border: 1px solid var(--on-surface-colors);
+    border: 3px solid var(--on-surface-colors);
 
     font-size: 1.2rem;
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
@@ -1075,6 +1097,8 @@ header .nav .navList .navItem {
     background: var(--primary-color);
     color: var(--on-primary-color);
     font-size: 1.2rem;
+    border-top: 3px solid var(--on-surface-colors);
+    border-bottom: 3px solid var(--on-surface-colors);
 
 }
 

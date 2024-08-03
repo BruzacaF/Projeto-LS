@@ -1,4 +1,5 @@
 import createAboutPage from '../templates/about.js';
+import homePage from '../templates/homepage.js';
 
 
 function createHeader() {
@@ -24,9 +25,15 @@ function createHeader() {
     navList.classList.add('navList');
 
     const about = document.createElement('li');
-    about.textContent = 'About';
+    about.textContent = 'Devs';
     about.id = 'about';
     about.classList.add('navItem');
+
+    const home = document.createElement('li');
+    home.textContent = 'Home';
+    home.id = 'home';
+    home.classList.add('navItem');
+
 
     const contact = document.createElement('li');
     contact.textContent = 'Contact';
@@ -35,12 +42,15 @@ function createHeader() {
     
     const themeSwitch = document.createElement('label');
     themeSwitch.classList.add('switch');
+
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.id = 'themeSwitch';
     input.classList.add('toggle');
+
     const slider = document.createElement('span');
     slider.classList.add('slider');
+
     const cardSide = document.createElement('span');
     cardSide.classList.add('cardSide');
 
@@ -48,7 +58,7 @@ function createHeader() {
     themeSwitch.appendChild(slider);
     themeSwitch.appendChild(cardSide);
 
-
+    navList.appendChild(home);
     navList.appendChild(about);
     navList.appendChild(contact);
     navList.appendChild(themeSwitch);
@@ -57,6 +67,12 @@ function createHeader() {
     nav.appendChild(navList);
 
     header.appendChild(nav);
+
+    home.addEventListener('click', () => {
+        setTimeout(() => {
+            homePage();
+        }, 200);
+    });
 
     input.addEventListener("click", () => {
         const checkbox = document.getElementById('themeSwitch');
@@ -72,7 +88,7 @@ function createHeader() {
     about.addEventListener('click', () => {
         setTimeout(() => {
             createAboutPage();
-        }, 400);
+        }, 200);
     }
     );
 
