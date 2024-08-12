@@ -15,11 +15,43 @@ function runGame() {
     let boxInput = document.createElement('div');
     boxInput.id = 'boxInput';
     boxInput.classList.add('boxInput');
-    
+
+    let typeLogin = document.createElement('h1');
+    typeLogin.textContent = 'Login';
+    typeLogin.classList.add('typeLogin');
+
+    let inputContainer = document.createElement('div');
+    inputContainer.id = 'inputContainer';
+    inputContainer.classList.add('inputContainer');
+
     let inputUser = document.createElement('input');
     inputUser.id = 'inputUser';
     inputUser.classList.add('inputUser');
     inputUser.placeholder = 'Digite seu nome';
+
+    let inputPassword = document.createElement('input');
+    inputPassword.id = 'inputPassword';
+    inputPassword.classList.add('inputPassword');
+    inputPassword.placeholder = 'Digite sua senha';
+    inputPassword.type = 'password';
+
+    let showPassword = document.createElement('button');
+    showPassword.id = 'showPassword';
+    showPassword.classList.add('showPassword');
+
+    let showPasswordImg = document.createElement('img');
+    showPasswordImg.src = './assets/password.svg';
+    showPasswordImg.classList.add('showPasswordImg');
+    
+    showPassword.appendChild(showPasswordImg);
+
+    
+  
+
+    let buttonsBox = document.createElement('div');
+    buttonsBox.id = 'buttonsBox';
+    buttonsBox.classList.add('buttonsBox');
+
 
     let buttonUser = document.createElement('button');
     buttonUser.id = 'run';
@@ -37,6 +69,16 @@ function runGame() {
             homePage();
         }
         , 100);
+    });
+    
+    showPassword.addEventListener('click', () => {
+        if (inputPassword.type === 'password') {
+            inputPassword.type = 'text';
+            showPasswordImg.src = './assets/hidePassword.svg';
+        } else {
+            inputPassword.type = 'password';
+            showPasswordImg.src = './assets/password.svg';
+        }
     });
     
     
@@ -57,11 +99,22 @@ function runGame() {
         }
     });
     
+
     
-    boxInput.appendChild(inputUser);
-    boxInput.appendChild(buttonUser);
-    boxInput.appendChild(backButton);
+    
+    inputContainer.appendChild(inputUser);
+    inputContainer.appendChild(showPassword);
+    inputContainer.appendChild(inputPassword);
+    
+    buttonsBox.appendChild(buttonUser);
+    buttonsBox.appendChild(backButton);
+    
+    boxInput.appendChild(typeLogin);
+    boxInput.appendChild(inputContainer);
+    boxInput.appendChild(buttonsBox);
+    
     boxUser.appendChild(boxInput);
+    
     app.appendChild(boxUser);
     
     
