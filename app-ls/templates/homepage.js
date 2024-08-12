@@ -1,20 +1,11 @@
-import { createGamePage } from './gamePage.js';
-import runPreLoader from '../animations/pre-loader.js';
+// import { createGamePage } from './gamePage.js';
+
 import createHeader from '../templates/header.js';
 import createScorePage from '../templates/scorePage.js';
 import { runGame } from '../templates/gamePage.js';
-import createAboutPage from '../templates/about.js';
-
-
-
-document.body.onload = homePage();
-
-
 
 
 function homePage() {
-
-
 
     let app = document.getElementById('app');
     app.innerHTML = '';
@@ -73,8 +64,6 @@ function homePage() {
     
     
 }
-
-
 
 
 export default homePage;
