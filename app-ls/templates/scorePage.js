@@ -1,3 +1,4 @@
+import DataBase from '../dataBase/dataBase.js';
 import homePage from '../templates/homepage.js';
 
 
@@ -5,7 +6,7 @@ import homePage from '../templates/homepage.js';
 
 
 
-function createScorePage() {
+async function createScorePage() {
 
     let app = document.getElementById('app');
     app.innerHTML = '';
@@ -27,7 +28,7 @@ function createScorePage() {
     }
 
 
-    let scoreTable = createTable();
+    let scoreTable = await createTable();
 
 
     scorePage.appendChild(backButton);
@@ -44,7 +45,10 @@ function createScorePage() {
 
 }
 
-function createTable() {
+
+async function createTable() {
+    const db = new DataBase();
+
     let table = document.createElement('table');
     table.id = 'scoreTable';
     table.className = 'scoreTable';
@@ -64,12 +68,14 @@ function createTable() {
 
     table.appendChild(tr);
 
-    let data = localStorage;
-    data = Object.entries(data);
-    data = data.filter(item => item[0] !== 'playerScore');
-    data = data.map(item => JSON.parse(item[1]));
-    data = data.sort((a, b) => b.score - a.score);
-    data = data.slice(0, 10);
+    let data;
+    try {
+        data = await db.getTopPlayers();
+        data = data.sort((a, b) => b.score - a.score).slice(0, 10);
+    } catch (error) {
+        console.error('Failed to fetch top players:', error);
+        data = [];
+    }
 
     let rank = 1;
     for (let i = 0; i < data.length; i++) {
@@ -78,12 +84,8 @@ function createTable() {
         let td2 = document.createElement('td');
         let td3 = document.createElement('td');
 
-        if (data[i].score === data[i - 1]?.score) {
-            td1.innerHTML = '-';
-        } else {
-            td1.innerHTML = rank;
-            rank++;
-        }
+        
+        td1.innerHTML = i+1;
         td2.innerHTML = data[i].name;
         td3.innerHTML = data[i].score;
 
@@ -94,13 +96,7 @@ function createTable() {
         table.appendChild(tr);
     }
 
-    return table;
+    return table; // Certifique-se de retornar um elemento do tipo Node
 }
-
-
-
-
-
-
 
 export default createScorePage;

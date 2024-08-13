@@ -1,63 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Players</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            background: #fff;
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
 </head>
+
 <body>
-    <h1>Top Players</h1>
-    <ul id="leaderboard">
-        <!-- Os jogadores serão carregados aqui -->
-    </ul>
-
-    <!-- Inclua o arquivo JavaScript que contém o método getTopPlayers -->
-    <script type="module">
-        import DataBase from './dataBase/dataBase.js';
-
-        // Função para carregar os top players
-        async function loadTopPlayers() {
-            const db = new DataBase();
-
-            try {
-                const topPlayers = await db.getTopPlayers();
-                const leaderboard = document.getElementById('leaderboard');
-                leaderboard.innerHTML = ''; // Limpa a lista atual
-                
-                topPlayers.forEach(player => {
-                    const playerItem = document.createElement('li');
-                    playerItem.textContent = `${player.name}: ${player.score}`;
-                    leaderboard.appendChild(playerItem);
-                });
-            } catch (err) {
-                console.error('Failed to fetch top players:', err);
-            }
-        }
-
-        // Carrega os top players quando a página é carregada
-        document.addEventListener('DOMContentLoaded', loadTopPlayers);
-    </script>
+    <div id="app"></div>
+    <script src="./main.js" type="module"></script>
 </body>
+
 </html>
