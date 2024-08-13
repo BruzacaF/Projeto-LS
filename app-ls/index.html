@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interação com Botão</title>
+    <title>Top Players</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,54 +14,50 @@
             text-align: center;
             color: #333;
         }
-        #mensagem {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            text-align: center;
+        ul {
+            list-style: none;
+            padding: 0;
         }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
+        li {
+            background: #fff;
+            margin: 5px 0;
+            padding: 10px;
             border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Interação com Botão</h1>
+    <h1>Top Players</h1>
+    <ul id="leaderboard">
+        <!-- Os jogadores serão carregados aqui -->
+    </ul>
 
-    <button id="meuBotao">Clique Aqui</button>
-
-    <div id="mensagem">
-        Este é o texto original que será modificado.
-    </div>
-
-    <!-- Importa o módulo JavaScript -->
+    <!-- Inclua o arquivo JavaScript que contém o método getTopPlayers -->
     <script type="module">
-        import DataBase from './dataBase/dataBase.js'; // Certifique-se de que o caminho está correto
+        import DataBase from './dataBase/dataBase.js';
 
-        document.getElementById('meuBotao').addEventListener('click', async () => {
+        // Função para carregar os top players
+        async function loadTopPlayers() {
+            const db = new DataBase();
+
             try {
-                const db = new DataBase();
                 const topPlayers = await db.getTopPlayers();
+                const leaderboard = document.getElementById('leaderboard');
+                leaderboard.innerHTML = ''; // Limpa a lista atual
                 
-                const mensagem = document.getElementById('mensagem');
-                // Formata os dados dos jogadores para uma string
-                mensagem.textContent = topPlayers.map(player => `${player.name}: ${player.score}`).join('\n');
-            } catch (error) {
-                console.error('Failed to fetch top players:', error);
+                topPlayers.forEach(player => {
+                    const playerItem = document.createElement('li');
+                    playerItem.textContent = `${player.name}: ${player.score}`;
+                    leaderboard.appendChild(playerItem);
+                });
+            } catch (err) {
+                console.error('Failed to fetch top players:', err);
             }
-        });
+        }
+
+        // Carrega os top players quando a página é carregada
+        document.addEventListener('DOMContentLoaded', loadTopPlayers);
     </script>
 </body>
 </html>
