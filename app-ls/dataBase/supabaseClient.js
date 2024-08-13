@@ -1,10 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
-import '../env.js';
-
 
 // Variáveis de ambiente para armazenar a URL e a chave
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
     throw new Error('supabaseUrl and supabaseKey are required.');
