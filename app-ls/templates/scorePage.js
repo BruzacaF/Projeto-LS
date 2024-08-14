@@ -47,7 +47,6 @@ async function createScorePage() {
 
 
 async function createTable() {
-    const db = new DataBase();
 
     let table = document.createElement('table');
     table.id = 'scoreTable';
@@ -68,16 +67,8 @@ async function createTable() {
 
     table.appendChild(tr);
 
-    let data;
-    try {
-        data = await db.getTopPlayers();
-        data = data.sort((a, b) => b.score - a.score).slice(0, 10);
-    } catch (error) {
-        console.error('Failed to fetch top players:', error);
-        data = [];
-    }
+    let data = DataBase.topPlayers;
 
-    let rank = 1;
     for (let i = 0; i < data.length; i++) {
         let tr = document.createElement('tr');
         let td1 = document.createElement('td');

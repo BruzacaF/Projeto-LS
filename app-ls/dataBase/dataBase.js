@@ -1,11 +1,14 @@
 import supabase from './supabaseClient.js'; // Ajuste o caminho conforme necessário
 
 export default class DataBase {
-    // Array de objetos todas as palavras e dicas
+    // Array de objetos de todas as palavras e dicas
     static allWordsAndHints;
 
+    // Array de objetos com nome e score
+    static topPlayers;
+
     // Verifica se o usuário existe no banco de dados
-    async userExists(player) {
+    static async userExists(player) {
         try {
             const { data, error } = await supabase
                 .from('players')
@@ -22,7 +25,7 @@ export default class DataBase {
     }
 
     // Adiciona nome e senha do jogador no banco de dados
-    async addPlayerToDatabase(player) {
+    static async addPlayerToDatabase(player) {
         try {
             const { error } = await supabase
                 .from('players')
@@ -36,7 +39,7 @@ export default class DataBase {
     }
 
     // Retorna informações do jogador
-    async getPlayerInfoByName(player) {
+    static async getPlayerInfoByName(player) {
         try {
             const { data, error } = await supabase
                 .from('players')
@@ -53,7 +56,7 @@ export default class DataBase {
     }
 
     // Função para obter os ids das palavras não adivinhadas pelo jogador
-    async getIdFromUnGuessedWordsByPlayerId(playerId) {
+    static async getIdFromUnGuessedWordsByPlayerId(playerId) {
         try {
             const { data, error } = await supabase
                 .from('words')
@@ -71,7 +74,7 @@ export default class DataBase {
     }
 
     // Método para recuperar todas as palavras da tabela words
-    async getAllWords() {
+    static async getAllWords() {
         try {
             const { data, error } = await supabase
                 .from('words')
@@ -92,7 +95,7 @@ export default class DataBase {
     }
 
     // Função para obter os 10 melhores jogadores
-    async getTopPlayers() {
+    static async getTopPlayers() {
         try {
             const { data, error } = await supabase
                 .from('players')
@@ -101,7 +104,7 @@ export default class DataBase {
                 .limit(10);
 
             if (error) throw error;
-            return data;
+            DataBase.topPlayers = data;
         } catch (err) {
             console.error('Error retrieving top players:', err.message);
             throw err;
