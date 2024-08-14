@@ -85,9 +85,8 @@ function runGame() {
     
     buttonUser.addEventListener('click', () => {
         userName = inputUser.value;
-        score = 0;
-        if (userName === '') {
-            alert('Digite um nome válido');
+
+        if (!validateInput(userName, inputPassword.value)){
             return;
         }
         else {
@@ -120,6 +119,22 @@ function runGame() {
     
 }
 
+function validateInput(userName, userPassword){
+    let flag = true;
+    let message = ''
+    if (userName === '') {
+        message = 'Digite um nome válido'
+        flag = false;
+    }
+    if (userPassword.length < 4){
+        message += '\nSua senha deve ter no mínimo 4 caracteres'
+        flag = false;
+    }
+    if (!flag){
+        alert(message);
+    }
+    return flag;
+}
 
 
 
