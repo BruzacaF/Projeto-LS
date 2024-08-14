@@ -1,9 +1,8 @@
 export default class Player {
-    constructor(name, password) {
+    constructor(name) {
         this.id = undefined;
         this.name = name;
         this.score = 0;
-        this.password = password;
         this.unguessedWordsId = [];
     }
 
@@ -18,7 +17,6 @@ export default class Player {
     updatePlayerInfo(playerInfo, guessedWords) {
         this.score = playerInfo.score;
         this.id = playerInfo.id
-        this.password = playerInfo.password
         this.guessedWords = guessedWords
     }
 
