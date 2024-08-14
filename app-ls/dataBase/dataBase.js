@@ -89,6 +89,10 @@ export default class DataBase {
         }
     }
 
+    static async loadedWords(){
+        return DataBase.allWordsAndHints === undefined;
+    }
+
     // Retorna um objeto {word: 'example', hint: 'example'}
     static getWordHint(id) {
         return DataBase.allWordsAndHints.find(word => word.id === id);
@@ -109,5 +113,9 @@ export default class DataBase {
             console.error('Error retrieving top players:', err.message);
             throw err;
         }
+    }
+
+    static async loadedTopPlayers(){
+        return DataBase.topPlayers === undefined;
     }
 }

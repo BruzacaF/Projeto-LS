@@ -1,4 +1,4 @@
-import DataBase from '../dataBase/dataBase.js';
+import DB from '../dataBase/dataBase.js';
 import homePage from '../templates/homepage.js';
 
 
@@ -67,7 +67,10 @@ async function createTable() {
 
     table.appendChild(tr);
 
-    let data = DataBase.topPlayers;
+    if (!DB.loadedTopPlayers()){
+        await DB.getTopPlayers();
+    }
+    let data = DB.topPlayers;
 
     for (let i = 0; i < data.length; i++) {
         let tr = document.createElement('tr');
