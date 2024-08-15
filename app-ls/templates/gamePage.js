@@ -137,7 +137,6 @@ async function processUserData(userName, userPassword){
         let score = await DataBase.getScoreById(id);
         player.setScore(score);
         
-
         let guessedWordsId = await DataBase.getGuessedWordIdsByPlayerId(id);
         player.setUnguessedWordsId(guessedWordsId);
         

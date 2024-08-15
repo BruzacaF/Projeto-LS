@@ -1,7 +1,7 @@
 import DataBase from "./dataBase.js";
 
 async function preload(){
-    if (!DataBase.loadedWords()){
+    if (DataBase.notLoadedWords()){
         DataBase.getAllWords();
     }
     if (DataBase.topPlayers === undefined){

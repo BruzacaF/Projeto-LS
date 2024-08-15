@@ -119,7 +119,7 @@ export default class DataBase {
         }
     }
 
-    static async loadedWords(){
+    static async notLoadedWords(){
         return DataBase.allWordsAndHints === null;
     }
 
