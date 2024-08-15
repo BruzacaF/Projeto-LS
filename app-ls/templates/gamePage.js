@@ -37,6 +37,7 @@ function runGame() {
     inputPassword.classList.add('inputPassword');
     inputPassword.placeholder = 'Digite sua senha';
     inputPassword.type = 'password';
+    inputPassword.maxLength = 4;
 
     let showPassword = document.createElement('button');
     showPassword.id = 'showPassword';
@@ -128,12 +129,15 @@ function runGame() {
 
 
 async function processUserData(userName, userPassword){
+    let inputUser = document.getElementById('inputUser');
+    let inputPassword = document.getElementById('inputPassword');
+
     let id = await DataBase.userExists(userName);
     Player.initialize(userName);
     
     if (id !== null){
         if(!await DataBase.authenticatePassword(id, userPassword)){
-            throw new Error("Senha incorreta");
+            throw new Error('Senha incorreta');
         }
         let score = await DataBase.getScoreById(id);
         Player.setScore(score);
@@ -195,11 +199,6 @@ function createGamePage(Player) {
 
 var userName = undefined;
 var score = undefined;
-// var words = [];
-// var guessedWords = [];
-// var chances = 6;
-// words = getRandomWord();
-// var word = 'undefined';
 
 function randomWord() {
     let random = Math.floor(Math.random() * words.length);
@@ -207,32 +206,6 @@ function randomWord() {
 }
 
 
-
-
-// async function getRandomWord() {
-//     const url = 'https://a-randomizer-data-api.p.rapidapi.com/api/random/words?count=10';
-//     const options = {
-//         method: 'GET',
-//         headers: {
-//             'x-rapidapi-key': 'bdfadaf8a0msh764112675ed3a40p193489jsn10ab5292962b',
-//             'x-rapidapi-host': 'a-randomizer-data-api.p.rapidapi.com'
-//         }
-//     };
-    
-//     try {
-//         const response = await fetch(url, options);
-//         const result = await response.text();
-//         words = JSON.parse(result);
-//         return words;
-           
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
-
-
-// ok
 function createChances() {
     let container = document.createElement('div');
 
@@ -285,22 +258,6 @@ function createWordToGuess() {
     let wordHint = DataBase.getWordHint(w.id);
     w.word = wordHint.word;
     console.log(w.word);
-
-    // for (let i = 0; i < words.length; i++) {
-    //     if (guessedWords.includes(words[i])) {
-    //         word = getRandomWord();
-    //     } else {
-    //         word = words[i];
-    //         break;
-    //     }
-    //     if (guessedWords.length === words.length) {
-    //         saveScore();
-    //         homePage();
-    //         guessedWords = [];
-    //     }
-    // }
-
-
 
     let hideWord = w.word.replace(/[a-zA-Zá-úÁ-ÚçÇ]/gi, '');
 
@@ -356,9 +313,11 @@ function makeGuess() {
             let wordLetters = document.querySelectorAll('.letter');
             let isLetterInWord = false;
 
+            const collator = new Intl.Collator('pt-BR', { sensitivity: 'base' });
+
             for (let i = 0; i < wordArray.length; i++) {
-                if (letter === wordArray[i]) {
-                    wordLetters[i].textContent = letter;
+                if (collator.compare(wordArray[i], letter) === 0) {
+                    wordLetters[i].textContent = wordArray[i];
                     isLetterInWord = true;
                     wordLetters[i].classList.add('letterCorrect');
                     button.classList.add('keyCorrect');
