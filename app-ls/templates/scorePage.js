@@ -1,3 +1,4 @@
+import DB from '../dataBase/dataBase.js';
 import homePage from '../templates/homepage.js';
 
 
@@ -5,7 +6,7 @@ import homePage from '../templates/homepage.js';
 
 
 
-function createScorePage() {
+async function createScorePage() {
 
     let app = document.getElementById('app');
     app.innerHTML = '';
@@ -27,7 +28,7 @@ function createScorePage() {
     }
 
 
-    let scoreTable = createTable();
+    let scoreTable = await createTable();
 
 
     scorePage.appendChild(backButton);
@@ -44,7 +45,9 @@ function createScorePage() {
 
 }
 
-function createTable() {
+
+async function createTable() {
+
     let table = document.createElement('table');
     table.id = 'scoreTable';
     table.className = 'scoreTable';
@@ -64,26 +67,19 @@ function createTable() {
 
     table.appendChild(tr);
 
-    let data = localStorage;
-    data = Object.entries(data);
-    data = data.filter(item => item[0] !== 'playerScore');
-    data = data.map(item => JSON.parse(item[1]));
-    data = data.sort((a, b) => b.score - a.score);
-    data = data.slice(0, 10);
+    if (!DB.loadedTopPlayers()){
+        await DB.getTopPlayers();
+    }
+    let data = DB.topPlayers;
 
-    let rank = 1;
     for (let i = 0; i < data.length; i++) {
         let tr = document.createElement('tr');
         let td1 = document.createElement('td');
         let td2 = document.createElement('td');
         let td3 = document.createElement('td');
 
-        if (data[i].score === data[i - 1]?.score) {
-            td1.innerHTML = '-';
-        } else {
-            td1.innerHTML = rank;
-            rank++;
-        }
+        
+        td1.innerHTML = i+1;
         td2.innerHTML = data[i].name;
         td3.innerHTML = data[i].score;
 
@@ -94,13 +90,7 @@ function createTable() {
         table.appendChild(tr);
     }
 
-    return table;
+    return table; // Certifique-se de retornar um elemento do tipo Node
 }
-
-
-
-
-
-
 
 export default createScorePage;

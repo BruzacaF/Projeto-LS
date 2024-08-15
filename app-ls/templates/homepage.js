@@ -1,9 +1,11 @@
 // import { createGamePage } from './gamePage.js';
-
+import preload from '../dataBase/preload.js';
 import createHeader from '../templates/header.js';
 import createScorePage from '../templates/scorePage.js';
 import { runGame } from '../templates/gamePage.js';
 
+// preload palavras e score
+preload();
 
 function homePage() {
 

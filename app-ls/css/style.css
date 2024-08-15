@@ -990,7 +990,9 @@ header .nav .navList .navItem:active {
 
 .boxInput input:nth-child(2) {
     grid-area: inputPassword;
+
 }
+
 
 .boxInput .showPassword {
     grid-area: showPassword;
