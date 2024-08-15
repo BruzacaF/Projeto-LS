@@ -1,49 +1,62 @@
 import DataBase from "../dataBase/dataBase.js";
+import w from "./word.js"
 
 export default class Player {
-    constructor(name) {
-        this.id = undefined;
-        this.name = name;
-        this.score = 0;
-        this.unguessedWordsId = [];
+    static id = undefined;
+    static name = '';
+    static score = 0;
+    static unguessedWordsId = [];
+    static chances = 6;
+
+    static initialize(name) {
+        Player.name = name;
+        Player.chances = 6;
+        Player.score = 0;
     }
 
-    getName() {
-        return console.log(this.name);
+    static getName() {
+        return console.log(Player.name);
     }
 
-    getScore() {
-        return this.score;
+    static getScore() {
+        return Player.score;
     }
 
-    setId(id){
-        this.id = id;
+    static setId(id) {
+        Player.id = id;
     }
 
-    setScore(score){
-        this.score = score;
+    static setScore(score) {
+        Player.score += score;
+    }
+
+    static updateScore(score) {
+        Player.score += score;
+    }
+
+    // Reduz uma unidade das chances
+    static decreaseChances(){
+        Player.chances -= 1;
     }
 
     // Define os ids das palavras não adivinhadas
-    setUnguessedWordsId(guessedWordIds){
+    static setUnguessedWordsId(guessedWordIds) {
         const allWordsIds = DataBase.allWordsAndHints.map(object => object.id);
-
-        this.unguessedWordsId = allWordsIds.filter(id => !guessedWordIds.includes(id));
+        Player.unguessedWordsId = allWordsIds.filter(id => !guessedWordIds.includes(id));
     }
 
     // Remove o id de uma palavra adivinhada
-    removeIdGuessedWord(id){
-        this.unguessedWordsId = this.unguessedWordsId.filter(num => num !== id);
+    static removeIdGuessedWord(id) {
+        Player.unguessedWordsId = Player.unguessedWordsId.filter(num => num !== id);
     }
-    
+
     // Retorna aleatoriamente o id de uma palavra não adivinhada
-    getRandomIdWord(){
-        const randomIndex = Math.floor(Math.random() * this.unguessedWordsId.length);
-        return this.unguessedWordsId[randomIndex]
+    static getRandomIdWord() {
+        const randomIndex = Math.floor(Math.random() * Player.unguessedWordsId.length);
+        w.id = randomIndex + 1
     }
 
-    toString() {
-        return `ID: ${this.id !== undefined ? this.id : 'N/A'}, Nome: ${this.name}, Pontuação: ${this.score}, Palavras Não Adivinhadas: [${this.unguessedWordsId.join(', ')}]`;
+    static toString() {
+        return `ID: ${Player.id !== undefined ? Player.id : 'N/A'}, Nome: ${Player.name}, Pontuação: ${Player.score}, Palavras Não Adivinhadas: [${Player.unguessedWordsId.join(', ')}]`;
     }
-
 }

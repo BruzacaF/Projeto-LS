@@ -1,6 +1,7 @@
 import Player from '../classes/player.js';
 import homePage from '../templates/homepage.js';
 import DataBase from '../dataBase/dataBase.js';
+import w from '../classes/word.js';
 
 
 function runGame() {
@@ -92,11 +93,11 @@ function runGame() {
         try {
             validateInput(userName, userPassword);
             // Chama processUserData e aguarda a sua execução
-            const player = await processUserData(userName, userPassword);
+            const Player = await processUserData(userName, userPassword);
             
             // Se não houver erro, cria a página do jogo após um atraso
             setTimeout(() => {
-                createGamePage(player);
+                createGamePage(Player);
             }, 400);
             
         } catch (err) {
@@ -128,23 +129,23 @@ function runGame() {
 
 async function processUserData(userName, userPassword){
     let id = await DataBase.userExists(userName);
-    let player = new Player(userName);
+    Player.initialize(userName);
     
     if (id !== null){
         if(!await DataBase.authenticatePassword(id, userPassword)){
             throw new Error("Senha incorreta");
         }
         let score = await DataBase.getScoreById(id);
-        player.setScore(score);
+        Player.setScore(score);
         
         let guessedWordsId = await DataBase.getGuessedWordIdsByPlayerId(id);
-        player.setUnguessedWordsId(guessedWordsId);
+        Player.setUnguessedWordsId(guessedWordsId);
         
-        player.setId(id);
+        Player.setId(id);
     } else {
         DataBase.addPlayerToDatabase(userName, userPassword);
     }
-    return player;
+    return Player;
 }
 
 // Valida os inputs do usuário
@@ -167,7 +168,7 @@ function validateInput(userName, userPassword){
 
 
 
-function createGamePage(player) {
+function createGamePage(Player) {
 
     let app = document.getElementById('app');
     let main = document.createElement('main');
@@ -177,7 +178,7 @@ function createGamePage(player) {
 
     app.appendChild(main);
 
-    let boxWord = createWordToGuess();
+    let boxWord = createWordToGuess(Player);
     let keyboard = createKeyboard();
 
 
@@ -194,11 +195,11 @@ function createGamePage(player) {
 
 var userName = undefined;
 var score = undefined;
-var words = [];
-var guessedWords = [];
-var chances = 6;
+// var words = [];
+// var guessedWords = [];
+// var chances = 6;
 // words = getRandomWord();
-var word = 'undefined';
+// var word = 'undefined';
 
 function randomWord() {
     let random = Math.floor(Math.random() * words.length);
@@ -231,7 +232,7 @@ function randomWord() {
 
 
 
-
+// ok
 function createChances() {
     let container = document.createElement('div');
 
@@ -246,9 +247,9 @@ function createChances() {
     box2.classList.add('upperCard');
     box3.classList.add('lowerCard');
 
-    box.textContent = `Chances: ${chances}`;
-    box2.textContent = `${userName}`;
-    box3.textContent = `Pontos: ${score}`;
+    box.textContent = `Chances: ${Player.chances}`;
+    box2.textContent = `${Player.name}`;
+    box3.textContent = `Pontos: ${Player.score}`;
 
     container.appendChild(box);
     container.appendChild(box2);
@@ -266,7 +267,7 @@ function restartGame(restart) {
 }
 
 
-
+// ok*
 function createWordToGuess() {
     let box = document.createElement('div');
     let containerLetters = document.createElement('div');
@@ -279,24 +280,30 @@ function createWordToGuess() {
     containerLetters.classList.add('containerLetters');
 
     
+    // Sorteia a palavra
+    Player.getRandomIdWord();
+    let wordHint = DataBase.getWordHint(w.id);
+    w.word = wordHint.word;
+    console.log(w.word);
 
-    for (let i = 0; i < words.length; i++) {
-        if (guessedWords.includes(words[i])) {
-            word = getRandomWord();
-        } else {
-            word = words[i];
-            break;
-        }
-        if (guessedWords.length === words.length) {
-            saveScore();
-            homePage();
-            guessedWords = [];
-        }
-    }
+    // for (let i = 0; i < words.length; i++) {
+    //     if (guessedWords.includes(words[i])) {
+    //         word = getRandomWord();
+    //     } else {
+    //         word = words[i];
+    //         break;
+    //     }
+    //     if (guessedWords.length === words.length) {
+    //         saveScore();
+    //         homePage();
+    //         guessedWords = [];
+    //     }
+    // }
 
 
 
-    let hideWord = word.replace(/[a-z]/g, ' ');
+    let hideWord = w.word.replace(/[a-zA-Zá-úÁ-ÚçÇ]/gi, '');
+
 
     containerLetters.textContent = '';
 
@@ -305,7 +312,7 @@ function createWordToGuess() {
     box.appendChild(containerLetters);
 
 
-    for (let i = 0; i < word.length; i++) {
+    for (let i = 0; i < w.word.length; i++) {
         let span = document.createElement('span');
         span.className = 'letter';
         span.id = `letter-${i}`;
@@ -319,7 +326,7 @@ function createWordToGuess() {
 }
 
 
-
+// ok
 function createKeyboard() {
     let keyboard = document.createElement('keyboard');
     let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -336,15 +343,16 @@ function createKeyboard() {
     return keyboard;
 }
 
-function makeGuess() {
 
+
+function makeGuess() {
     let buttons = document.querySelectorAll('.key');
 
-    buttons.forEach(button => {
+    buttons.forEach((button) => {
         if (button === this) {
             button.classList.toggle("guessed");
             let letter = button.textContent;
-            let wordArray = word.split('');
+            let wordArray = w.word.split('');
             let wordLetters = document.querySelectorAll('.letter');
             let isLetterInWord = false;
 
@@ -358,14 +366,14 @@ function makeGuess() {
             }
 
             if (!isLetterInWord) {
-                chances--;
+                Player.decreaseChances();
                 let boxChances = document.getElementById('boxChances');
-                boxChances.textContent = `Chances: ${chances}`;
+                boxChances.textContent = `Chances: ${Player.chances}`;
                 button.classList.add('keyIncorrect');
 
 
             }
-            if (chances === 0) {
+            if (Player.chances === 0) {
                 completeWord();
                 gameOver(true);
                 
@@ -378,8 +386,8 @@ function makeGuess() {
             }
 
             if (isWordGuessed()) {
-                score += 10;
-                guessedWords.push(word);
+                Player.updateScore(10);
+                Player.removeIdGuessedWord(w.id);
                 gameOver(false);
             }
 
@@ -390,8 +398,9 @@ function makeGuess() {
     });
 }
 
+// ok
 function completeWord() {
-    let wordArray = word.split('');
+    let wordArray = w.word.split('');
     let wordLetters = document.querySelectorAll('.letter');
     for (let i = 0; i < wordArray.length; i++) {
         wordLetters[i].textContent = wordArray[i];
@@ -406,14 +415,15 @@ function addMakeGuessEvent() {
     }
 }
 
+// ok
 function isWordGuessed() {
     let wordLetters = document.querySelectorAll('.letter');
     for (let letter of wordLetters) {
-        if (letter.textContent === ' ') {
-            return false;
+        if (letter.textContent === '') {
+            return false;  // Retorna false se alguma letra ainda não foi adivinhada
         }
     }
-    return true;
+    return true;  // Retorna true se todas as letras foram adivinhadas
 }
 
 function createPopUp(message) {
@@ -450,7 +460,6 @@ function createPopUp(message) {
 
     button2.addEventListener('click', () => {
         setTimeout(() => {
-            saveScore();
             homePage();
         }
             , 400);
@@ -492,6 +501,7 @@ function createPopUp(message) {
 
 }
 
+// ok
 async function gameOver(bool) {
     if (bool === true) {
         setTimeout(() => {
@@ -506,16 +516,6 @@ async function gameOver(bool) {
     }
 
 }
-
-function saveScore() {
-    let playerScore = {
-        name: userName,
-        score: score,
-    };
-    let localStorageLength = localStorage.length;
-    localStorage.setItem(localStorageLength + 1, JSON.stringify(playerScore));
-}
-
 
 
 export { runGame };
