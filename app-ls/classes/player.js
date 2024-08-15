@@ -1,3 +1,5 @@
+import DataBase from "../dataBase/dataBase.js";
+
 export default class Player {
     constructor(name) {
         this.id = undefined;
@@ -14,15 +16,19 @@ export default class Player {
         return this.score;
     }
 
-    updatePlayerInfo(playerInfo, guessedWords) {
-        this.score = playerInfo.score;
-        this.id = playerInfo.id
-        this.guessedWords = guessedWords
+    setId(id){
+        this.id = id;
     }
 
-    addIdUnguessedWords(unguessedWordsId){
-        unguessedWordsId.forEach(unguessedWordId => this.unguessedWordsId.push(unguessedWordId.id))
-        console.log(this.unguessedWordsId)
+    setScore(score){
+        this.score = score;
+    }
+
+    // Define os ids das palavras não adivinhadas
+    setUnguessedWordsId(guessedWordIds){
+        const allWordsIds = DataBase.allWordsAndHints.map(object => object.id);
+
+        this.unguessedWordsId = allWordsIds.filter(id => !guessedWordIds.includes(id));
     }
 
     // Remove o id de uma palavra adivinhada
@@ -34,6 +40,10 @@ export default class Player {
     getRandomIdWord(){
         const randomIndex = Math.floor(Math.random() * this.unguessedWordsId.length);
         return this.unguessedWordsId[randomIndex]
+    }
+
+    toString() {
+        return `ID: ${this.id !== undefined ? this.id : 'N/A'}, Nome: ${this.name}, Pontuação: ${this.score}, Palavras Não Adivinhadas: [${this.unguessedWordsId.join(', ')}]`;
     }
 
 }
