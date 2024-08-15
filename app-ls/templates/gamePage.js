@@ -1,4 +1,6 @@
+import Player from '../classes/player.js';
 import homePage from '../templates/homepage.js';
+import DataBase from '../dataBase/dataBase.js';
 
 
 function runGame() {
@@ -83,20 +85,26 @@ function runGame() {
     
     
     
-    buttonUser.addEventListener('click', () => {
-        userName = inputUser.value;
-
-        if (!validateInput(userName, inputPassword.value)){
-            return;
-        }
-        else {
+    buttonUser.addEventListener('click', async () => {
+        const userName = inputUser.value;
+        const userPassword = inputPassword.value;
+    
+        try {
+            validateInput(userName, userPassword);
+            // Chama processUserData e aguarda a sua execução
+            const player = await processUserData(userName, userPassword);
+            
+            // Se não houver erro, cria a página do jogo após um atraso
             setTimeout(() => {
-                
-                createGamePage();
-            }
-            , 400);
+                createGamePage(player);
+            }, 400);
+            
+        } catch (err) {
+            // Exibe o erro e encerra a função para garantir que nada mais seja executado
+            alert(err.message);
         }
     });
+    
     
 
     
@@ -115,32 +123,52 @@ function runGame() {
     boxUser.appendChild(boxInput);
     
     app.appendChild(boxUser);
-    
-    
 }
 
+
+async function processUserData(userName, userPassword){
+    let id = await DataBase.userExists(userName);
+    let player = new Player(userName);
+    
+    if (id !== null){
+        if(!await DataBase.authenticatePassword(id, userPassword)){
+            throw new Error("Senha incorreta");
+        }
+        let score = await DataBase.getScoreById(id);
+        player.setScore(score);
+        
+
+        let guessedWordsId = await DataBase.getGuessedWordIdsByPlayerId(id);
+        player.setUnguessedWordsId(guessedWordsId);
+        
+        player.setId(id);
+    } else {
+        DataBase.addPlayerToDatabase(userName, userPassword);
+    }
+    return player;
+}
+
+// Valida os inputs do usuário
 function validateInput(userName, userPassword){
-    let flag = true;
+    let flag = false;
     let message = ''
     if (userName === '') {
         message = 'Digite um nome válido'
-        flag = false;
+        flag = true;
     }
     if (userPassword.length < 4){
         message += '\nSua senha deve ter no mínimo 4 caracteres'
-        flag = false;
+        flag = true;
     }
-    if (!flag){
-        alert(message);
+    if (flag){
+        throw new Error(message);
     }
-    return flag;
 }
 
 
 
 
-
-function createGamePage() {
+function createGamePage(player) {
 
     let app = document.getElementById('app');
     let main = document.createElement('main');
@@ -160,7 +188,6 @@ function createGamePage() {
 
 
 }
-
 
 
 
@@ -251,6 +278,8 @@ function createWordToGuess() {
 
     containerLetters.id = 'containerLetters';
     containerLetters.classList.add('containerLetters');
+
+    
 
     for (let i = 0; i < words.length; i++) {
         if (guessedWords.includes(words[i])) {

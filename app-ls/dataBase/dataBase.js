@@ -8,28 +8,55 @@ export default class DataBase {
     static topPlayers;
 
     // Verifica se o usuário existe no banco de dados
-    static async userExists(player) {
+    static async userExists(userName) {
         try {
             const { data, error } = await supabase
                 .from('players')
                 .select('id')
-                .eq('name', player.name)
+                .eq('name', userName)
                 .single();
 
-            if (error) throw error;
-            return data !== null;
+            if (data !== null){
+                return data.id
+            }
+            return null;
         } catch (err) {
             console.error('Error checking user existence:', err.message);
             throw err;
         }
     }
 
+    static async authenticatePassword(id, password) {
+        try {
+            // Busca a senha do usuário pelo ID
+            const { data, error } = await supabase
+                .from('players')
+                .select('password')
+                .eq('id', id)
+                .single();
+
+            if (error) {
+                throw error;
+            }
+
+            // Verifica se a senha passada é igual à senha no banco de dados
+            if (data.password === password) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (err) {
+            console.error('Error authenticating password:', err.message);
+            throw err;
+        }
+    }
+
     // Adiciona nome e senha do jogador no banco de dados
-    static async addPlayerToDatabase(player) {
+    static async addPlayerToDatabase(userName, userPassword) {
         try {
             const { error } = await supabase
                 .from('players')
-                .insert([{ name: player.name, password: player.password }]);
+                .insert([{ name: userName, password: userPassword }]);
 
             if (error) throw error;
         } catch (err) {
@@ -38,40 +65,43 @@ export default class DataBase {
         }
     }
 
-    // Retorna informações do jogador
-    static async getPlayerInfoByName(player) {
+    // Retorna o score do jogador
+    static async getScoreById(id) {
         try {
             const { data, error } = await supabase
                 .from('players')
-                .select('id, password, score')
-                .eq('name', player.name)
+                .select('score')
+                .eq('id', id)
                 .single();
 
             if (error) throw error;
-            return data;
+            return data.score;
         } catch (err) {
-            console.error('Error retrieving player info:', err.message);
+            console.error('Error retrieving score', err.message);
             throw err;
         }
     }
 
-    // Função para obter os ids das palavras não adivinhadas pelo jogador
-    static async getIdFromUnGuessedWordsByPlayerId(playerId) {
+    // Método para obter os ids das palavras adivinhadas
+    static async getGuessedWordIdsByPlayerId(playerId) {
         try {
             const { data, error } = await supabase
-                .from('words')
-                .select('id')
-                .not('id', 'in', `
-                    (SELECT id_word FROM guessed_words WHERE id_player = ${playerId})
-                `);
-
+                .from('guessed_words')
+                .select('id_word')
+                .eq('id_player', playerId);
+    
             if (error) throw error;
-            return data;
+    
+            // Extrai apenas os IDs das palavras adivinhadas
+            const guessedWordIds = data.map(word => word.id_word);
+    
+            return guessedWordIds;
         } catch (err) {
-            console.error('Error retrieving unguessed words:', err.message);
+            console.error('Error retrieving guessed word IDs:', err.message);
             throw err;
         }
     }
+    
 
     // Método para recuperar todas as palavras da tabela words
     static async getAllWords() {
@@ -90,7 +120,7 @@ export default class DataBase {
     }
 
     static async loadedWords(){
-        return DataBase.allWordsAndHints === undefined;
+        return DataBase.allWordsAndHints === null;
     }
 
     // Retorna um objeto {word: 'example', hint: 'example'}
