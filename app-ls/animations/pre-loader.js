@@ -1,41 +1,35 @@
 import createPreLoader from "../templates/loader.js";
 import homePage from "../templates/homepage.js";
 
-
-function runPreLoader() {
-
+async function runPreLoader() {
     let app = document.getElementById('app');
     app.innerHTML = '';
 
     document.body.setAttribute('data-theme', 'light');
 
-
     createPreLoader();
-    doAnimation();
+    await doAnimation();
 
+    return true;
 }
-
-
 
 
 
 async function doAnimation() {
    let result = await typeWriterAnimation('Loading...');
     if (result === 'done') {
-        result = await typeWriterAnimation('Please wait...');
-        if (result === 'done') {
-            result = await typeWriterAnimation('Almost there...');
-            if (result === 'done') {
-                result = await typeWriterAnimation('Done!');
-                if (result === 'done') {
-                    result = await pressKeyToContinue();
-                    if (result === 'done') {
+        result = await typeWriterAnimation('Loading...');
+            if (result === 'done') {    
                         homePage();
-                }
             }
-        }}
-    
+        }
     }
+
+    
+    
+
+
+    
 
 
 
@@ -77,7 +71,6 @@ async function doAnimation() {
 
 
 }
-    }
 
 
 

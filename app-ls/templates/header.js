@@ -11,15 +11,6 @@ function createHeader() {
     nav.id = 'nav';
     nav.classList.add('nav');
 
-    const logoBox = document.createElement('div');
-    logoBox.id = 'logoBox';
-    logoBox.classList.add('logoBox');
-
-    const logo = document.createElement('img');
-    logo.src = '/app-ls/assets/logo.jpeg';
-    logo.alt = 'Logo';
-    logo.classList.add('logo');
-
     const navList = document.createElement('ul');
     navList.id = 'navList';
     navList.classList.add('navList');
@@ -62,8 +53,7 @@ function createHeader() {
     navList.appendChild(about);
     navList.appendChild(contact);
     navList.appendChild(themeSwitch);
-    logoBox.appendChild(logo);
-    nav.appendChild(logoBox);
+
     nav.appendChild(navList);
 
     header.appendChild(nav);

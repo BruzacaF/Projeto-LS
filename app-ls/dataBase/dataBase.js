@@ -135,7 +135,7 @@ export default class DataBase {
                 .from('players')
                 .select('name, score')
                 .order('score', { ascending: false })
-                .limit(10);
+                .limit(5);
 
             if (error) throw error;
             DataBase.topPlayers = data;

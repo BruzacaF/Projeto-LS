@@ -134,19 +134,6 @@ function createAboutPage() {
         mainContent.appendChild(card);
 
 
-    
-        // let github = document.createElement('a');
-        // github.textContent = 'Github';
-        // github.href = infosDev[index].github;
-        // github.target = '_blank';
-    
-        // let linkedin = document.createElement('a');
-        // linkedin.textContent = 'Linkedin';
-        // linkedin.href = infosDev[index].linkedin;
-        // linkedin.target = '_blank';
-    
-        // mainContent.appendChild(github);
-        // mainContent.appendChild(linkedin);
     }
 
 
