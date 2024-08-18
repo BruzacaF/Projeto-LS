@@ -1,10 +1,13 @@
 import homePage from "./templates/homepage";
 import runPreLoader from "./animations/pre-loader";
-import createPopUp from "./templates/pop-up-init";
 
 
 
-document.addEventListener('DOMContentLoaded', homePage);
+
+document.body.setAttribute('data-theme', 'light');
+
+
+document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     await runPreLoader();

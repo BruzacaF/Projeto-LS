@@ -2,6 +2,8 @@ import Player from '../classes/player.js';
 import homePage from '../templates/homepage.js';
 import DataBase from '../dataBase/dataBase.js';
 import w from '../classes/word.js';
+import createPopUpWin from './templatesPopUp/popUpWin.js';
+import createPopUpLose from './templatesPopUp/popUpLose.js';
 
 
 function runGame() {
@@ -401,7 +403,7 @@ function makeGuess() {
             }
             if (Player.chances === 0) {
                 completeWord();
-                gameOver(true);
+                createPopUpLose(Player);
                 
 
                 let buttons = document.querySelectorAll('.key');
@@ -414,7 +416,7 @@ function makeGuess() {
             if (isWordGuessed()) {
                 Player.updateScore(10);
                 Player.removeIdGuessedWord(w.id);
-                gameOver(false);
+                createPopUpWin(Player);
             }
 
 
@@ -452,96 +454,6 @@ function isWordGuessed() {
     return true;  // Retorna true se todas as letras foram adivinhadas
 }
 
-function createPopUp(message) {
-
-    // CREATING POPUP AND BACKGROUND
-    let popUpBackground = document.createElement('div');
-    let popUp = document.createElement('div');
-    let popUpContent = document.createElement('div');
-
-    // CREATING ELEMENTS FROM POPUP
-
-    let closeButton = document.createElement('div');
-    closeButton.textContent = 'X';
-    let text = document.createElement('h1');
-    text.textContent = message;
-    let button = document.createElement('button');
-    button.textContent = 'Play again';
-    let button2 = document.createElement('button');
-    button2.id = 'exit';
-    button2.textContent = 'Exit';
-    let buttonRow = document.createElement('div');
-
-
-    // ADD EVENT LISTENERS
-
-    button.addEventListener('click', () => {
-        setTimeout(() => {
-            restartGame(true);
-        }
-            , 400);
-    }
-    );
-
-
-    button2.addEventListener('click', () => {
-        setTimeout(() => {
-            homePage();
-        }
-            , 400);
-
-    }
-    );
-
-
-    // ADD CLASSES AND IDS
-    popUp.classList.add('popUp');
-    popUp.id = 'popUp';
-
-
-    closeButton.classList.add('closeButton');
-    text.classList.add('text-popUp');
-    button.classList.add('button');
-    button2.classList.add('button');
-    popUpContent.classList.add('popUpContent');
-    buttonRow.classList.add('buttonRow');
-
-
-    popUpBackground.classList.add('popUpBackground');
-
-
-
-    // APPENDING ELEMENTS
-    popUpBackground.appendChild(popUp);
-    popUpContent.appendChild(closeButton);
-    popUpContent.appendChild(text);
-    buttonRow.appendChild(button);
-    buttonRow.appendChild(button2);
-    popUpContent.appendChild(buttonRow);
-
-    popUp.appendChild(popUpContent);
-
-    document.getElementById('gamePage').appendChild(popUpBackground);
-
-
-
-}
-
-// ok
-async function gameOver(bool) {
-    if (bool === true) {
-        setTimeout(() => {
-            createPopUp('Game Over!');
-        }
-            , 1000);
-    } else {
-        setTimeout(() => {
-            createPopUp('You won!');
-        }
-            , 1000);
-    }
-
-}
 
 
 export { runGame };
