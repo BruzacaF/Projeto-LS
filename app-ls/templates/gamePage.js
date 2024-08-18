@@ -229,6 +229,8 @@ function validateInput(userName, userPassword){
 
 
 function createGamePage() {
+    Player.scoreLocal = 0;
+    Player.chances = 6;
 
     let app = document.getElementById('app');
     let main = document.createElement('main');
@@ -275,13 +277,6 @@ function createChances() {
     return container;
 }
 
-function restartGame(restart) {
-    if (restart === true) {
-        Player.chances = 6;
-        createGamePage();
-    }
-}
-
 
 // ok*
 function createWordToGuess() {
@@ -303,6 +298,8 @@ function createWordToGuess() {
     let wordHint = Player.getRandomWordHint();
 
     w.word = wordHint.word;
+    w.hint = wordHint.hint;
+
     console.log(w.word);
 
     let hideWord = w.word.replace(/[a-zA-Zá-úÁ-ÚçÇ]/gi, '');
@@ -397,38 +394,31 @@ function makeGuess() {
                 
             }
 
-            
-            if (isWordGuessed()) {
-                Player.increaseScore();
-                Player.removeIdGuessedWord(w.id);
-                createPopUpWin();
-            }
-            
             if (Player.chances === 0) {
-                completeWord();
                 Player.decreaseScore(5);
+                DataBase.updatePlayerScore(Player.id, Player.score);
+                DataBase.getTopPlayers();
+
                 createPopUpLose();
                 
-
                 let buttons = document.querySelectorAll('.key');
                 for (let button of buttons) {
                     button.disabled = true;
                 }
 
+            } else if (isWordGuessed()) {
+                Player.increaseScore();
+                Player.removeIdGuessedWord(w.id);
+                DataBase.updatePlayerScore(Player.id, Player.score);
+                DataBase.getTopPlayers();
+
+                createPopUpWin();
             }
+            
         }
 
 
     });
-}
-
-// ok
-function completeWord() {
-    let wordArray = w.word.split('');
-    let wordLetters = document.querySelectorAll('.letter');
-    for (let i = 0; i < wordArray.length; i++) {
-        wordLetters[i].textContent = wordArray[i];
-    }
 }
 
 

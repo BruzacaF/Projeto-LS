@@ -1,7 +1,10 @@
+import Player from "../../classes/player.js";
 import DB from "../../dataBase/dataBase.js";
+import { createGamePage } from "../gamePage.js";
+import homePage from "../homepage.js";
 
 
-async function createPopUpWin(player) {
+async function createPopUpWin() {
 
     let app = document.getElementById('app');
 
@@ -34,12 +37,12 @@ async function createPopUpWin(player) {
     button2.innerText = 'Sair'; //Aqui deve ser adicionado um evento para sair
 
     button2.addEventListener('click', () => {
-        window.close();
+        homePage();
     }
     );
 
     button.addEventListener('click', () => {
-        popUpWin.style.display = 'none';
+        createGamePage();
     }
     );
 
@@ -59,13 +62,13 @@ async function createPopUpWin(player) {
     app.appendChild(popUpWin);
 
    
-    if (await typeWriterAnimation(`Parabéns ${await (player.nome)}`, title, 100)) {
-        if (player.pontos > 100) { //Colocar um valor de referência 
-            await typeWriterAnimation(`Você fez ${player.pontos} pontos, UM VERDADEIRO MESTRE! `, subTitle, 50);
-        } else if (player.pontos > 50) { //Colocar um valor de referência
-            await typeWriterAnimation(`Parabens você fez ${player.pontos},`, subTitle, 150);
+    if (await typeWriterAnimation(`Parabéns ${(Player.name)}`, title, 100)) {
+        if (Player.scoreLocal > 100) { //Colocar um valor de referência 
+            await typeWriterAnimation(`Você fez ${Player.scoreLocal} pontos, UM VERDADEIRO MESTRE! `, subTitle, 50);
+        } else if (Player.scoreLocal > 50) { //Colocar um valor de referência
+            await typeWriterAnimation(`Parabens você fez ${Player.scoreLocal},`, subTitle, 150);
         } else {
-            await typeWriterAnimation(`Você fez ${player.pontos} pontos, continue treinando!`, subTitle, 50);
+            await typeWriterAnimation(`Você fez ${Player.scoreLocal} pontos, continue treinando!`, subTitle, 50);
         }
     }
 
@@ -125,10 +128,6 @@ async function createRanking() { //Aqui se possivel comparar o ranking do player
 
     hintsBox.appendChild(hint1);
     hintsBox.appendChild(hint2);
-
-    if (!DB.loadedTopPlayers()) {
-        await DB.getTopPlayers();
-    }
 
     let data = DB.topPlayers;
 

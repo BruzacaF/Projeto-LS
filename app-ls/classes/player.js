@@ -7,6 +7,7 @@ export default class Player {
     static score = 0;
     static unguessedWordsId = [];
     static chances = 6;
+    static scoreLocal = 0;
 
     static initialize(name) {
         Player.name = name;
@@ -32,6 +33,7 @@ export default class Player {
 
     static increaseScore(increase = 10) {
         Player.score += increase;
+        Player.scoreLocal += increase;
     }
 
     static decreaseScore(decrease = 3){
@@ -40,6 +42,7 @@ export default class Player {
         }
         else {
             Player.score -= decrease;
+            Player.scoreLocal -= decrease;
         }
     }
 
