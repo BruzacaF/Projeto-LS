@@ -19,8 +19,21 @@ function runGame() {
     boxInput.id = 'boxInput';
     boxInput.classList.add('boxInput');
 
-    let typeLogin = document.createElement('h1');
-    typeLogin.textContent = 'Login';
+    let typeLogin = document.createElement('div');
+    
+    let loginButton = document.createElement('span');
+    loginButton.textContent = 'Login';
+    loginButton.id = 'login';
+    loginButton.classList.add('typeLoginText');
+
+    let cadastrarButton = document.createElement('span');
+    cadastrarButton.textContent = 'cadastro';
+    cadastrarButton.id = 'cadastrar';
+    cadastrarButton.classList.add('typeLoginText2');
+
+    typeLogin.appendChild(loginButton);
+    typeLogin.appendChild(cadastrarButton);
+    
     typeLogin.classList.add('typeLogin');
 
     let inputContainer = document.createElement('div');
@@ -32,12 +45,21 @@ function runGame() {
     inputUser.classList.add('inputUser');
     inputUser.placeholder = 'Digite seu nome';
 
+    // Restricting the input to 10 characters and only letters
+    inputUser.maxLength = 10;
+    inputUser.pattern = '[a-zA-Z0-9]+';
+
     let inputPassword = document.createElement('input');
     inputPassword.id = 'inputPassword';
     inputPassword.classList.add('inputPassword');
     inputPassword.placeholder = 'Digite sua senha';
+
+    // Restricting the input to 10 characters and only letters, numbers
+    inputPassword.pattern = '[a-zA-Z0-9]+';
+
     inputPassword.type = 'password';
-    inputPassword.maxLength = 4;
+    inputPassword.minLength = 4;
+    inputPassword.maxLength = 10;
 
     let showPassword = document.createElement('button');
     showPassword.id = 'showPassword';
@@ -67,6 +89,13 @@ function runGame() {
     backButton.id = 'back';
     backButton.textContent = 'Back';
     backButton.classList.add('buttonBack');
+
+
+    inputUser.addEventListener('input', () => {
+        inputUser.value = inputUser.value.replace(/[^a-zA-Z0-9 ]/g, '');
+    });
+
+
     
     backButton.addEventListener('click', () => {
         setTimeout(() => {
@@ -74,6 +103,30 @@ function runGame() {
         }
         , 100);
     });
+
+    loginButton.addEventListener('click', () => {
+        inputUser.placeholder = 'Digite seu nome';
+        inputPassword.placeholder = 'Digite sua senha';
+        buttonUser.textContent = 'Iniciar';
+        cadastrarButton.classList.remove('selected');
+        loginButton.classList.add('selected');
+    }
+        
+    );
+
+    cadastrarButton.addEventListener('click', () => {
+        inputUser.placeholder = 'Digite seu nome de usuário';
+        inputPassword.placeholder = 'Cadastre sua senha';
+        buttonUser.textContent = 'Cadastrar';
+
+        loginButton.classList.remove('selected'); // adiciona a classe para elucidar qual botão está selecionado
+        cadastrarButton.classList.add('selected');
+
+        cadastrarButton.addEventListener('click', () => {
+            // Função para cadastrar usuário na database
+        });
+    }
+    );
     
     showPassword.addEventListener('click', () => {
         if (inputPassword.type === 'password') {
@@ -84,29 +137,36 @@ function runGame() {
             showPasswordImg.src = './assets/password.svg';
         }
     });
+
+
     
     
     
     buttonUser.addEventListener('click', async () => {
         const userName = inputUser.value;
         const userPassword = inputPassword.value;
-    
+
         try {
             validateInput(userName, userPassword);
             // Chama processUserData e aguarda a sua execução
             const Player = await processUserData(userName, userPassword);
-            
+
             // Se não houver erro, cria a página do jogo após um atraso
             setTimeout(() => {
                 createGamePage(Player);
             }, 400);
-            
+
         } catch (err) {
             // Exibe o erro e encerra a função para garantir que nada mais seja executado
-            alert(err.message);
+            inputPassword.value = 'Senha Incorreta';
+            inputPassword.classList.add('shake-animation'); // Add this line to add the shake animation
+            setTimeout(() => {
+                inputPassword.classList.remove('shake-animation'); // Remove the shake animation after a delay
+                inputPassword.value = ''; // Reset the input value after the shake animation
+            }, 500);
+            // alert(err.message);
         }
     });
-    
     
 
     
@@ -194,7 +254,7 @@ function createGamePage(Player) {
 }
 
 
-// nada
+
 
 
 var userName = undefined;

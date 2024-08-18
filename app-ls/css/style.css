@@ -158,7 +158,6 @@ body {
     display: flex;
     flex-direction: column;
     transition: 800ms ease-in-out;
-    gap: 2rem;
 
     overflow: hidden;
     z-index: 0;
@@ -182,7 +181,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 200px;
+    
     padding: 20px 50px;
     background-color: var(--primary-color);
     color: var(--on-primary-color);
@@ -202,16 +201,6 @@ header .nav {
     height: 100px;
 }
 
-header .nav .logoBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    flex: 1;
-    height: 100%;
-
-}
 
 header .logoBox img {
     width: 100px;
@@ -333,18 +322,9 @@ header .nav .navList .navItem:active {
 
 
 
-
-
-
-
-
-
-
-
 /* ------------- MAIN PAGE ----------------- */
 .homePage {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -817,24 +797,6 @@ header .nav .navList .navItem:active {
     background-color: var(--pop-up-error-color);
 }
 
-/* .popUp .popUpContent .button::before {
-    content: "";
-    position: absolute;
-    left: 0;
-
-    width: 0%;
-    height: 100%;
-    background-color: var(--on-surface-colors);
-    
-     z-index: -1;
-    transition: 0.5s;
-}
-
-.popUp .popUpContent .button:hover::before {
-    width: 100%;
-    transition: 0.5s;
-} */
-
 
 
 /* ---------------------- LOADER AND ANIMATIONS ---------------------------- */
@@ -925,38 +887,104 @@ header .nav .navList .navItem:active {
     width: 600px;
     height: 400px;
     margin: 0 auto;
+    padding: 10px;
 
     border: 3px solid var(--on-surface-colors);
     background: var(--surface-colors);
     box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
-    border-radius: 10px;
-    padding: 10px 20px;
-    color: var(--on-primary-color);
 
-}
-
-.boxInput .typeLogin {
-    grid-area: typeLogin;
-    font-size: 2rem;
+    
     color: var(--on-primary-color);
-    display: flex;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
 
 }
 
 .boxInput .inputContainer {
     display: grid;
-    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 50px;
     grid-template-areas: 'inputBox inputBox' 'inputPassword showPassword';
+    
+
+    align-items: center;
+    align-content: center;
+    gap: 20px;
 
     width: 100%;
     height: 100%;
-    gap: 20px;
+}
+
+
+.boxInput .typeLogin{
+    grid-area: typeLogin;
+    font-size: 2rem;
+    color: var(--on-primary-color);
+    display: grid;
+    grid-template-areas: 'typeLoginText typeLoginText2';
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    
+    gap: 10px;
+
+}
+
+.boxInput .typeLogin .typeLoginText {
+    grid-area: typeLoginText;
+
+}
+
+.boxInput .typeLogin .typeLoginText2 {
+    grid-area: typeLoginText2;
+    
+}
+
+
+
+.boxInput .typeLogin .typeLoginText , .boxInput .typeLogin .typeLoginText2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: var(--on-primary-color);
+    text-align: center;
+    width: 100%;
+    height: 60px;
+    cursor: pointer;
+
+    border-bottom: 3px solid var(--on-surface-colors);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+}
+
+.boxInput .typeLogin .typeLoginText:hover , .boxInput .typeLogin .typeLoginText2:hover{
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+}
+
+.boxInput .typeLogin .typeLoginText::before , .boxInput .typeLogin .typeLoginText2::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0%;
+    height: 100%;
+    z-index: -1;
+    transition: 0.5s;
+    
+}
+
+.boxInput .typeLogin .typeLoginText::before{
+    background-color: var(--primary-color);
+}
+
+.boxInput .typeLogin .typeLoginText2::before{
+    background-color: var(--secondary-color);
+}
+
+.boxInput .typeLogin .typeLoginText:hover::before , .boxInput .typeLogin .typeLoginText2:hover::before{
+   
+    width: 100%;
+    transition: 0.5s;
 }
 
 
@@ -984,6 +1012,17 @@ header .nav .navList .navItem:active {
     text-transform: none;
 }
 
+.boxInput input:not(:placeholder-shown):valid {
+    border-color: var(--success-color);
+}
+
+.boxInput input:not(:placeholder-shown):invalid {
+    border-color: var(--error-color);
+   
+}
+
+
+
 .boxInput input:nth-child(1) {
     grid-area: inputBox;
 }
@@ -991,6 +1030,100 @@ header .nav .navList .navItem:active {
 .boxInput input:nth-child(2) {
     grid-area: inputPassword;
 
+}
+
+.shake-animation{
+    animation: shake 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: 0.5s ease-in-out;
+    border-color: var(--pop-up-error-color)!important; 
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--error-color)!important;
+    background: var(--error-color)!important;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    5% {
+        transform: translateX(-10px);
+    }
+
+    10% {
+        transform: translateX(10px);
+    }
+
+    15% {
+        transform: translateX(-10px);
+    }
+
+    20% {
+        transform: translateX(10px);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    30% {
+        transform: translateX(10px);
+    }
+
+    35% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    45% {
+        transform: translateX(-10px);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    55% {
+        transform: translateX(-10px);
+    }
+
+    60% {
+        transform: translateX(10px);
+    }
+
+    65% {
+        transform: translateX(-10px);
+    }
+
+    70% {
+        transform: translateX(10px);
+    }
+
+    75% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    85% {
+        transform: translateX(-10px);
+    }
+
+    90% {
+        transform: translateX(10px);
+    }
+
+    95% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 
