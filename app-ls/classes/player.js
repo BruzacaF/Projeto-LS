@@ -27,11 +27,20 @@ export default class Player {
     }
 
     static setScore(score) {
-        Player.score += score;
+        Player.score = score;
     }
 
-    static updateScore(score) {
-        Player.score += score;
+    static increaseScore(increase = 10) {
+        Player.score += increase;
+    }
+
+    static decreaseScore(decrease = 3){
+        if (Player.score - decrease < 0){
+            Player.score = 0;
+        }
+        else {
+            Player.score -= decrease;
+        }
     }
 
     // Reduz uma unidade das chances

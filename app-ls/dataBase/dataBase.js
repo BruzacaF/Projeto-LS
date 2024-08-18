@@ -124,7 +124,7 @@ export default class DataBase {
     }
 
     // Retorna um objeto {word: 'example', hint: 'example'}
-    static getWordHint(id) {
+    static getWordHintById(id) {
         return DataBase.allWordsAndHints.find(word => word.id === id);
     }
 

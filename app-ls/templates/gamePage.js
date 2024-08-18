@@ -121,10 +121,6 @@ function runGame() {
 
         loginButton.classList.remove('selected'); // adiciona a classe para elucidar qual botão está selecionado
         cadastrarButton.classList.add('selected');
-
-        cadastrarButton.addEventListener('click', () => {
-            // Função para cadastrar usuário na database
-        });
     }
     );
     
@@ -149,11 +145,11 @@ function runGame() {
         try {
             validateInput(userName, userPassword);
             // Chama processUserData e aguarda a sua execução
-            const Player = await processUserData(userName, userPassword);
+            await processUserData(userName, userPassword);
 
             // Se não houver erro, cria a página do jogo após um atraso
             setTimeout(() => {
-                createGamePage(Player);
+                createGamePage();
             }, 400);
 
         } catch (err) {
@@ -208,19 +204,18 @@ async function processUserData(userName, userPassword){
     } else {
         DataBase.addPlayerToDatabase(userName, userPassword);
     }
-    return Player;
 }
 
 // Valida os inputs do usuário
 function validateInput(userName, userPassword){
     let flag = false;
-    let message = ''
+    let message = '';
     if (userName === '') {
-        message = 'Digite um nome válido'
+        message = 'Digite um nome válido';
         flag = true;
     }
     if (userPassword.length < 4){
-        message += '\nSua senha deve ter no mínimo 4 caracteres'
+        message += '\nSua senha deve ter no mínimo 4 caracteres';
         flag = true;
     }
     if (flag){
@@ -231,7 +226,7 @@ function validateInput(userName, userPassword){
 
 
 
-function createGamePage(Player) {
+function createGamePage() {
 
     let app = document.getElementById('app');
     let main = document.createElement('main');
@@ -241,7 +236,7 @@ function createGamePage(Player) {
 
     app.appendChild(main);
 
-    let boxWord = createWordToGuess(Player);
+    let boxWord = createWordToGuess();
     let keyboard = createKeyboard();
 
 
@@ -292,8 +287,8 @@ function createChances() {
 
 function restartGame(restart) {
     if (restart === true) {
-        word = getRandomWord();
-        chances = 6;
+        w.word = getRandomWord();
+        Player.chances = 6;
         createGamePage();
     }
 }
@@ -316,8 +311,8 @@ function createWordToGuess() {
 
     
     // Sorteia a palavra
-    Player.getRandomIdWord();
-    let wordHint = DataBase.getWordHint(w.id);
+    let wordHint = Player.getRandomWordHint();
+
     w.word = wordHint.word;
     console.log(w.word);
 
@@ -393,6 +388,8 @@ function makeGuess() {
 
             if (!isLetterInWord) {
                 Player.decreaseChances();
+                Player.decreaseScore();
+                
                 let boxChances = document.getElementById('boxChances');
                 boxChances.textContent = `Chances: ${Player.chances}`;
                 button.classList.add('keyIncorrect');
@@ -412,7 +409,8 @@ function makeGuess() {
             }
 
             if (isWordGuessed()) {
-                Player.updateScore(10);
+                Player.increaseScore();
+                async DataBase.
                 Player.removeIdGuessedWord(w.id);
                 gameOver(false);
             }
@@ -434,6 +432,7 @@ function completeWord() {
 }
 
 
+// ok
 function addMakeGuessEvent() {
     let buttons = document.querySelectorAll('.key');
     for (let button of buttons) {
