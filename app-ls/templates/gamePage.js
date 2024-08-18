@@ -395,6 +395,9 @@ function makeGuess() {
                 boxChances.textContent = `Chances: ${Player.chances}`;
                 button.classList.add('keyIncorrect');
                 button.disabled = true;
+
+                let boxScore = document.getElementsByClassName('lowerCard')[0];
+                boxScore.textContent = `Pontos: ${Player.score}`;
                 
             } else {
                 Player.increaseScore(2);
@@ -407,8 +410,18 @@ function makeGuess() {
 
             }
 
+            
+            if (isWordGuessed()) {
+                Player.increaseScore();
+                console.log('antes', Player.unguessedWordsId);
+                Player.removeIdGuessedWord(w.id);
+                console.log('depois', Player.unguessedWordsId);
+                gameOver(false);
+            }
+            
             if (Player.chances === 0) {
                 completeWord();
+                Player.decreaseScore(5);
                 gameOver(true);
                 
 
@@ -418,15 +431,6 @@ function makeGuess() {
                 }
 
             }
-
-            if (isWordGuessed()) {
-                Player.increaseScore();
-                console.log('antes', Player.unguessedWordsId);
-                Player.removeIdGuessedWord(w.id);
-                console.log('depois', Player.unguessedWordsId);
-                gameOver(false);
-            }
-
 
         }
 
