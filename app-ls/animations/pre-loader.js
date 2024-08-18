@@ -16,9 +16,9 @@ async function runPreLoader() {
 
 
 async function doAnimation() {
-   let result = await typeWriterAnimation('Loading...');
+   let result = await typeWriterAnimation('Carregando...');
     if (result === 'done') {
-        result = await typeWriterAnimation('Loading...');
+        result = await typeWriterAnimation('Carregando...');
             if (result === 'done') {    
                         homePage();
             }
@@ -37,41 +37,29 @@ async function doAnimation() {
 
 
     function typeWriterAnimation(text) {
-
         return new Promise(resolve => {
             let loaderText = document.querySelector('.loaderText');
             let newLoaderText = document.createElement('p');
-        
-        for (let i = 0; i < text.length; i++) {
+    
+
+            for (let i = 0; i < text.length; i++) {
+                setTimeout(() => {
+                    newLoaderText.textContent += text[i];
+                    loaderText.textContent = newLoaderText.textContent;
+                }, 250 * i);
+            }
+
             setTimeout(() => {
-                newLoaderText.textContent += text[i];
-                loaderText.textContent = newLoaderText.textContent;
-            }, 250 * i);
-        } setTimeout(() => {
-            resolve('done');
-        }, 250 * text.length);
+                resolve('done');
+            }, 250 * text.length);
         });
     }
 
+
+
+
      // ------------ function to animate text ------------
-    //  ------------ function to press key continue ------------
-
-    function pressKeyToContinue() {
-        return new Promise(resolve => {
-            let loaderText = document.querySelector('.loaderText');
-            let newLoaderText = document.createElement('p');
-            newLoaderText.textContent = 'Press any key to continue...';
-            loaderText.textContent = newLoaderText.textContent;
-           window.addEventListener('keydown', () => {
-               resolve('done');
-           });
-        });
-
-
-
-
-}
-
+   
 
 
 export default runPreLoader;

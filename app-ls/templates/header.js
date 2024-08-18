@@ -1,5 +1,6 @@
 import createAboutPage from '../templates/about.js';
 import homePage from '../templates/homepage.js';
+import { checkStatusForPopUp } from './pop-up-init.js';
 
 
 function createHeader() {
@@ -16,7 +17,7 @@ function createHeader() {
     navList.classList.add('navList');
 
     const about = document.createElement('li');
-    about.textContent = 'Devs';
+    about.textContent = 'Sobre';
     about.id = 'about';
     about.classList.add('navItem');
 
@@ -27,7 +28,7 @@ function createHeader() {
 
 
     const contact = document.createElement('li');
-    contact.textContent = 'Contact';
+    contact.textContent = 'Ajuda';
     contact.id = 'contact';
     contact.classList.add('navItem');
     
@@ -63,6 +64,14 @@ function createHeader() {
             homePage();
         }, 200);
     });
+
+    contact.addEventListener('click', () => {
+        setTimeout(() => {
+            localStorage.clear();
+            checkStatusForPopUp();
+            homePage();
+        }, 200);
+    }); 
 
     input.addEventListener("click", () => {
         const checkbox = document.getElementById('themeSwitch');

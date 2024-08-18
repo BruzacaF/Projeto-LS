@@ -3,8 +3,8 @@
 const infosDev = {
     filipe: {
         name: 'Filipe',
-        role: 'Front-end Developer',
-        description: 'I am a front-end developer and I am responsible for the development of the application interface.',
+        role: 'Dev Front-end e Designer',
+        description: 'Responsável por:\nDesenvolvimento do front-end e design da aplicação.\nGerenciamento do projeto.\nGosta de interfaces limpas e intuitivas.',
         icon: 'assets/icon1.jpg',
         brands: {
             github: 'assets/github.svg',

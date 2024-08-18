@@ -256,13 +256,13 @@ function createGamePage(Player) {
 
 
 
-var userName = undefined;
-var score = undefined;
+// var userName = undefined;
+// var score = undefined;
 
-function randomWord() {
-    let random = Math.floor(Math.random() * words.length);
-    word = words[random];
-}
+// function randomWord() {
+//     let random = Math.floor(Math.random() * words.length);
+//     word = words[random];
+// }
 
 
 function createChances() {
@@ -304,7 +304,10 @@ function createWordToGuess() {
     let box = document.createElement('div');
     let containerLetters = document.createElement('div');
 
-
+    let hintBox = document.createElement('div');
+    hintBox.id = 'hintBox';
+    hintBox.classList.add('hintBox');
+    
     box.id = 'boxWord';
     box.classList.add('boxWord');
 
@@ -320,11 +323,16 @@ function createWordToGuess() {
 
     let hideWord = w.word.replace(/[a-zA-Zá-úÁ-ÚçÇ]/gi, '');
 
-
+    hintBox.textContent = `Dica: ${wordHint.hint}`;
+    
+    
     containerLetters.textContent = '';
-
+    
+    
     let chances = createChances();
+    
     box.appendChild(chances);
+    box.appendChild(hintBox);
     box.appendChild(containerLetters);
 
 
