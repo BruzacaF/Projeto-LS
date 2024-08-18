@@ -121,6 +121,10 @@ function runGame() {
 
         loginButton.classList.remove('selected'); // adiciona a classe para elucidar qual botão está selecionado
         cadastrarButton.classList.add('selected');
+
+        cadastrarButton.addEventListener('click', () => {
+            // Função para cadastrar usuário na database
+        });
     }
     );
     
@@ -145,11 +149,11 @@ function runGame() {
         try {
             validateInput(userName, userPassword);
             // Chama processUserData e aguarda a sua execução
-            await processUserData(userName, userPassword);
+            const Player = await processUserData(userName, userPassword);
 
             // Se não houver erro, cria a página do jogo após um atraso
             setTimeout(() => {
-                createGamePage();
+                createGamePage(Player);
             }, 400);
 
         } catch (err) {
@@ -163,6 +167,7 @@ function runGame() {
             // alert(err.message);
         }
     });
+    
     
 
     
@@ -184,9 +189,7 @@ function runGame() {
 }
 
 
-async function processUserData(){
-    let userName = document.getElementById('inputUser').value;
-    let userPassword = document.getElementById('inputPassword').value;
+async function processUserData(userName, userPassword){
 
     let id = await DataBase.userExists(userName);
     Player.initialize(userName);
@@ -205,6 +208,7 @@ async function processUserData(){
     } else {
         DataBase.addPlayerToDatabase(userName, userPassword);
     }
+    return Player;
 }
 
 // Valida os inputs do usuário
@@ -227,7 +231,7 @@ function validateInput(userName, userPassword){
 
 
 
-function createGamePage() {
+function createGamePage(Player) {
 
     let app = document.getElementById('app');
     let main = document.createElement('main');
@@ -237,7 +241,7 @@ function createGamePage() {
 
     app.appendChild(main);
 
-    let boxWord = createWordToGuess();
+    let boxWord = createWordToGuess(Player);
     let keyboard = createKeyboard();
 
 
@@ -288,19 +292,22 @@ function createChances() {
 
 function restartGame(restart) {
     if (restart === true) {
-        w.word = Player.getRandomIdWord();
+        word = getRandomWord();
         chances = 6;
         createGamePage();
     }
 }
 
 
-// ok
+// ok*
 function createWordToGuess() {
     let box = document.createElement('div');
     let containerLetters = document.createElement('div');
 
-
+    let hintBox = document.createElement('div');
+    hintBox.id = 'hintBox';
+    hintBox.classList.add('hintBox');
+    
     box.id = 'boxWord';
     box.classList.add('boxWord');
 
@@ -308,21 +315,24 @@ function createWordToGuess() {
     containerLetters.classList.add('containerLetters');
 
     
-    // Sorteia a palavra/dica
-    let wordHint = Player.getRandomWordHint();
-    
+    // Sorteia a palavra
+    Player.getRandomIdWord();
+    let wordHint = DataBase.getWordHint(w.id);
     w.word = wordHint.word;
-    w.hint = wordHint.hint;
-    
     console.log(w.word);
 
     let hideWord = w.word.replace(/[a-zA-Zá-úÁ-ÚçÇ]/gi, '');
 
-
+    hintBox.textContent = `Dica: ${wordHint.hint}`;
+    
+    
     containerLetters.textContent = '';
-
+    
+    
     let chances = createChances();
+    
     box.appendChild(chances);
+    box.appendChild(hintBox);
     box.appendChild(containerLetters);
 
 
@@ -442,7 +452,6 @@ function isWordGuessed() {
     return true;  // Retorna true se todas as letras foram adivinhadas
 }
 
-// 
 function createPopUp(message) {
 
     // CREATING POPUP AND BACKGROUND

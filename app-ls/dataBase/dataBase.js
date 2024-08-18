@@ -124,7 +124,7 @@ export default class DataBase {
     }
 
     // Retorna um objeto {word: 'example', hint: 'example'}
-    static getWordHintById(id) {
+    static getWordHint(id) {
         return DataBase.allWordsAndHints.find(word => word.id === id);
     }
 
@@ -135,7 +135,7 @@ export default class DataBase {
                 .from('players')
                 .select('name, score')
                 .order('score', { ascending: false })
-                .limit(10);
+                .limit(5);
 
             if (error) throw error;
             DataBase.topPlayers = data;

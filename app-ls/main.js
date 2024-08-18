@@ -1,20 +1,14 @@
 import homePage from "./templates/homepage";
 import runPreLoader from "./animations/pre-loader";
+import createPopUp from "./templates/pop-up-init";
 
 
-document.body.onload = homePage;
 
-// document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', homePage);
 
-
-// async function init() {
-
-//     await runPreLoader();
-//     if (runPreLoader) {
-//         homePage();
-//         alert('Welcome to the home page');
-//     }
-
-// }
-
-
+async function init() {
+    await runPreLoader();
+    if (runPreLoader) {
+            homePage();   
+    }
+}

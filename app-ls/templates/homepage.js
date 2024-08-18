@@ -3,14 +3,22 @@ import preload from '../dataBase/preload.js';
 import createHeader from '../templates/header.js';
 import createScorePage from '../templates/scorePage.js';
 import { runGame } from '../templates/gamePage.js';
+import createPopUp from "./pop-up-init.js";
+import { checkStatusForPopUp } from './pop-up-init.js';
 
 // preload palavras e score
 preload();
 
-function homePage() {
+// preload palavras e score
+preload();
+
+
+
+async function homePage() {
 
     let app = document.getElementById('app');
     app.innerHTML = '';
+
 
     let header = createHeader();
     document.body.setAttribute('data-theme', 'light');
@@ -20,7 +28,10 @@ function homePage() {
         document.getElementById('header').remove();
     }
     
+    await checkStatusForPopUp();
     
+
+
     
     let homePage = document.createElement('div');
     homePage.id = 'homePage';
@@ -66,6 +77,5 @@ function homePage() {
     
     
 }
-
 
 export default homePage;

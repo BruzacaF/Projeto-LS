@@ -16,7 +16,7 @@ async function createScorePage() {
     scorePage.className = 'scorePage';
 
     let scoreTitle = document.createElement('h1');
-    scoreTitle.innerHTML = 'Score Page';
+    scoreTitle.innerText = 'Ranking';
     scoreTitle.className = 'scoreTitle';
 
 
@@ -57,9 +57,9 @@ async function createTable() {
     let th2 = document.createElement('th');
     let th3 = document.createElement('th');
 
-    th1.innerHTML = 'Rank';
-    th2.innerHTML = 'Name';
-    th3.innerHTML = 'Score';
+    th1.innerText = 'Rank';
+    th2.innerText = 'Nome';
+    th3.innerText = 'Pontuação';
 
     tr.appendChild(th1);
     tr.appendChild(th2);

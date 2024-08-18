@@ -180,15 +180,17 @@ body {
 .header {
     display: flex;
     align-items: center;
+    justify-content: center;
+
+
+
     width: 100%;
-    
-    padding: 20px 50px;
+    height: 120px;
     background-color: var(--primary-color);
     color: var(--on-primary-color);
     text-transform: uppercase;
     box-shadow: 1px var(--active-offset) 3px var(--shadow_color);
     z-index: 1;
-    flex: 1;
 
 }
 
@@ -198,25 +200,17 @@ header .nav {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 38px;
+    height: 100%;
+    padding: 20px 40px ;
 }
 
-
-header .logoBox img {
-    width: 100px;
-    height: 100px;
-    border-radius: 40%;
-}
 
 header .nav .navList {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
     flex-direction: row;
-    position: relative;
-    margin-left: 40px;
-
-
     gap: 20px;
-    flex: 9;
     height: 100%;
     width: 100%;
     list-style: none;
@@ -228,7 +222,6 @@ header .nav .navList .navItem {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    align-self: flex-end;
     height: fit-content;
     padding: 0 20px;
     cursor: pointer;
@@ -387,10 +380,11 @@ header .nav .navList .navItem:active {
     justify-content: center;
     flex-direction: column;
     gap: 20px;
-
     width: 100%;
-    height: fit-content;
 
+    height: 250px;
+    border-bottom: 3px solid var(--on-surface-colors);
+    border-top: 3px solid var(--on-surface-colors);
     background-color: var(--background-colors);
     box-shadow: 1px var(--active-offset2) 3px var(--shadow_color);
 
@@ -405,107 +399,55 @@ header .nav .navList .navItem:active {
     width: 85%;
     align-self: center;
 
-    flex: 8;
-
+    height: 180px;
 
 }
 
 .boxWord .chances {
     display: flex;
-    height: 100%;
-    width: 200px;
-    font-size: 20px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    font-size: 1.2rem;
     color: var(--on-primary-color);
-    flex: 4;
+
 
 }
 
-.boxWord .chances .card {
+.boxWord .hintBox{
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: 200px;
+    width: 100%;
     height: 60px;
-    background: var(--primary-color);
-    border-radius: 0 10px 10px 0;
-    border: 3px solid var(--on-primary-color);
+    font-size: 1.2rem;
+    
+    color: var(--on-secondary-color);
+    background: var(--secondary-color);
+    border-bottom: 3px solid var(--on-surface-colors);
+    border-top: 3px solid var(--on-surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+}
+
+.boxWord .chances .card, .boxWord .chances .upperCard, .boxWord .chances .lowerCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    height: 50px;
+
+    font-size: 1.2rem;
+    color: var(--on-primary-color);
+
+    border-bottom: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
 
-    align-self: center;
-    z-index: 3;
-
-
 
 }
-
-.boxWord .chances .upperCard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    align-self: center;
-    border-radius: 0 10px 10px 0;
-    border: 3px solid var(--on-primary-color);
-    width: 200px;
-    height: 60px;
-    background: var(--secondary-color);
-    z-index: 2;
-    transition: 1s ease-in-out;
-    position: absolute;
-    left: 0;
-
-}
-
-.boxWord .chances .lowerCard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    align-self: center;
-    border-radius: 0 10px 10px 0;
-    width: 200px;
-    height: 60px;
-    border: 3px solid var(--on-primary-color);
-    background: var(--terciary-color);
-
-    z-index: 1;
-    transition: 1s ease-in-out;
-    position: absolute;
-    left: 0;
-
-}
-
-.boxWord .chances .card:hover {
-    cursor: pointer;
-    transition: 1s ease-in-out;
-    border-radius: 0;
-    z-index: 3;
-    transition: 1s ease-in-out;
-
-
-}
-
-.boxWord .chances .card:hover+.upperCard {
-    transform: translateX(200px);
-    transition: 1s ease-in-out;
-    box-shadow: var(--active-offset2) var(--active-offset2) 0 var(--shadow_color);
-    border: 3px solid var(--on-primary-color);
-    z-index: 2;
-    border-radius: 0;
-}
-
-.boxWord .chances .card:hover+.upperCard+.lowerCard {
-    transform: translateX(400px);
-    transition: 1s ease-in-out;
-    box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
-    z-index: 1;
-    border: 3px solid var(--on-primary-color);
-    border-radius: 0;
-
-}
-
-
 
 
 
@@ -834,18 +776,21 @@ header .nav .navList .navItem:active {
 
 .loader .boxLoader .loaderText {
     font-size: 2rem;
-
-
     margin-bottom: 20px;
     text-align: center;
     z-index: 103;
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
+    
+    padding: 10px;
+    width: 100%;
+    
 
 }
 
 .loader .boxLoader .loaderText #textBox {
     font-size: 1.5rem;
-
-
     margin-bottom: 20px;
     text-align: center;
     z-index: 105;
@@ -949,6 +894,7 @@ header .nav .navList .navItem:active {
     width: 100%;
     height: 60px;
     cursor: pointer;
+    position: relative;
 
     border-bottom: 3px solid var(--on-surface-colors);
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1126,7 +1072,6 @@ header .nav .navList .navItem:active {
     }
 }
 
-
 .boxInput .showPassword {
     grid-area: showPassword;
     display: flex;
@@ -1284,10 +1229,17 @@ header .nav .navList .navItem:active {
     padding: 20px;
 }
 
-.scorePage h1 {
+.scorePage .scoreTitle {
     font-size: 2rem;
     color: var(--on-primary-color);
-    margin-bottom: 20px;
+    text-align: center;
+    width: 70%;
+    text-transform: capitalize;
+    border: 3px solid var(--on-surface-colors);
+    background: var(--primary-color);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    padding: 5px;
+
 }
 
 .scorePage .backButton {
@@ -1606,6 +1558,303 @@ header .nav .navList .navItem:active {
 
 
 
+
+/*------------------- POP UP INIT ---------------- */
+
+.popUp-init {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--pop-up-background-color);
+    backdrop-filter: blur(15px);
+    z-index: 100;
+}
+
+.popUp-init .popUpBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 700px;
+    height: 600px;
+    padding: 20px;
+    border: 3px solid var(--on-surface-colors);
+    background-color: var(--pop-up-surface-colors);
+    box-shadow: var(--active-offset3) var(--active-offset3) rgba(0, 0, 0, 0.6);
+    z-index: 101;
+    position: relative;
+}
+
+.popUp-init .popUpBox h2{
+    font-size: 1.8rem;
+    color: var(--on-primary-color);
+    text-align: center;
+    display: flex;
+    padding: 10px 0;
+}
+
+.popUp-init .popUpBox p{
+    font-size: 1rem;
+    color: var(--on-primary-color);
+    margin-bottom: 20px;
+    text-align: justify;
+    align-self: flex-start;
+    height: 300px;
+    text-wrap: wrap;
+}
+
+.popUp-init .popUpBox .button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+    width: 100px;
+    height: 50px;
+    background: var(--pop-up-surface-colors);
+    border: 3px solid var(--on-surface-colors);
+    color: var(--on-primary-color);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+}
+
+.popUp-init .popUpBox .button:hover {
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+    transition: .3s ease-in;
+}
+
+.popUp-init .popUpBox .button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0%;
+    height: 100%;
+    z-index: -1;
+    transition: 0.5s;
+    background-color: var(--pop-up-success-color);
+}
+
+.popUp-init .popUpBox .button:hover::before {
+    width: 100%;
+    transition: 0.5s;
+}
+
+/* -----------------------POP UP CONTENT--------------- */
+
+.popUp-init .popUpBox .popUpContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+
+}
+
+.popUp-init .popUpBox .popUpContent h2{
+    font-size: 1.8rem;
+    color: var(--on-primary-color);
+    display: flex;
+    height: fit-content;
+    align-self: flex-start;
+    
+    text-align: justify;
+    text-transform: capitalize;
+    
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 3px solid var(--on-surface-colors);
+}
+
+.popUp-init .popUpBox .popUpContent p{
+    font-size: 1.2rem;
+    color: var(--on-primary-color);
+    text-align: justify;
+    height: fit-content;
+    text-transform: capitalize;
+    
+}
+
+.popUp-init .popUpBox .popUpContent ul{
+    font-size: 1rem;
+    width: 100%;
+    color: var(--on-primary-color);
+    margin-bottom: 20px;
+    text-align: justify;
+    align-self: flex-start;
+    list-style: none;
+    
+}
+
+.popUp-init .popUpBox .popUpContent li{
+    font-size: 1rem;
+    color: var(--on-primary-color);
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: justify;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.popUp-init .popUpBox .popUpContent li img{
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+}
+
+/* ---------------------------------- POP UP DEVS ---------------------------------- */
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .popUpExpandableIcons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    min-height: 120px;
+    gap: 20px;
+
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .popUpExpandableIcons > img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--on-surface-colors);
+
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .popUpExpandableIcons img:hover{
+    width: 100px;
+    height: 100px;
+    transform: translateY(-0.2em);
+    box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
+    transition: 0.2s ease-in-out;
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .popUpExpandableIcons img:active{
+    width: 80px;
+    height: 80px;
+    transform: translateY(0.2em);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transition: 0.2s ease-in-out;
+}
+
+/* --------------------------------- POP UP INFO DEFAULT -------------------------------- */
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .contentBoxDev .contentDefault{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+  
+/* ---------------------------------- POP UP DEVS INFO ---------------------------------- */
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .contentBoxDev{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .contentBoxDev .boxShowDev{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .contentBoxDev .boxShowDev .brands {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 1rem;
+    color: var(--on-primary-color);
+    text-align: justify;
+    align-items: flex-start;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .contentBoxDev .boxShowDev .brands .imgBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--on-surface-colors);
+    border-radius: 10px;
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateY(-0.2em);
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .contentBoxDev .boxShowDev .brands img{
+    width: 40px;
+    height: 40px;
+    
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.popUp-init .popUpBox .popUpContent .popUpContentDevs .contentBoxDev .boxShowDev .brands .imgBox:hover{
+    transform: translate(calc(.5 * var(--hover_offset)),
+            calc(.5 * var(--hover_offset)));
+    box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
+    transition: .3s ease-in;
+}
 
 
 
