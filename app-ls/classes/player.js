@@ -53,7 +53,13 @@ export default class Player {
     // Retorna aleatoriamente o id de uma palavra não adivinhada
     static getRandomIdWord() {
         const randomIndex = Math.floor(Math.random() * Player.unguessedWordsId.length);
-        w.id = randomIndex + 1
+        return randomIndex + 1
+
+    }
+
+    static getRandomWordHint(){
+        w.id = Player.getRandomIdWord();
+        return DataBase.getWordHintById(w.id);
     }
 
     static toString() {
