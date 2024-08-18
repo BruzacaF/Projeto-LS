@@ -1,0 +1,100 @@
+import { typeWriterAnimation } from "./popUpWin";
+
+
+async function createPopUpLose(player) {
+
+    let app = document.getElementById('app');
+
+    let popUpLose = document.createElement('div');
+    popUpLose.classList.add('popUpBackground');
+
+    let contentBox = document.createElement('div');
+    contentBox.classList.add('popUp');
+
+    let header = document.createElement('div');
+    header.classList.add('headerPopUp');
+
+    let title = document.createElement('h2');
+    let subTitle = document.createElement('p');
+
+    let content = document.createElement('div');
+    content.classList.add('popUpContent');
+
+    let textLoseBox = document.createElement('div');
+    textLoseBox.classList.add('lose');
+
+    let textLose = document.createElement('p');
+    textLose.classList.add('loseText');
+    let textLose2 = document.createElement('p');
+    textLose2.classList.add('loseText');
+
+
+
+    let hintBox = document.createElement('div');
+    hintBox.classList.add('hintBox');
+
+    let hint = document.createElement('p');
+    hint.classList.add('hint');
+
+
+    let hint2 = document.createElement('p');
+    hint2.classList.add('hint');
+    
+    let buttons = document.createElement('div');
+    buttons.classList.add('buttonRow');
+
+    let button = document.createElement('button');
+    button.classList.add('button');
+    button.innerText = 'Jogar novamente'; //Aqui deve ser adicionado um evento para jogar novamente
+
+    let button2 = document.createElement('button');
+    button2.classList.add('button');
+    button2.innerText = 'Sair'; //Aqui deve ser adicionado um evento para sair
+
+    button2.addEventListener('click', () => {
+        window.close();
+    }
+    );
+
+    button.addEventListener('click', () => {
+        popUpLose.style.display = 'none';
+    }
+    );
+
+    popUpLose.appendChild(contentBox);
+
+    contentBox.appendChild(header);
+    contentBox.appendChild(content);
+    contentBox.appendChild(buttons);
+
+    content.appendChild(textLoseBox);
+    textLoseBox.appendChild(textLose);
+    textLoseBox.appendChild(textLose2);
+
+    content.appendChild(hintBox);
+    hintBox.appendChild(hint);
+    hintBox.appendChild(hint2);
+
+    buttons.appendChild(button);
+    buttons.appendChild(button2);
+
+    header.appendChild(title);
+    header.appendChild(subTitle);
+
+    app.appendChild(popUpLose);
+
+    if (await typeWriterAnimation(`Que pena! ${player.nome}, Tente de novo!`, title, 50)) {
+        if (await typeWriterAnimation(`Você perdeu ${player.pontos} pontos`, subTitle, 50)) {
+            if (await typeWriterAnimation(`A palavra era: ${player.palavra}`, textLose, 50)) {
+                if (await typeWriterAnimation(`A dica era: ${player.dica}`, textLose2, 50)) {
+                    await typeWriterAnimation(`Clique em jogar novamente para tentar de novo!`, hint, 50);
+                    await typeWriterAnimation(`Clique em sair para voltar ao menu principal!`, hint2, 50);
+                }
+            }
+
+        }
+    }
+}
+
+
+export default createPopUpLose;

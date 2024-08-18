@@ -63,3 +63,4 @@ async function doAnimation() {
 
 
 export default runPreLoader;
+export {typeWriterAnimation};
