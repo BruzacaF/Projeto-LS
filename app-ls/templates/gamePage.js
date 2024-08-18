@@ -389,7 +389,7 @@ function makeGuess() {
             if (!isLetterInWord) {
                 Player.decreaseChances();
                 Player.decreaseScore();
-                
+
                 let boxChances = document.getElementById('boxChances');
                 boxChances.textContent = `Chances: ${Player.chances}`;
                 button.classList.add('keyIncorrect');
@@ -410,7 +410,6 @@ function makeGuess() {
 
             if (isWordGuessed()) {
                 Player.increaseScore();
-                async DataBase.
                 Player.removeIdGuessedWord(w.id);
                 gameOver(false);
             }
