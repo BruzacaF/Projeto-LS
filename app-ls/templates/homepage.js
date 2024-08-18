@@ -6,15 +6,10 @@ import { runGame } from '../templates/gamePage.js';
 import createPopUp from "./pop-up-init.js";
 import { checkStatusForPopUp } from './pop-up-init.js';
 
-// preload palavras e score
-preload();
-
-// preload palavras e score
-preload();
-
-
 
 async function homePage() {
+    // preload palavras e score
+    preload();
 
     let app = document.getElementById('app');
     app.innerHTML = '';
@@ -30,8 +25,6 @@ async function homePage() {
     
     await checkStatusForPopUp();
     
-
-
     
     let homePage = document.createElement('div');
     homePage.id = 'homePage';
