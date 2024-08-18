@@ -287,7 +287,6 @@ function createChances() {
 
 function restartGame(restart) {
     if (restart === true) {
-
         Player.chances = 6;
         createGamePage();
     }
@@ -406,13 +405,13 @@ function makeGuess() {
                 boxScore.textContent = `Pontos: ${Player.score}`;
                 
                 
-
             }
 
             
             if (isWordGuessed()) {
                 Player.increaseScore();
                 Player.removeIdGuessedWord(w.id);
+
                 gameOver(false);
             }
             
@@ -541,12 +540,15 @@ function createPopUp(message) {
 
 // ok
 async function gameOver(bool) {
+    DataBase.updatePlayerScore(Player.id, Player.score);
+
     if (bool === true) {
         setTimeout(() => {
             createPopUp('Game Over!');
         }
             , 1000);
     } else {
+        DataBase.addGuessedWord(Player.id, w.id);
         setTimeout(() => {
             createPopUp('You won!');
         }

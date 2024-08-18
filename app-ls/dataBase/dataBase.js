@@ -148,4 +148,40 @@ export default class DataBase {
     static async loadedTopPlayers(){
         return DataBase.topPlayers === undefined;
     }
+
+    static async updatePlayerScore(playerId, newScore) {
+        try {
+            // Atualiza o score do jogador
+            const { error } = await supabase
+                .from('players')
+                .update({ score: newScore })
+                .eq('id', playerId);
+    
+            if (error) throw error;
+    
+            // Se a atualização foi bem-sucedida, retorna uma mensagem de sucesso
+            return { success: true, message: 'Score updated successfully' };
+    
+        } catch (err) {
+            console.error('Error updating score:', err.message);
+        }
+    }
+
+    static async addGuessedWord(playerId, wordId) {
+        try {
+            // Adiciona o ID da palavra adivinhada na tabela guessed_words
+            const { error } = await supabase
+                .from('guessed_words')
+                .insert([{ id_player: playerId, id_word: wordId }]);
+    
+            if (error) throw error;
+    
+            // Se a inserção foi bem-sucedida, retorna uma mensagem de sucesso
+            return { success: true, message: 'Guessed word ID added successfully' };
+    
+        } catch (err) {
+            console.error('Error adding guessed word ID:', err.message);
+        }
+    }
+    
 }
