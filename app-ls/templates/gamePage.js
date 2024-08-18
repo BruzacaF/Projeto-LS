@@ -248,18 +248,6 @@ function createGamePage() {
 }
 
 
-
-
-
-// var userName = undefined;
-// var score = undefined;
-
-// function randomWord() {
-//     let random = Math.floor(Math.random() * words.length);
-//     word = words[random];
-// }
-
-
 function createChances() {
     let container = document.createElement('div');
 
@@ -540,7 +528,8 @@ function createPopUp(message) {
 
 // ok
 async function gameOver(bool) {
-    DataBase.updatePlayerScore(Player.id, Player.score);
+    await DataBase.updatePlayerScore(Player.id, Player.score);
+    DataBase.getTopPlayers();
 
     if (bool === true) {
         setTimeout(() => {
