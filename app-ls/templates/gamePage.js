@@ -404,7 +404,6 @@ function makeGuess() {
 
                 let boxScore = document.getElementsByClassName('lowerCard')[0];
                 boxScore.textContent = `Pontos: ${Player.score}`;
-                console.log('mais 2');
                 
                 
 
@@ -413,9 +412,7 @@ function makeGuess() {
             
             if (isWordGuessed()) {
                 Player.increaseScore();
-                console.log('antes', Player.unguessedWordsId);
                 Player.removeIdGuessedWord(w.id);
-                console.log('depois', Player.unguessedWordsId);
                 gameOver(false);
             }
             

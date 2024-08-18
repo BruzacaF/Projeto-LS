@@ -62,7 +62,7 @@ export default class Player {
     // Retorna aleatoriamente o id de uma palavra não adivinhada
     static getRandomIdWord() {
         const randomIndex = Math.floor(Math.random() * Player.unguessedWordsId.length);
-        return randomIndex + 1
+        return Player.unguessedWordsId[randomIndex];
 
     }
 
