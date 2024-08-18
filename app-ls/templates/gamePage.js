@@ -287,7 +287,7 @@ function createChances() {
 
 function restartGame(restart) {
     if (restart === true) {
-        w.word = getRandomWord();
+
         Player.chances = 6;
         createGamePage();
     }
@@ -383,6 +383,7 @@ function makeGuess() {
                     isLetterInWord = true;
                     wordLetters[i].classList.add('letterCorrect');
                     button.classList.add('keyCorrect');
+                    button.disabled = true;
                 }
             }
 
@@ -393,9 +394,19 @@ function makeGuess() {
                 let boxChances = document.getElementById('boxChances');
                 boxChances.textContent = `Chances: ${Player.chances}`;
                 button.classList.add('keyIncorrect');
+                button.disabled = true;
+                
+            } else {
+                Player.increaseScore(2);
 
+                let boxScore = document.getElementsByClassName('lowerCard')[0];
+                boxScore.textContent = `Pontos: ${Player.score}`;
+                console.log('mais 2');
+                
+                
 
             }
+
             if (Player.chances === 0) {
                 completeWord();
                 gameOver(true);
@@ -410,7 +421,9 @@ function makeGuess() {
 
             if (isWordGuessed()) {
                 Player.increaseScore();
+                console.log('antes', Player.unguessedWordsId);
                 Player.removeIdGuessedWord(w.id);
+                console.log('depois', Player.unguessedWordsId);
                 gameOver(false);
             }
 
