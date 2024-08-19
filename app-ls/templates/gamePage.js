@@ -150,18 +150,18 @@ function runGame() {
 
         } catch (err) {
             // Exibe o erro e encerra a função para garantir que nada mais seja executado
-            if (err.message === 'Digite um nome válido') {
-                console.log('Digite um nome válido');   
+            if (err.message === '1') {
+                console.log('Digite um nome válido');
                 inputUser.value = 'Digite um nome válido';
-                inputUser.classList.add('shake-animation'); // Add this line to add the shake animation
+                inputUser.classList.add('shake-animation');         // Add this line to add the shake animation
                 setTimeout(() => {
                     inputUser.classList.remove('shake-animation'); // Remove the shake animation after a delay
-                    inputUser.value = ''; // Reset the input value after the shake animation
+                    inputUser.value = '';                          // Reset the input value after the shake animation
                     inputUser.placeholder = 'Digite um nome válido';
                 }, 500);
-            } else if (err.message === 'Sua senha deve ter no mínimo 4 caracteres') {
+            } else if (err.message === '2') {
                 inputPassword.value = 'Sua senha deve ter no mínimo 4 caracteres';
-                inputPassword.classList.add('shake-animation'); // Add this line to add the shake animation
+                inputPassword.classList.add('shake-animation');     // Add this line to add the shake animation
                 setTimeout(() => {
                     inputPassword.classList.remove('shake-animation'); // Remove the shake animation after a delay
                     inputPassword.value = ''; // Reset the input value after the shake animation
@@ -175,8 +175,28 @@ function runGame() {
                     inputPassword.value = ''; // Reset the input value after the shake animation
                     inputPassword.placeholder = 'Senha incorreta';
                 }, 500);
-
-            };
+            } else if (err.message === '3') {
+                inputUser.value = 'Digite um nome válido';
+                inputPassword.value = 'Sua senha deve ter no mínimo 4 caracteres';
+                inputUser.classList.add('shake-animation');         // Add this line to add the shake animation
+                inputPassword.classList.add('shake-animation');     // Add this line to add the shake animation
+                setTimeout(() => {
+                    inputUser.classList.remove('shake-animation'); // Remove the shake animation after a delay
+                    inputPassword.classList.remove('shake-animation'); // Remove the shake animation after a delay
+                    inputUser.value = '';                          // Reset the input value after the shake animation
+                    inputPassword.value = '';                          // Reset the input value after the shake animation
+                    inputUser.placeholder = 'Digite um nome válido';
+                    inputPassword.placeholder = 'Sua senha deve ter no mínimo 4 caracteres';
+                }, 500);
+            } else if (err.message === '4') {
+                inputUser.value = 'Usuário já cadastrado';
+                inputUser.classList.add('shake-animation');         // Add this line to add the shake animation
+                setTimeout(() => {
+                    inputUser.classList.remove('shake-animation'); // Remove the shake animation after a delay
+                    inputUser.value = '';                          // Reset the input value after the shake animation
+                    inputUser.placeholder = 'Usuário já cadastrado';
+                }, 500);
+            }
 
 
         }
@@ -227,14 +247,26 @@ function validateInput(userName, userPassword) {
     let flag = false;
     let message = '';
     if (userName === '') {
-
-        message = 'Digite um nome válido';
+        message = '1';
         flag = true;
     }
+    
     if (userPassword.length < 4) {
-        message += '\nSua senha deve ter no mínimo 4 caracteres';
+        message += '2';
         flag = true;
     }
+
+    if (userName === '' && userPassword.length === 0) {
+        message = '3';
+        flag = true;
+    }
+
+    if (DataBase.userExists(userName)) {
+        message = '4';
+        flag = true;
+    }
+
+
     if (flag) {
         throw new Error(message);
     }
