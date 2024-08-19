@@ -146,7 +146,7 @@ function runGame() {
 
         try {
             validateInput(userName, userPassword);
-            
+
             // Chama processUserData e aguarda a sua execução
             await processUserData(userName, userPassword);
 
@@ -202,14 +202,13 @@ async function processUserData(userName, userPassword){
         
         let guessedWordsId = await DataBase.getGuessedWordIdsByPlayerId(id);
         Player.setUnguessedWordsId(guessedWordsId);
-        Player.setId(id);
         
     } else {
         DataBase.addPlayerToDatabase(userName, userPassword);
         Player.setUnguessedWordsId();
-        Player.id = DataBase.userExists(userName);
-        
+        id = await DataBase.userExists(userName);
     }
+    Player.setId(id);
 }
 
 // Valida os inputs do usuário
