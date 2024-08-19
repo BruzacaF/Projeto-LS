@@ -261,18 +261,16 @@ function validateInput(userName, userPassword) {
         flag = true;
     }
 
-    if (DataBase.userExists(userName)) {
-        message = '4';
-        flag = true;
-    }
+    // if (DataBase.userExists(userName)) {
+    //     message = '4';
+    //     flag = true;
+    // }
 
 
     if (flag) {
         throw new Error(message);
     }
 }
-
-
 
 
 function createGamePage() {
