@@ -3,6 +3,7 @@ import w from "../../classes/word.js";
 import homePage from "../homepage.js";
 import { createGamePage } from "../gamePage.js";
 import Player from "../../classes/player.js";
+import DataBase from "../../dataBase/dataBase.js";
 
 
 async function createPopUpLose() {
@@ -87,8 +88,15 @@ async function createPopUpLose() {
 
     app.appendChild(popUpLose);
 
+
     if (await typeWriterAnimation(`Que pena! ${Player.name}, Tente de novo!`, title, 50)) {
-        if (await typeWriterAnimation(`Você perdeu ${Player.scoreLocal} pontos`, subTitle, 50)) {
+        let string = ''
+        if (Player.score === 0){
+            string = 'todos os seus';
+        } else {
+            string = `${Player.scoreLocal}`
+        }
+        if (await typeWriterAnimation(`Você perdeu ${string} pontos`, subTitle, 50)) {
             if (await typeWriterAnimation(`A palavra era: ${w.word}`, textLose, 50)) {
                 if (await typeWriterAnimation(`A dica era: ${w.hint}`, textLose2, 50)) {
                     await typeWriterAnimation(`Clique em jogar novamente para tentar de novo!`, hint, 50);
