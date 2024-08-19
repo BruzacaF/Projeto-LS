@@ -146,6 +146,7 @@ function runGame() {
 
         try {
             validateInput(userName, userPassword);
+            
             // Chama processUserData e aguarda a sua execução
             await processUserData(userName, userPassword);
 
@@ -201,10 +202,13 @@ async function processUserData(userName, userPassword){
         
         let guessedWordsId = await DataBase.getGuessedWordIdsByPlayerId(id);
         Player.setUnguessedWordsId(guessedWordsId);
-        
         Player.setId(id);
+        
     } else {
         DataBase.addPlayerToDatabase(userName, userPassword);
+        Player.setUnguessedWordsId();
+        Player.id = DataBase.userExists(userName);
+        
     }
 }
 
@@ -221,7 +225,7 @@ function validateInput(userName, userPassword){
         flag = true;
     }
     if (flag){
-        throw new Error(message);
+        throw new Error(message)
     }
 }
 
@@ -397,7 +401,6 @@ function makeGuess() {
             if (Player.chances === 0) {
                 Player.decreaseScore(5);
                 DataBase.updatePlayerScore(Player.id, Player.score);
-                DataBase.getTopPlayers();
 
                 createPopUpLose();
                 
@@ -410,7 +413,6 @@ function makeGuess() {
                 Player.increaseScore();
                 Player.removeIdGuessedWord(w.id);
                 DataBase.updatePlayerScore(Player.id, Player.score);
-                DataBase.getTopPlayers();
 
                 createPopUpWin();
             }
