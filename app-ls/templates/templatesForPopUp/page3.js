@@ -97,12 +97,14 @@ function showInfosDev(item) {
     let github = document.createElement('img');
     github.src = item.brands.github;
     github.alt = 'github';
+    github.setAttribute('onclick', `window.open('${item.links.github}', '_blank')`);
 
     let imgBox2 = document.createElement('div');
     imgBox2.classList.add('imgBox');
     let linkedin = document.createElement('img');
     linkedin.src = item.brands.linkedin;
     linkedin.alt = 'linkedin';
+    linkedin.setAttribute('onclick', `window.open('${item.links.linkedin}', '_blank')`);
 
     imgBox.appendChild(github);
     imgBox2.appendChild(linkedin);

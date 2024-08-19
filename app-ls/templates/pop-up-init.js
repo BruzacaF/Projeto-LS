@@ -22,7 +22,7 @@ async function createPopUp() {
     
     let popUpTitle = document.createElement('h2');
     popUpTitle.id = 'popUpTitle';
-    popUpTitle.textContent = 'Bem-vindo ao Jogo da Forca';
+    popUpTitle.textContent = 'Bem-vindo ao Letra a Letra';
 
 
     let popUpContent = document.createElement('div');
@@ -50,7 +50,7 @@ async function createPopUp() {
     dbLogo.classList.add('logo');
 
     let popUpContentText = document.createElement('p');
-    popUpContentText.textContent = 'Este é um jogo da forca (sem forca)\ndesenvolvido para a disciplina de Linguagem de Script\n\n Usamos as seguintes tecnologias:';
+    popUpContentText.textContent = 'O Letra a Letra é um jogo de advinhar palavras \ndesenvolvido para a disciplina de Linguagem de Script\n\n Usamos as seguintes tecnologias:';
     popUpContentText.innerHTML = popUpContentText.textContent.replace(/\n/g, '<br>');
 
     let popUpContentList = document.createElement('ul');

@@ -5,10 +5,14 @@ const infosDev = {
         name: 'Filipe',
         role: 'Dev Front-end e Designer',
         description: 'Responsável por:\nDesenvolvimento do front-end e design da aplicação.\nGerenciamento do projeto.\nGosta de interfaces limpas e intuitivas.',
-        icon: 'assets/icon1.jpg',
+        icon: 'assets/bruzas.jpg',
         brands: {
             github: 'assets/github.svg',
             linkedin: 'assets/linkedin.svg',
+        },
+        links: {
+            github: 'https://github.com/BruzacaF',
+            linkedin: '',
         }
         
         
@@ -16,22 +20,30 @@ const infosDev = {
     maria: {
         name: 'Julielison',
         role: 'Back-end Developer',
-        description: 'I am a back-end developer and I am responsible for the development of the application logic.',
-        icon: 'assets/icon2.jpg',
+        description: 'Responsável por:\nDesenvolvimento do back-end da aplicação.\nDesenvolvimento e estruturação do banco dados\nGosta de resolver problemas e criar soluções.',
+        icon: 'assets/juli-projetoLs.jpeg',
         brands: {
             github: 'assets/github.svg',
             linkedin: 'assets/linkedin.svg',
+        },
+        links: {
+            github: 'https://github.com/Julielison',
+            linkedin: 'https://www.linkedin.com/in/julielison-lima/?original_referer=https%3A%2F%2Fgithub.com%2F',
         }
       
     },
     joao: {
         name: 'Flavio',
-        role: 'Designer',
-        description: 'I am a designer and I am responsible for the development of the application layout.',
+        role: 'Mascote',
+        description: 'Mascote da equipe',
         icon: 'assets/icon3.jpg',
         brands: {
             github: 'assets/github.svg',
             linkedin: 'assets/linkedin.svg',
+        },
+        links: {
+            github: '',
+            linkedin: '',
         }
         
         
