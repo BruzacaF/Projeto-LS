@@ -4,6 +4,7 @@ import runPreLoader from "./animations/pre-loader";
 
 
 
+
 document.body.setAttribute('data-theme', 'light');
 
 

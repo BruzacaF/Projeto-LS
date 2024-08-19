@@ -645,7 +645,19 @@ header .nav .navList .navItem:active {
     backdrop-filter: blur(15px);
     z-index: 100;
 
+    animation: fadeIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 
 
 .popUp {
@@ -661,10 +673,22 @@ header .nav .navList .navItem:active {
     background-color: var(--surface-colors);
     box-shadow: var(--active-offset3) var(--active-offset3) rgba(0, 0, 0, 0.6);
     z-index: 101;
-    
-   
 
+    animation: scaleIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    
 }
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
 
 .popUp h2 {
     font-size: 2rem;
@@ -1408,7 +1432,7 @@ header .nav .navList .navItem:active {
 .scorePage {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -1416,31 +1440,45 @@ header .nav .navList .navItem:active {
     padding: 20px;
 }
 
-.scorePage .scoreTitle {
+.scorePage .contentScore {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 20px;
+    width: 800px;
+    height: 100%;
+
+    border: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
+    box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
+    padding: 20px;
+}
+
+
+.scorePage .contentScore  .scoreTitle {
     font-size: 2rem;
     color: var(--on-primary-color);
     text-align: center;
-    width: 70%;
+    width: 100%;
     text-transform: capitalize;
-    border: 3px solid var(--on-surface-colors);
-    background: var(--primary-color);
-    box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
+    border-bottom: 3px solid var(--on-surface-colors);
+    background: var(--surface-colors);
     padding: 5px;
 
 }
 
-.scorePage .backButton {
+.scorePage .contentScore  .backButton {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: 20px;
-    position: inherit;
-    bottom: 0;
-    left: 0;
+    position: relative;
 
     align-self: flex-start;
+
 
 
     width: 200px;
@@ -1455,7 +1493,25 @@ header .nav .navList .navItem:active {
 
 }
 
-.scorePage .backButton:hover {
+.scorePage .contentScore .backButton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0%;
+    height: 100%;
+    z-index: -1;
+    transition: 0.5s;
+    background-color: var(--analogous-color-1);
+}
+
+.scorePage .contentScore .backButton:hover::before {
+    width: 100%;
+    transition: 0.5s;
+}
+
+.scorePage .contentScore .backButton:hover {
     transform: translate(calc(.5 * var(--hover_offset)),
             calc(.5 * var(--hover_offset)));
     box-shadow: var(--hover_offset) var(--hover_offset) 0 var(--shadow-color);
@@ -1464,18 +1520,18 @@ header .nav .navList .navItem:active {
 
 
 
-.scorePage .scoreTable {
+.scorePage .contentScore .scoreTable {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    width: 70%;
+    width: 100%;
     height: 100%;
 
 }
 
-.scorePage .scoreTable tr {
+.scorePage .contentScore  .scoreTable tr {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -1485,13 +1541,13 @@ header .nav .navList .navItem:active {
     background: var(--surface-colors);
     color: var(--on-primary-color);
     border: 3px solid var(--on-surface-colors);
-
+    
     font-size: 1.2rem;
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
 
 }
 
-.scorePage .scoreTable th {
+.scorePage .contentScore  .scoreTable th {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1505,8 +1561,16 @@ header .nav .navList .navItem:active {
 
 }
 
-.scorePage .scoreTable tr:nth-child(odd) {
-    background-color: var(--secondary-color);
+.scorePage .contentScore .scoreTable tr:nth-child(2) {
+    background-color: gold;    
+}
+
+.scorePage .contentScore .scoreTable tr:nth-child(3) {
+    background-color: silver;    
+}
+
+.scorePage .contentScore .scoreTable tr:nth-child(4) {
+    background-color: #cd7f32;    
 }
 
 /* ----------------- ABOUT PAGE ------------------------------- */

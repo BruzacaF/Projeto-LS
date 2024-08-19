@@ -19,6 +19,12 @@ async function createScorePage() {
     scoreTitle.innerText = 'Ranking';
     scoreTitle.className = 'scoreTitle';
 
+    let content = document.createElement('div');
+    content.className = 'contentScore';
+
+
+
+
 
     let backButton = document.createElement('button');
     backButton.innerText = 'Voltar';
@@ -31,9 +37,11 @@ async function createScorePage() {
     let scoreTable = await createTable();
 
 
-    scorePage.appendChild(backButton);
-    scorePage.appendChild(scoreTitle);
-    scorePage.appendChild(scoreTable);
+    content.appendChild(backButton);
+    content.appendChild(scoreTitle);
+    content.appendChild(scoreTable);
+
+    scorePage.appendChild(content);
 
     app.appendChild(scorePage);
 

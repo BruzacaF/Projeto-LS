@@ -77,8 +77,7 @@ async function createPopUpWin() {
 
     // Add fade-in animation
     content.style.opacity = 0;
-    content.style.animation = 'fadeIn 1s forwards';
-    content.style.animationDelay = '500ms';
+    content.style.animation = 'fadeIn 400ms forwards';
     content.style.animationTimingFunction = 'ease-in';
     content.style.animationFillMode = 'forwards';
     content.style.animationIterationCount = '1';

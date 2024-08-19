@@ -442,8 +442,10 @@ function makeGuess() {
             if (Player.chances === 0) {
                 Player.decreaseScore(5);
                 DataBase.updatePlayerScore(Player.id, Player.score);
-
-                createPopUpLose();
+                setTimeout(() => {
+                    createPopUpLose();
+                }
+                    , 700);
 
                 let buttons = document.querySelectorAll('.key');
                 for (let button of buttons) {
@@ -455,8 +457,12 @@ function makeGuess() {
                 Player.removeIdGuessedWord(w.id);
                 DataBase.updatePlayerScore(Player.id, Player.score);
                 DataBase.addGuessedWord(Player.id, w.id);
+                setTimeout(() => {
+                    createPopUpWin();
+                }
+                    , 700);
 
-                createPopUpWin();
+
             }
 
         }
