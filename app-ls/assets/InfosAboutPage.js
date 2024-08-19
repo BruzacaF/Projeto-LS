@@ -34,9 +34,9 @@ const infosDev = {
     },
     joao: {
         name: 'Flavio',
-        role: 'Mascote',
-        description: 'Mascote da equipe',
-        icon: 'assets/icon3.jpg',
+        role: 'QA',
+        description: 'Testes de logfica e usabilidade.\nResponsável por:\nTestes de lógica e usabilidade.\nGosta de encontrar bugs e melhorar a experiência do usuário.',
+        icon: 'assets/fl-ls.jpg',
         brands: {
             github: 'assets/github.svg',
             linkedin: 'assets/linkedin.svg',
