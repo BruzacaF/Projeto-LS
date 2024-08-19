@@ -15,14 +15,6 @@ export default class Player {
         Player.score = 0;
     }
 
-    static getName() {
-        return console.log(Player.name);
-    }
-
-    static getScore() {
-        return Player.score;
-    }
-
     static setId(id) {
         Player.id = id;
     }
@@ -52,9 +44,15 @@ export default class Player {
     }
 
     // Define os ids das palavras não adivinhadas
-    static setUnguessedWordsId(guessedWordIds) {
+    static setUnguessedWordsId(guessedWordIds = false) {
         const allWordsIds = DataBase.allWordsAndHints.map(object => object.id);
+
+        if (!guessedWordIds){
+            Player.unguessedWordsId = [...allWordsIds];
+
+        } else {
         Player.unguessedWordsId = allWordsIds.filter(id => !guessedWordIds.includes(id));
+        }
     }
 
     // Remove o id de uma palavra adivinhada
