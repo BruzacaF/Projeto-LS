@@ -1,7 +1,12 @@
-import { typeWriterAnimation } from "./popUpWin";
+import { typeWriterAnimation } from "./popUpWin.js";
+import w from "../../classes/word.js";
+import homePage from "../homepage.js";
+import { createGamePage } from "../gamePage.js";
+import Player from "../../classes/player.js";
+import DataBase from "../../dataBase/dataBase.js";
 
 
-async function createPopUpLose(player) {
+async function createPopUpLose() {
 
     let app = document.getElementById('app');
 
@@ -52,12 +57,12 @@ async function createPopUpLose(player) {
     button2.innerText = 'Sair'; //Aqui deve ser adicionado um evento para sair
 
     button2.addEventListener('click', () => {
-        window.close();
+        homePage();
     }
     );
 
     button.addEventListener('click', () => {
-        popUpLose.style.display = 'none';
+        createGamePage();
     }
     );
 
@@ -83,10 +88,17 @@ async function createPopUpLose(player) {
 
     app.appendChild(popUpLose);
 
-    if (await typeWriterAnimation(`Que pena! ${player.nome}, Tente de novo!`, title, 50)) {
-        if (await typeWriterAnimation(`Você perdeu ${player.pontos} pontos`, subTitle, 50)) {
-            if (await typeWriterAnimation(`A palavra era: ${player.palavra}`, textLose, 50)) {
-                if (await typeWriterAnimation(`A dica era: ${player.dica}`, textLose2, 50)) {
+
+    if (await typeWriterAnimation(`Que pena! ${Player.name}, Tente de novo!`, title, 50)) {
+        let string = ''
+        if (Player.score === 0){
+            string = 'todos os seus';
+        } else {
+            string = `${Player.scoreLocal}`
+        }
+        if (await typeWriterAnimation(`Você perdeu ${string} pontos`, subTitle, 50)) {
+            if (await typeWriterAnimation(`A palavra era: ${w.word}`, textLose, 50)) {
+                if (await typeWriterAnimation(`A dica era: ${w.hint}`, textLose2, 50)) {
                     await typeWriterAnimation(`Clique em jogar novamente para tentar de novo!`, hint, 50);
                     await typeWriterAnimation(`Clique em sair para voltar ao menu principal!`, hint2, 50);
                 }

@@ -7,6 +7,7 @@ export default class Player {
     static score = 0;
     static unguessedWordsId = [];
     static chances = 6;
+    static scoreLocal = 0;
 
     static initialize(name) {
         Player.name = name;
@@ -14,24 +15,27 @@ export default class Player {
         Player.score = 0;
     }
 
-    static getName() {
-        return console.log(Player.name);
-    }
-
-    static getScore() {
-        return Player.score;
-    }
-
     static setId(id) {
         Player.id = id;
     }
 
     static setScore(score) {
-        Player.score += score;
+        Player.score = score;
     }
 
-    static updateScore(score) {
-        Player.score += score;
+    static increaseScore(increase = 10) {
+        Player.score += increase;
+        Player.scoreLocal += increase;
+    }
+
+    static decreaseScore(decrease = 3){
+        if (Player.score - decrease < 0){
+            Player.score = 0;
+        }
+        else {
+            Player.score -= decrease;
+            Player.scoreLocal -= decrease;
+        }
     }
 
     // Reduz uma unidade das chances
@@ -40,9 +44,15 @@ export default class Player {
     }
 
     // Define os ids das palavras não adivinhadas
-    static setUnguessedWordsId(guessedWordIds) {
+    static setUnguessedWordsId(guessedWordIds = false) {
         const allWordsIds = DataBase.allWordsAndHints.map(object => object.id);
+
+        if (!guessedWordIds){
+            Player.unguessedWordsId = [...allWordsIds];
+
+        } else {
         Player.unguessedWordsId = allWordsIds.filter(id => !guessedWordIds.includes(id));
+        }
     }
 
     // Remove o id de uma palavra adivinhada
@@ -53,7 +63,13 @@ export default class Player {
     // Retorna aleatoriamente o id de uma palavra não adivinhada
     static getRandomIdWord() {
         const randomIndex = Math.floor(Math.random() * Player.unguessedWordsId.length);
-        w.id = randomIndex + 1
+        return Player.unguessedWordsId[randomIndex];
+
+    }
+
+    static getRandomWordHint(){
+        w.id = Player.getRandomIdWord();
+        return DataBase.getWordHintById(w.id);
     }
 
     static toString() {

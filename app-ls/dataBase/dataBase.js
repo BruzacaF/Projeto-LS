@@ -22,7 +22,6 @@ export default class DataBase {
             return null;
         } catch (err) {
             console.error('Error checking user existence:', err.message);
-            throw err;
         }
     }
 
@@ -47,7 +46,6 @@ export default class DataBase {
             }
         } catch (err) {
             console.error('Error authenticating password:', err.message);
-            throw err;
         }
     }
 
@@ -61,7 +59,6 @@ export default class DataBase {
             if (error) throw error;
         } catch (err) {
             console.error('Error adding player to database:', err.message);
-            throw err;
         }
     }
 
@@ -78,7 +75,6 @@ export default class DataBase {
             return data.score;
         } catch (err) {
             console.error('Error retrieving score', err.message);
-            throw err;
         }
     }
 
@@ -98,7 +94,6 @@ export default class DataBase {
             return guessedWordIds;
         } catch (err) {
             console.error('Error retrieving guessed word IDs:', err.message);
-            throw err;
         }
     }
     
@@ -115,7 +110,6 @@ export default class DataBase {
             DataBase.allWordsAndHints = data;
         } catch (err) {
             console.error('Error retrieving words and hints:', err.message);
-            throw err;
         }
     }
 
@@ -124,7 +118,7 @@ export default class DataBase {
     }
 
     // Retorna um objeto {word: 'example', hint: 'example'}
-    static getWordHint(id) {
+    static getWordHintById(id) {
         return DataBase.allWordsAndHints.find(word => word.id === id);
     }
 
@@ -141,11 +135,46 @@ export default class DataBase {
             DataBase.topPlayers = data;
         } catch (err) {
             console.error('Error retrieving top players:', err.message);
-            throw err;
         }
     }
 
     static async loadedTopPlayers(){
         return DataBase.topPlayers === undefined;
     }
+
+    static async updatePlayerScore(playerId, newScore) {
+        try {
+            // Atualiza o score do jogador
+            const { error } = await supabase
+                .from('players')
+                .update({ score: newScore })
+                .eq('id', playerId);
+    
+            if (error) throw error;
+    
+            // Se a atualização foi bem-sucedida, retorna uma mensagem de sucesso
+            return { success: true, message: 'Score updated successfully' };
+    
+        } catch (err) {
+            console.error('Error updating score:', err.message);
+        }
+    }
+
+    static async addGuessedWord(playerId, wordId) {
+        try {
+            // Adiciona o ID da palavra adivinhada na tabela guessed_words
+            const { error } = await supabase
+                .from('guessed_words')
+                .insert([{ id_player: playerId, id_word: wordId }]);
+    
+            if (error) throw error;
+    
+            // Se a inserção foi bem-sucedida, retorna uma mensagem de sucesso
+            return { success: true, message: 'Guessed word ID added successfully' };
+    
+        } catch (err) {
+            console.error('Error adding guessed word ID:', err.message);
+        }
+    }
+    
 }

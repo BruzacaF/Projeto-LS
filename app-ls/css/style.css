@@ -287,6 +287,7 @@ header .nav .navList .navItem:active {
     bottom: 0;
     background-color: var(--switch-background-color);
     transition: 0.3s;
+    transform: translateY(-25px); 
 }
 
 .slider:before {

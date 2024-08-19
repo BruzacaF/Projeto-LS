@@ -123,10 +123,6 @@ function runGame() {
 
         loginButton.classList.remove('selected'); // adiciona a classe para elucidar qual botão está selecionado
         cadastrarButton.classList.add('selected');
-
-        cadastrarButton.addEventListener('click', () => {
-            // Função para cadastrar usuário na database
-        });
     }
     );
     
@@ -150,12 +146,13 @@ function runGame() {
 
         try {
             validateInput(userName, userPassword);
+
             // Chama processUserData e aguarda a sua execução
-            const Player = await processUserData(userName, userPassword);
+            await processUserData(userName, userPassword);
 
             // Se não houver erro, cria a página do jogo após um atraso
             setTimeout(() => {
-                createGamePage(Player);
+                createGamePage();
             }, 400);
 
         } catch (err) {
@@ -206,34 +203,37 @@ async function processUserData(userName, userPassword){
         let guessedWordsId = await DataBase.getGuessedWordIdsByPlayerId(id);
         Player.setUnguessedWordsId(guessedWordsId);
         
-        Player.setId(id);
     } else {
         DataBase.addPlayerToDatabase(userName, userPassword);
+        Player.setUnguessedWordsId();
+        id = await DataBase.userExists(userName);
     }
-    return Player;
+    Player.setId(id);
 }
 
 // Valida os inputs do usuário
 function validateInput(userName, userPassword){
     let flag = false;
-    let message = ''
+    let message = '';
     if (userName === '') {
-        message = 'Digite um nome válido'
+        message = 'Digite um nome válido';
         flag = true;
     }
     if (userPassword.length < 4){
-        message += '\nSua senha deve ter no mínimo 4 caracteres'
+        message += '\nSua senha deve ter no mínimo 4 caracteres';
         flag = true;
     }
     if (flag){
-        throw new Error(message);
+        throw new Error(message)
     }
 }
 
 
 
 
-function createGamePage(Player) {
+function createGamePage() {
+    Player.scoreLocal = 0;
+    Player.chances = 6;
 
     let app = document.getElementById('app');
     let main = document.createElement('main');
@@ -243,7 +243,7 @@ function createGamePage(Player) {
 
     app.appendChild(main);
 
-    let boxWord = createWordToGuess(Player);
+    let boxWord = createWordToGuess();
     let keyboard = createKeyboard();
 
 
@@ -253,18 +253,6 @@ function createGamePage(Player) {
 
 
 }
-
-
-
-
-
-// var userName = undefined;
-// var score = undefined;
-
-// function randomWord() {
-//     let random = Math.floor(Math.random() * words.length);
-//     word = words[random];
-// }
 
 
 function createChances() {
@@ -292,14 +280,6 @@ function createChances() {
     return container;
 }
 
-function restartGame(restart) {
-    if (restart === true) {
-        word = getRandomWord();
-        chances = 6;
-        createGamePage();
-    }
-}
-
 
 // ok*
 function createWordToGuess() {
@@ -318,9 +298,11 @@ function createWordToGuess() {
 
     
     // Sorteia a palavra
-    Player.getRandomIdWord();
-    let wordHint = DataBase.getWordHint(w.id);
+    let wordHint = Player.getRandomWordHint();
+
     w.word = wordHint.word;
+    w.hint = wordHint.hint;
+
     console.log(w.word);
 
     let hideWord = w.word.replace(/[a-zA-Zá-úÁ-ÚçÇ]/gi, '');
@@ -390,52 +372,58 @@ function makeGuess() {
                     isLetterInWord = true;
                     wordLetters[i].classList.add('letterCorrect');
                     button.classList.add('keyCorrect');
+                    button.disabled = true;
                 }
             }
 
             if (!isLetterInWord) {
                 Player.decreaseChances();
+                Player.decreaseScore();
+
                 let boxChances = document.getElementById('boxChances');
                 boxChances.textContent = `Chances: ${Player.chances}`;
                 button.classList.add('keyIncorrect');
+                button.disabled = true;
 
-
-            }
-            if (Player.chances === 0) {
-                completeWord();
-                createPopUpLose(Player);
+                let boxScore = document.getElementsByClassName('lowerCard')[0];
+                boxScore.textContent = `Pontos: ${Player.score}`;
                 
+            } else {
+                Player.increaseScore(2);
 
+                let boxScore = document.getElementsByClassName('lowerCard')[0];
+                boxScore.textContent = `Pontos: ${Player.score}`;
+                
+                
+            }
+
+            if (Player.chances === 0) {
+                Player.decreaseScore(5);
+                DataBase.updatePlayerScore(Player.id, Player.score);
+
+                createPopUpLose();
+                
                 let buttons = document.querySelectorAll('.key');
                 for (let button of buttons) {
                     button.disabled = true;
                 }
 
-            }
-
-            if (isWordGuessed()) {
-                Player.updateScore(10);
+            } else if (isWordGuessed()) {
+                Player.increaseScore();
                 Player.removeIdGuessedWord(w.id);
-                createPopUpWin(Player);
+                DataBase.updatePlayerScore(Player.id, Player.score);
+
+                createPopUpWin();
             }
-
-
+            
         }
 
 
     });
 }
 
+
 // ok
-function completeWord() {
-    let wordArray = w.word.split('');
-    let wordLetters = document.querySelectorAll('.letter');
-    for (let i = 0; i < wordArray.length; i++) {
-        wordLetters[i].textContent = wordArray[i];
-    }
-}
-
-
 function addMakeGuessEvent() {
     let buttons = document.querySelectorAll('.key');
     for (let button of buttons) {
