@@ -1,4 +1,5 @@
 import Player from "../../classes/player.js";
+import DataBase from "../../dataBase/dataBase.js";
 import DB from "../../dataBase/dataBase.js";
 import { createGamePage } from "../gamePage.js";
 import homePage from "../homepage.js";
@@ -60,6 +61,8 @@ async function createPopUpWin() {
     header.appendChild(subTitle);
 
     app.appendChild(popUpWin);
+
+    await DataBase.getTopPlayers();
 
    
     if (await typeWriterAnimation(`Parabéns ${(Player.name)}`, title, 100)) {
