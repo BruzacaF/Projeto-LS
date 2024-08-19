@@ -72,23 +72,23 @@ async function createPopUpLose() {
     contentBox.appendChild(content);
     contentBox.appendChild(buttons);
 
-    content.appendChild(textLoseBox);
     textLoseBox.appendChild(textLose);
     textLoseBox.appendChild(textLose2);
-
-    content.appendChild(hintBox);
+    
     hintBox.appendChild(hint);
     hintBox.appendChild(hint2);
-
+    
     buttons.appendChild(button);
     buttons.appendChild(button2);
-
+    
     header.appendChild(title);
     header.appendChild(subTitle);
-
+    
+    content.appendChild(textLoseBox);
+    
     app.appendChild(popUpLose);
-
-
+    
+    
     if (await typeWriterAnimation(`Que pena! ${Player.name}, Tente de novo!`, title, 50)) {
         let string = ''
         if (Player.score === 0){
@@ -99,11 +99,12 @@ async function createPopUpLose() {
         if (await typeWriterAnimation(`Você perdeu ${string} pontos`, subTitle, 50)) {
             if (await typeWriterAnimation(`A palavra era: ${w.word}`, textLose, 50)) {
                 if (await typeWriterAnimation(`A dica era: ${w.hint}`, textLose2, 50)) {
+                    content.appendChild(hintBox);
                     await typeWriterAnimation(`Clique em jogar novamente para tentar de novo!`, hint, 50);
                     await typeWriterAnimation(`Clique em sair para voltar ao menu principal!`, hint2, 50);
                 }
             }
-
+            
         }
     }
 }
