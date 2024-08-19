@@ -4,7 +4,6 @@ import DB from "../../dataBase/dataBase.js";
 import { createGamePage } from "../gamePage.js";
 import homePage from "../homepage.js";
 
-
 async function createPopUpWin() {
 
     let app = document.getElementById('app');
@@ -62,8 +61,7 @@ async function createPopUpWin() {
 
     app.appendChild(popUpWin);
 
-    await DataBase.getTopPlayers();
-
+    
    
     if (await typeWriterAnimation(`Parabéns ${(Player.name)}`, title, 100)) {
         if (Player.scoreLocal > 100) { //Colocar um valor de referência 
@@ -132,6 +130,7 @@ async function createRanking() { //Aqui se possivel comparar o ranking do player
     hintsBox.appendChild(hint1);
     hintsBox.appendChild(hint2);
 
+    await DB.getTopPlayers();
     let data = DB.topPlayers;
 
     ranking.appendChild(title);

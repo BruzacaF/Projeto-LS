@@ -10,9 +10,6 @@ function runGame() {
     let app = document.getElementById('app');
     app.innerHTML = '';
 
-
-
-
     let boxUser = document.createElement('div');
     boxUser.id = 'boxUser';
     boxUser.classList.add('boxUser');
@@ -97,8 +94,6 @@ function runGame() {
         inputUser.value = inputUser.value.replace(/[^a-zA-Z0-9 ]/g, '');
     });
 
-
-
     backButton.addEventListener('click', () => {
         setTimeout(() => {
             homePage();
@@ -110,7 +105,7 @@ function runGame() {
         inputUser.placeholder = 'Digite seu nome';
         inputPassword.placeholder = 'Digite sua senha';
         buttonUser.textContent = 'Iniciar';
-        cadastrarButton.classList.remove('selected');
+        cadastrarButton.classList.remove('selected2');
         loginButton.classList.add('selected');
     }
 
@@ -122,12 +117,10 @@ function runGame() {
         buttonUser.textContent = 'Cadastrar';
 
         loginButton.classList.remove('selected'); // adiciona a classe para elucidar qual botão está selecionado
-        cadastrarButton.classList.add('selected');
-
-
-
+        cadastrarButton.classList.add('selected2');
 
     }
+
     );
 
     showPassword.addEventListener('click', () => {
@@ -139,10 +132,6 @@ function runGame() {
             showPasswordImg.src = './assets/password.svg';
         }
     });
-
-
-
-
 
     buttonUser.addEventListener('click', async () => {
         const userName = inputUser.value;
@@ -162,6 +151,7 @@ function runGame() {
         } catch (err) {
             // Exibe o erro e encerra a função para garantir que nada mais seja executado
             if (err.message === 'Digite um nome válido') {
+                console.log('Digite um nome válido');   
                 inputUser.value = 'Digite um nome válido';
                 inputUser.classList.add('shake-animation'); // Add this line to add the shake animation
                 setTimeout(() => {
@@ -185,16 +175,12 @@ function runGame() {
                     inputPassword.value = ''; // Reset the input value after the shake animation
                     inputPassword.placeholder = 'Senha incorreta';
                 }, 500);
-            
-                };
 
-            
+            };
+
+
         }
     });
-
-
-
-
 
     inputContainer.appendChild(inputUser);
     inputContainer.appendChild(showPassword);
@@ -438,6 +424,7 @@ function makeGuess() {
                 Player.increaseScore();
                 Player.removeIdGuessedWord(w.id);
                 DataBase.updatePlayerScore(Player.id, Player.score);
+                DataBase.addGuessedWord(Player.id, w.id);
 
                 createPopUpWin();
             }

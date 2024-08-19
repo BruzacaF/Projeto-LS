@@ -332,14 +332,14 @@ header .nav .navList .navItem:active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 600px;
     height: 400px;
     gap: 1rem;
 
-    border-top: 3px solid var(--on-surface-colors);
-    border-bottom: 3px solid var(--on-surface-colors);
+    border: 3px solid var(--on-surface-colors);
     background: var(--surface-colors);
     box-shadow: var(--active-offset3) var(--active-offset3) 0 var(--shadow_color);
+    z-index: 2;
 
 }
 
@@ -357,6 +357,7 @@ header .nav .navList .navItem:active {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    position: relative;
 
     font-size: 1.5rem;
 
@@ -371,6 +372,27 @@ header .nav .navList .navItem:active {
     box-shadow: var(--active-offset) var(--active-offset) 0 var(--shadow_color);
 
 }
+
+.homePage .cardBox button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--analogous-color-1);
+
+    width: 0%;
+    height: 100%;
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.homePage .cardBox button:hover::before {
+    width: 100%;
+    transition: 0.5s;
+}
+
+
+
 
 .homePage button:hover {
     transform: translate(calc(.5 * var(--hover_offset)),
@@ -492,21 +514,6 @@ header .nav .navList .navItem:active {
     border: 3px solid #2b2b2b;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*--------------------------------- LOWER PART ---------------------- */
@@ -1144,7 +1151,7 @@ header .nav .navList .navItem:active {
     grid-area: inputPassword;
 
 }
-
+/* ------------------------------------------------- */
 .shake-animation{
     animation: shake 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     transition: 0.5s ease-in-out;
@@ -1239,6 +1246,18 @@ header .nav .navList .navItem:active {
     }
 }
 
+.selected {
+    transition: 0.5s ease-in-out;
+    background: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.selected2{
+    transition: 0.5s ease-in-out;
+    background: var(--secondary-color);
+    color: var(--on-secondary-color);
+}
+/* ------------------------------------------------- */
 .boxInput .showPassword {
     grid-area: showPassword;
     display: flex;

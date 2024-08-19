@@ -3,8 +3,8 @@ import preload from '../dataBase/preload.js';
 import createHeader from '../templates/header.js';
 import createScorePage from '../templates/scorePage.js';
 import { runGame } from '../templates/gamePage.js';
-import createPopUp from "./pop-up-init.js";
 import { checkStatusForPopUp } from './pop-up-init.js';
+import { typeWriterAnimation } from './templatesPopUp/popUpWin.js';
 
 
 async function homePage() {
@@ -41,7 +41,7 @@ async function homePage() {
     cardBox.classList.add('cardBox');
 
     
-    h1.textContent = 'Letra a Letra';
+    
     startButton.textContent = 'Iniciar';
     scoreButton.textContent = 'Ranking';
     
@@ -72,6 +72,8 @@ async function homePage() {
         }
         , 400);
     });
+
+    typeWriterAnimation('Letra a Letra', h1, 100);
     
     
     
