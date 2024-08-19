@@ -139,16 +139,10 @@ async function createRanking() { //Aqui se possivel comparar o ranking do player
 
     data.forEach((player, index) => {
         let playerRank = document.createElement('li');
-        if (index > 0 && data[index - 1].score === player.score) {
-            playerRank.innerText = ` - ${player.name} - ${player.score} pontos`;
-        } else {
-            playerRank.innerText = `${index + 1}º lugar: ${player.name} - ${player.score} pontos`;
-        }
-
+        playerRank.innerText = `${index + 1}º lugar: ${player.name} - ${player.score} pontos`;
         listRanking.appendChild(playerRank);
-    }
+    });
 
-    );
 
     ranking.appendChild(listRanking);
     ranking.appendChild(hintsBox);
