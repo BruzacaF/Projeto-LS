@@ -10,19 +10,19 @@ function runGame() {
     let app = document.getElementById('app');
     app.innerHTML = '';
 
-    
-    
-    
+
+
+
     let boxUser = document.createElement('div');
     boxUser.id = 'boxUser';
     boxUser.classList.add('boxUser');
-    
+
     let boxInput = document.createElement('div');
     boxInput.id = 'boxInput';
     boxInput.classList.add('boxInput');
 
     let typeLogin = document.createElement('div');
-    
+
     let loginButton = document.createElement('span');
     loginButton.textContent = 'Login';
     loginButton.id = 'login';
@@ -35,7 +35,7 @@ function runGame() {
 
     typeLogin.appendChild(loginButton);
     typeLogin.appendChild(cadastrarButton);
-    
+
     typeLogin.classList.add('typeLogin');
 
     let inputContainer = document.createElement('div');
@@ -70,11 +70,11 @@ function runGame() {
     let showPasswordImg = document.createElement('img');
     showPasswordImg.src = './assets/password.svg';
     showPasswordImg.classList.add('showPasswordImg');
-    
+
     showPassword.appendChild(showPasswordImg);
 
-    
-  
+
+
 
     let buttonsBox = document.createElement('div');
     buttonsBox.id = 'buttonsBox';
@@ -98,12 +98,12 @@ function runGame() {
     });
 
 
-    
+
     backButton.addEventListener('click', () => {
         setTimeout(() => {
             homePage();
         }
-        , 100);
+            , 100);
     });
 
     loginButton.addEventListener('click', () => {
@@ -113,7 +113,7 @@ function runGame() {
         cadastrarButton.classList.remove('selected');
         loginButton.classList.add('selected');
     }
-        
+
     );
 
     cadastrarButton.addEventListener('click', () => {
@@ -123,9 +123,13 @@ function runGame() {
 
         loginButton.classList.remove('selected'); // adiciona a classe para elucidar qual botão está selecionado
         cadastrarButton.classList.add('selected');
+
+
+
+
     }
     );
-    
+
     showPassword.addEventListener('click', () => {
         if (inputPassword.type === 'password') {
             inputPassword.type = 'text';
@@ -137,9 +141,9 @@ function runGame() {
     });
 
 
-    
-    
-    
+
+
+
     buttonUser.addEventListener('click', async () => {
         const userName = inputUser.value;
         const userPassword = inputPassword.value;
@@ -157,52 +161,73 @@ function runGame() {
 
         } catch (err) {
             // Exibe o erro e encerra a função para garantir que nada mais seja executado
-            inputPassword.value = 'Senha Incorreta';
-            inputPassword.classList.add('shake-animation'); // Add this line to add the shake animation
-            setTimeout(() => {
-                inputPassword.classList.remove('shake-animation'); // Remove the shake animation after a delay
-                inputPassword.value = ''; // Reset the input value after the shake animation
-            }, 500);
-            // alert(err.message);
+            if (err.message === 'Digite um nome válido') {
+                inputUser.value = 'Digite um nome válido';
+                inputUser.classList.add('shake-animation'); // Add this line to add the shake animation
+                setTimeout(() => {
+                    inputUser.classList.remove('shake-animation'); // Remove the shake animation after a delay
+                    inputUser.value = ''; // Reset the input value after the shake animation
+                    inputUser.placeholder = 'Digite um nome válido';
+                }, 500);
+            } else if (err.message === 'Sua senha deve ter no mínimo 4 caracteres') {
+                inputPassword.value = 'Sua senha deve ter no mínimo 4 caracteres';
+                inputPassword.classList.add('shake-animation'); // Add this line to add the shake animation
+                setTimeout(() => {
+                    inputPassword.classList.remove('shake-animation'); // Remove the shake animation after a delay
+                    inputPassword.value = ''; // Reset the input value after the shake animation
+                    inputPassword.placeholder = 'Sua senha deve ter no mínimo 4 caracteres';
+                }, 500);
+            } else if (err.message === 'Senha incorreta') {
+                inputPassword.value = 'Senha incorreta';
+                inputPassword.classList.add('shake-animation'); // Add this line to add the shake animation
+                setTimeout(() => {
+                    inputPassword.classList.remove('shake-animation'); // Remove the shake animation after a delay
+                    inputPassword.value = ''; // Reset the input value after the shake animation
+                    inputPassword.placeholder = 'Senha incorreta';
+                }, 500);
+            
+                };
+
+            
         }
     });
-    
-    
 
-    
-    
+
+
+
+
     inputContainer.appendChild(inputUser);
     inputContainer.appendChild(showPassword);
     inputContainer.appendChild(inputPassword);
-    
+
     buttonsBox.appendChild(buttonUser);
     buttonsBox.appendChild(backButton);
-    
+
     boxInput.appendChild(typeLogin);
     boxInput.appendChild(inputContainer);
     boxInput.appendChild(buttonsBox);
-    
+
     boxUser.appendChild(boxInput);
-    
+
     app.appendChild(boxUser);
 }
 
 
-async function processUserData(userName, userPassword){
+async function processUserData(userName, userPassword) {
 
     let id = await DataBase.userExists(userName);
     Player.initialize(userName);
-    
-    if (id !== null){
-        if(!await DataBase.authenticatePassword(id, userPassword)){
+
+    if (id !== null) {
+        if (!await DataBase.authenticatePassword(id, userPassword)) {
             throw new Error('Senha incorreta');
         }
         let score = await DataBase.getScoreById(id);
         Player.setScore(score);
-        
+
         let guessedWordsId = await DataBase.getGuessedWordIdsByPlayerId(id);
         Player.setUnguessedWordsId(guessedWordsId);
-        
+
     } else {
         DataBase.addPlayerToDatabase(userName, userPassword);
         Player.setUnguessedWordsId();
@@ -212,19 +237,20 @@ async function processUserData(userName, userPassword){
 }
 
 // Valida os inputs do usuário
-function validateInput(userName, userPassword){
+function validateInput(userName, userPassword) {
     let flag = false;
     let message = '';
     if (userName === '') {
+
         message = 'Digite um nome válido';
         flag = true;
     }
-    if (userPassword.length < 4){
+    if (userPassword.length < 4) {
         message += '\nSua senha deve ter no mínimo 4 caracteres';
         flag = true;
     }
-    if (flag){
-        throw new Error(message)
+    if (flag) {
+        throw new Error(message);
     }
 }
 
@@ -289,14 +315,14 @@ function createWordToGuess() {
     let hintBox = document.createElement('div');
     hintBox.id = 'hintBox';
     hintBox.classList.add('hintBox');
-    
+
     box.id = 'boxWord';
     box.classList.add('boxWord');
 
     containerLetters.id = 'containerLetters';
     containerLetters.classList.add('containerLetters');
 
-    
+
     // Sorteia a palavra
     let wordHint = Player.getRandomWordHint();
 
@@ -308,13 +334,13 @@ function createWordToGuess() {
     let hideWord = w.word.replace(/[a-zA-Zá-úÁ-ÚçÇ]/gi, '');
 
     hintBox.textContent = `Dica: ${wordHint.hint}`;
-    
-    
+
+
     containerLetters.textContent = '';
-    
-    
+
+
     let chances = createChances();
-    
+
     box.appendChild(chances);
     box.appendChild(hintBox);
     box.appendChild(containerLetters);
@@ -387,14 +413,14 @@ function makeGuess() {
 
                 let boxScore = document.getElementsByClassName('lowerCard')[0];
                 boxScore.textContent = `Pontos: ${Player.score}`;
-                
+
             } else {
                 Player.increaseScore(2);
 
                 let boxScore = document.getElementsByClassName('lowerCard')[0];
                 boxScore.textContent = `Pontos: ${Player.score}`;
-                
-                
+
+
             }
 
             if (Player.chances === 0) {
@@ -402,7 +428,7 @@ function makeGuess() {
                 DataBase.updatePlayerScore(Player.id, Player.score);
 
                 createPopUpLose();
-                
+
                 let buttons = document.querySelectorAll('.key');
                 for (let button of buttons) {
                     button.disabled = true;
@@ -415,7 +441,7 @@ function makeGuess() {
 
                 createPopUpWin();
             }
-            
+
         }
 
 

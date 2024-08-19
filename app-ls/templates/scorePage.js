@@ -21,7 +21,7 @@ async function createScorePage() {
 
 
     let backButton = document.createElement('button');
-    backButton.innerHTML = 'Back';
+    backButton.innerText = 'Voltar';
     backButton.className = 'backButton';
     backButton.onclick = function () {
         homePage();

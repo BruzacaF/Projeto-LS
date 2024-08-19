@@ -35,10 +35,15 @@ async function homePage() {
     let h1 = document.createElement('h1');
     let startButton = document.createElement('button');
     let scoreButton = document.createElement('button');
+
+    let cardBox = document.createElement('div');
+    cardBox.id = 'cardBox';
+    cardBox.classList.add('cardBox');
+
     
-    h1.textContent = 'Hangman Game';
-    startButton.textContent = 'Start Game';
-    scoreButton.textContent = 'Score';
+    h1.textContent = 'Letra a Letra';
+    startButton.textContent = 'Iniciar';
+    scoreButton.textContent = 'Ranking';
     
     startButton.classList.add('button');
     scoreButton.classList.add('button');
@@ -46,9 +51,10 @@ async function homePage() {
     startButton.id = 'start';
     scoreButton.id = 'score';
     
-    homePage.appendChild(h1);
-    homePage.appendChild(startButton);
-    homePage.appendChild(scoreButton);
+    cardBox.appendChild(h1);
+    cardBox.appendChild(startButton);
+    cardBox.appendChild(scoreButton);
+    homePage.appendChild(cardBox);
     document.body.insertBefore(header, app);
     
     

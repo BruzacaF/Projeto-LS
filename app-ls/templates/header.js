@@ -53,7 +53,7 @@ function createHeader() {
     navList.appendChild(home);
     navList.appendChild(about);
     navList.appendChild(contact);
-    navList.appendChild(themeSwitch);
+    // navList.appendChild(themeSwitch);
 
     nav.appendChild(navList);
 
