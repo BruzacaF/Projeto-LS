@@ -22,7 +22,6 @@ export default class DataBase {
             return null;
         } catch (err) {
             console.error('Error checking user existence:', err.message);
-            throw err;
         }
     }
 
@@ -47,7 +46,6 @@ export default class DataBase {
             }
         } catch (err) {
             console.error('Error authenticating password:', err.message);
-            throw err;
         }
     }
 
@@ -61,7 +59,6 @@ export default class DataBase {
             if (error) throw error;
         } catch (err) {
             console.error('Error adding player to database:', err.message);
-            throw err;
         }
     }
 
@@ -78,7 +75,6 @@ export default class DataBase {
             return data.score;
         } catch (err) {
             console.error('Error retrieving score', err.message);
-            throw err;
         }
     }
 
@@ -98,7 +94,6 @@ export default class DataBase {
             return guessedWordIds;
         } catch (err) {
             console.error('Error retrieving guessed word IDs:', err.message);
-            throw err;
         }
     }
     
@@ -115,7 +110,6 @@ export default class DataBase {
             DataBase.allWordsAndHints = data;
         } catch (err) {
             console.error('Error retrieving words and hints:', err.message);
-            throw err;
         }
     }
 
@@ -141,7 +135,6 @@ export default class DataBase {
             DataBase.topPlayers = data;
         } catch (err) {
             console.error('Error retrieving top players:', err.message);
-            throw err;
         }
     }
 
