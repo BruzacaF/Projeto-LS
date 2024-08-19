@@ -412,6 +412,7 @@ function makeGuess() {
                 Player.increaseScore();
                 Player.removeIdGuessedWord(w.id);
                 DataBase.updatePlayerScore(Player.id, Player.score);
+                DataBase.addGuessedWord(Player.id, w.id);
 
                 createPopUpWin();
             }
