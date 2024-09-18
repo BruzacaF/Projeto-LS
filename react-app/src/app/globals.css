@@ -1,14 +1,41 @@
-:root {
+
+
+body.light {
   --background: #ffffff;
   --foreground: #171717;
+  --color-icon: #171717;
+  --border-color-icon: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --color-icon: #f9f9f9;
+  --border-color-icon: #f9f9f9;
+
 }
+
+
+
+
+
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ VARIABLES FOR CSS THEME CHANGE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
+
+
+
+
+/* THE MTF ULTIMATE BLASTER ANIMATION  */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+
+
+
 
 html,
 body {
@@ -17,21 +44,23 @@ body {
 }
 
 body {
-  color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+
+
+
