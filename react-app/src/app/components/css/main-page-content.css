@@ -1,91 +1,64 @@
-
-.content{
+.main-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    height: 100%;
-    position: relative;
-    
-    
-}
-
-.hero-box{
-    display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 100%;
-}
-
-.hero-box-content{
-    text-align: center;
-}
-
-.hero-box-content .hero-box-title{
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-.hero-box-content .hero-box-subtitle{
-    font-size: 1.5rem;
-    color: #777;
-}
-
-
-
-
-.card{
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.card img{
+    height: calc(100vh - 70px); /* 60px is the height of the header */
     width: 100%;
-    border-radius: 10px;
 }
 
-/* ======================== ICON =================== */
+.main-page-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+}
 
+.main-page-content-left {
+    flex: 1;
+    padding: 20px;
+}
 
-
-.icon{
+.main-page-content-right {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    position: relative;
+}
 
-    color: white;
-    font-size: 1rem;
+.main-page-content-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.main-page-content-title-highlight {
+    color: var(--color-primary); 
+}
+
+.main-page-content-description {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.main-page-content-icon {
+    font-size: 20rem;
+    color: var(--color-primary);   
     
 }
 
-.animation{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    place-self: center;
-    border: 1px solid #FF6600;
-    border-radius: 50%;
-    padding: 10px;
 
-    position: absolute;
-    bottom: 120px;
-
-    
+.Guide-Down {
+    position: fixed;
+    color: var(--color-primary);
+    font-size: 1.5em;
+    bottom: 20px;
+    right: 50%;
+    cursor: pointer;
 }
 
-
-
-@keyframes infiniteBounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
-}

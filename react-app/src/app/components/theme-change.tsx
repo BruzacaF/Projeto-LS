@@ -7,8 +7,7 @@ import '@/app/components/css/theme-change.css';
 
 
 function themeThoggle() {
-    const darkIcon = <Icon icon="line-md:sunny-outline-to-moon-loop-transition" width="2rem" height="2rem" className="switch-theme black" />;
-    const lightIcon = <Icon icon="line-md:moon-to-sunny-outline-loop-transition" width="2rem" height="2rem" className="switch-theme white" />;
+    
 
     const [isDarkMode, setIsDarkMode] = useState(false);
     const iconLocation = useRef<HTMLElement>(null);
@@ -41,7 +40,7 @@ function themeThoggle() {
                 ],
             },
             {
-                duration: 500,
+                duration: 700,
                 easing: 'ease-in-out',
                 pseudoElement: '::view-transition-new(root)'
             }
@@ -63,7 +62,13 @@ function themeThoggle() {
 
     return (
         <div className='theme-switch-box' ref={iconLocation} onClick={() => toggleDarkMode(!isDarkMode)}>
-            {isDarkMode ? darkIcon : lightIcon}
+            <Icon 
+            key={isDarkMode ? "dark-mode-icon" : "light-mode-icon"}
+            icon={isDarkMode ? "line-md:moon-to-sunny-outline-loop-transition" : "line-md:sunny-outline-to-moon-loop-transition"} 
+            width="2rem" 
+            height="2rem"  
+            className="theme-switch" 
+            />
         </div>
     );
 }

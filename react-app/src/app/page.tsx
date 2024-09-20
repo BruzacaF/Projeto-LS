@@ -1,52 +1,34 @@
 'use client'
 
-import Header from "@/app/components/header";
-import Button from "./components/button";
-import { Icon } from '@iconify/react';
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll } from "framer-motion";
 import 'iconify-icon';
-import Content1 from '@/app/components/mainPage/main-content-1';
-import Content2 from '@/app/components/mainPage/main-content-2';
-import { useState, useEffect, useRef } from "react";
 import '@/app/components/css/main-page-content.css';
-import themeThoggle from "./lib/theme-change";
+import  content  from "@/app/components/assets/page-content/main-page-content";
+import MainContent from "@/app/components/mainPage/main-content";
 
-export default function Home() {
 
-  const contentsToLoad = [<Content1 />, <Content2 />];
-  const [contentIndex, setContentIndex] = useState(0);
-  const contentRef = useRef<HTMLDivElement>(null);
+export default function MainPage() {
 
-  useEffect(() => {
-    contentRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [contentIndex]);
+  const refs = [useRef<HTMLDivElement>(null), useRef<HTMLDivElement>(null)];
+  const contents = [
+    <MainContent {...content.mainContent} />,
+    <MainContent {...content.mainContent2} />,
+    <MainContent {...content.mainContent3} />
+  ];
 
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
-
-  const handleOnScroll = (event: React.WheelEvent<HTMLDivElement>) => {
-    if (scrollTimeout.current) {
-      return;
-    }
-
-    if (event.deltaY > 0) {
-      setContentIndex((prevIndex) => (prevIndex + 1) % contentsToLoad.length);
-    } else {
-      setContentIndex((prevIndex) => (prevIndex - 1 + contentsToLoad.length) % contentsToLoad.length);
-    }
-    scrollTimeout.current = setTimeout(() => {
-      scrollTimeout.current = null;
-    }, 500); // Ajustar o delay para o valor desejado
-  }
 
   return (
-    <>
-      <Header />
-      <div className="content" ref={contentRef} onWheel={handleOnScroll}>
-        {contentsToLoad[contentIndex]}
-        {themeThoggle()}
-      </div>
 
-    </>
+    <div className="main-page">
+      {contents.map((content, index) => (
+        <div key={index} ref={refs[index]}>
+          {content}
+        </div>
+      ))}
+    </div>
+
+
+   
   );
-
-
 }

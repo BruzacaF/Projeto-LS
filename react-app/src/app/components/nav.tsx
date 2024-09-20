@@ -5,7 +5,7 @@ import '@/app/components/css/header.css'
 
 export default function Nav() {
     
-    const links = ["Sobre", "Ajuda", "Regras", "Contato"];
+    const links = ["Sobre", "Ajuda", "Regras"];
 
     return (
         <>
