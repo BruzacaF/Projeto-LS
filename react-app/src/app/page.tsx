@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import 'iconify-icon';
-import '@/app/components/css/main-page-content.css';
-import  content  from "@/app/components/assets/page-content/main-page-content";
-import MainContent from "@/app/components/mainPage/main-content";
+import '@/components/css/main-page-content.css';
+import  content  from "@/components/assets/page-content/main-page-content";
+import MainContent from "@/components/mainPage/main-content";
+import Link from "next/link";
 
 
 export default function MainPage() {
@@ -26,6 +27,19 @@ export default function MainPage() {
           {content}
         </div>
       ))}
+
+      <Link href= "/components">
+        <motion.button
+          className="button"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          style={{ willChange: 'transform', backfaceVisibility: 'hidden' }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          Play Game
+        </motion.button>
+      </Link>
+
     </div>
 
 

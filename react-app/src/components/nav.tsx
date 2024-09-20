@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "./button";
-import '@/app/components/css/header.css'
+import '@/components/css/header.css';
+
 
 
 export default function Nav() {

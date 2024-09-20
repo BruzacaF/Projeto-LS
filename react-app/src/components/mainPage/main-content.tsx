@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Icon } from '@iconify/react';
-import Button from '@/app/components/button';
+import Button from '@/components/button';
 
 interface MainContentProps {
   title: string,

@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Icon } from '@iconify/react';
 import { flushSync } from "react-dom";
-import '@/app/components/css/theme-change.css';
+import '@/components/css/theme-change.css';
 
 
 

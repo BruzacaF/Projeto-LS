@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Saira } from "next/font/google";
-import Header from "@/app/components/header";
+import Header from "@/components/header";
 
 
 const saira = Saira({

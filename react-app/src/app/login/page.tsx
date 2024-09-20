@@ -1,5 +1,7 @@
 'use client';
 
+import Forms from "@/components/forms";
+
 
 export default function LoginPage() {
 
@@ -9,8 +11,11 @@ export default function LoginPage() {
     }
     
     return (
-        <div>
-            <h1>Login</h1>
-        </div>
+        <>
+            <Forms/>
+
+
+
+        </>
     )
 }

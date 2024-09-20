@@ -1,11 +1,13 @@
 'use client';
 
-import styled from "styled-components";
-
 import {Saira_Stencil_One} from "next/font/google";
-import '@/app/components/css/button.css';
 import Nav from "./nav";
-import themeThoggle from "@/app/components/theme-change";
+import themeThoggle from "@/components/theme-change";
+
+import '@/components/css/button.css';
+
+
+
 
 const sairaStencial = Saira_Stencil_One ({
   subsets: ["latin"],
