@@ -1,0 +1,25 @@
+
+.theme-switch-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    justify-self: center;
+    flex: 1;
+}
+
+
+
+.theme-switch{
+    color: var(--color-icon);
+}
+
+
+/* .black{
+    color: #fff;
+}
+
+.white{
+    color: #000;
+} */
+

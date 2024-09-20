@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import {Saira} from "next/font/google";
+import { Saira } from "next/font/google";
+import Header from "@/components/header";
 
-const saira = Saira ({
+
+const saira = Saira({
   subsets: ["latin"],
   weight: ['300', '500', '600'],
 })
@@ -17,15 +19,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
-
-  
   return (
     <html lang="en">
-      <body className={`${saira.className} light`}>
-        {children}
-      </body>
+        <body className={`${saira.className} light`}>
+          <Header />
+          {children}
+        </body>
     </html>
   );
 }
