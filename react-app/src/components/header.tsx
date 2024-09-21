@@ -39,8 +39,6 @@ const whileHover = {
     },
 }
 
-
-
 export default function Header() {
 
 

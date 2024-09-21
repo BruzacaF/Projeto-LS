@@ -1,15 +1,11 @@
-
-
+import styled from "styled-components";
 import Button from "./button";
-import '@/components/css/header.css';
-
-// Organinizar o css do nav
-// Organizar o mapeamento dos links ver nota em header.tsx
+import '@/app/components/css/header.css'
 
 
 export default function Nav() {
     
-    const links = ["Sobre", "Ajuda", "Regras"];
+    const links = ["Sobre", "Ajuda", "Regras", "Contato"];
 
     return (
         <>

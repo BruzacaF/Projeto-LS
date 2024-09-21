@@ -26,6 +26,7 @@ export default function MainContent(props: MainContentProps) {
             </h1>
             <p className="main-page-content-description">
               {props.description}
+
             </p>
             {props.button && (
                 <Button buttonSize="medium" textSize="medium" name="Começar" href={props.link}/>
@@ -36,8 +37,6 @@ export default function MainContent(props: MainContentProps) {
           </div>
         </div>
       </div>
-
-
     </>
   );
 }

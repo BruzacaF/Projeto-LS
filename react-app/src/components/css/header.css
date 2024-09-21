@@ -46,11 +46,11 @@
     justify-content: center;
     gap: 10px;
     flex: 1;
-    
 }
 
 .header ul{
     display: flex;
+
     align-items: center;
     justify-content: center;
     list-style: none;
@@ -89,3 +89,4 @@
         margin: 0 20px;
     }
 }
+

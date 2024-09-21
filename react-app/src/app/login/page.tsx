@@ -24,8 +24,8 @@ import { motion } from "framer-motion";
 
 
 
-
 export default function LoginPage() {
+
 
     const[isLogin, setIsLogin] = useState(true);
 
@@ -69,3 +69,4 @@ export default function LoginPage() {
         </UserProvider>
     );
 }
+
