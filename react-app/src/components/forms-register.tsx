@@ -1,47 +1,74 @@
-
 import { motion } from 'framer-motion';
-import { ChangeEvent, FormEvent } from 'react';
-
+import { useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import '@/components/css/forms.css';
 import Button from '@/components/button';
 import { useUser, UserContextProps } from '@/context/formsContext';
+import '@/components/css/forms.css';
 
+// *Ver outras tasks em forms.tsx
+// Refazer a logica de dias e meses para o registro
+// Refazer a logica de idade para o registro
+// 
 
+export default function FormsRegister() {
 
-
-// Colocar Restrições de senha e email 
-// Colocar validação de email
-// Colocar validação de senha
-// Colocar validação de idade
-// Implementar a função de login
-// Implementar a função de registro
-// Implementar a função de logout
-// Implementar a função de esqueci a senha
-
-
-// Implementar a função de bloquear o botao de login e registro 
-// enquanto o usuario não aceitar os termos ou senha e email não estiverem validos* 
-
-
-
-
-export default function Forms() {
-
-    const { user,
+    const {
+        user,
          handleChanges,
-          handleSubmit, 
-          isChecked, 
-          toggleCheckbox, 
-          isShowPassword, 
-          togglePassword,
-            isLoginBlock,
-            toggleLoginBlock } = useUser() as UserContextProps;
+          handleSubmit,
+          isChecked,
+           toggleCheckbox,
+            isShowPassword,
+             togglePassword,
+            getDaysInmonth } = useUser() as UserContextProps;
+
+    
+    const months = Array.from({ length: 12 }, (_, i) => i + 1);
+    const years = Array.from({ length: 100 }, (_, i) => i + 1922).reverse();
 
 
     return (
         <>
             <form className="form" onSubmit={handleSubmit}>
+                <input 
+                    type="text"
+                    placeholder="Nome"
+                    className="input"
+                    name='name'
+                    value={user.name}
+                    onChange={(e) => handleChanges(e)}
+                />
+                <input
+                    type="text"
+                    placeholder="Sobrenome"
+                    className="input"
+                    name='lastName'
+                    value={user.lastName}
+                    onChange={(e) => handleChanges(e)}
+                />
+                <div className="selects">
+                    <select name="day"
+                     value={user.day}
+                      onChange={(e) => handleChanges(e)}>
+                        <option value="">Dia</option>
+                        {Array.from({ length: getDaysInmonth(Number(user.month), Number(user.year)) }, (_, day) => day + 1).map((day) => (
+                            <option key={day} value={day}>{day}</option>
+                        ))}
+
+                    </select>
+                    <select name="month" value={user.month} onChange={(e) => handleChanges(e)}>
+                        <option value="">Mês</option>
+                        {months.map((month) => (
+                            <option key={month} value={month}>{month}</option>
+                        ))}
+                    </select>
+                    <select name="year" value={user.year} onChange={(e) => handleChanges(e)}>
+                        <option value="">Ano</option>
+                        {years.map((year) => (
+                            <option key={year} value={year}>{year}</option>
+                        ))}
+                    </select>
+                </div>
                 <input
                     type="text"
                     placeholder="Email"
@@ -56,13 +83,12 @@ export default function Forms() {
                         type={isShowPassword ? "text" : "password"}
                         placeholder="Password"
                         className="input"
-                        value={user.password} 
+                        value={user.password}
                         name='password'
                         onChange={(e) => handleChanges(e)}
-                        {...(isShowPassword && { autoComplete: 'off' })}
                     />
                     <Icon 
-                        icon={isShowPassword ? "mdi:eye-off-outline" : "mdi:eye-outline" }
+                        icon={isShowPassword ? "mdi:eye-outline" : "mdi:eye-off-outline" }
                         onClick={togglePassword}
                         style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}
                     />
@@ -96,8 +122,7 @@ export default function Forms() {
                     </label>
                 </div>
 
-                <Button name='Entrar' buttonSize='medium' textSize='medium' />
-                    
+                <Button name='Cadastrar' buttonSize='medium' textSize='medium' onClick={() => handleSubmit} />
             </form>
         </>
     )

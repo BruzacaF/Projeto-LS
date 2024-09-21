@@ -5,6 +5,15 @@ import Link from "next/link";
 
 
 
+
+
+
+// Refatorar o componente button para que fique mais limpo e organizado
+// Organizar o css do button
+// Organizar o componente button
+
+
+
 interface ButtonProps {
     buttonSize: string;
     textSize: string;
@@ -22,26 +31,28 @@ export default function Button(props: ButtonProps) {
 
     const className = convertToClassName(props.buttonSize || "medium", props.textSize || "medium");
 
-    return (
-        <>
-            <motion.button
-                className={className}
-                onClick={props.onClick}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                style={{ willChange: 'transform', backfaceVisibility: 'hidden' }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-                {props.href ? (
-                    <Link href={props.href} className="links">
-                        {props.name}
-                    </Link>
-                ) : (
-                    <span>{props.name}</span>
-                )}
+    const buttonElement = (
+        <motion.button
+            className={className}
+            onClick={props.onClick}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            style={{ 
+                willChange: 'transform', 
+                backfaceVisibility: 'hidden', 
+                transform: 'translateZ(0)' 
+            }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+            {props.name}
+        </motion.button>
+    );
 
-
-            </motion.button>
-        </>
+    return props.href ? (
+        <Link href={props.href} passHref>
+            {buttonElement}
+        </Link>
+    ) : (
+        buttonElement
     );
 }

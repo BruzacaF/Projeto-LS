@@ -1,7 +1,10 @@
-import styled from "styled-components";
+
+
 import Button from "./button";
 import '@/components/css/header.css';
 
+// Organinizar o css do nav
+// Organizar o mapeamento dos links ver nota em header.tsx
 
 
 export default function Nav() {

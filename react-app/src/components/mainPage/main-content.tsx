@@ -16,7 +16,6 @@ export default function MainContent(props: MainContentProps) {
 
   return (
     <>
-
       <div className="main-content" >
         <div className="main-page-content">
           <div className="main-page-content-left">
@@ -27,19 +26,17 @@ export default function MainContent(props: MainContentProps) {
             </h1>
             <p className="main-page-content-description">
               {props.description}
-              {props.button && (
+
+            </p>
+            {props.button && (
                 <Button buttonSize="medium" textSize="medium" name="Começar" href={props.link}/>
               )}
-            </p>
           </div>
           <div className="main-page-content-right">
             {props.icon && <Icon icon={props.icon} className="main-page-content-icon" />}
           </div>
         </div>
       </div>
-
-      <Icon icon="line-md:chevron-double-down" width="2rem" height="2rem" className="Guide-Down" />
-
     </>
   );
 }

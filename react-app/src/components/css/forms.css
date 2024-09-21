@@ -1,0 +1,129 @@
+.forms-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 100px);
+}
+
+.forms-right, .forms-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.forms-left {
+    background-color: var(--color-card);
+}
+
+.forms-right {
+    background-color: var(--color-surface);
+}
+
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.form input {
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid var(--border-color-card);
+    border-radius: 5px;
+    
+}
+
+.form .selects {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    
+}
+
+.form select {
+    flex: 1;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color-card);
+    border-radius: 5px;
+}
+
+.form select option {
+    display: flex;
+    flex: 1;
+    height: 40px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid var(--border-color-card);
+    border-radius: 5px;
+}
+
+.form button {
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid var(--border-color-card);
+    border-radius: 5px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.form button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+.checkbox {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    background-color: var(--background);
+}
+
+.checkbox:checked {
+    background-color: var(--color-surface);
+}
+
+.checkmark {
+    color: var(--background);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ilustration {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
