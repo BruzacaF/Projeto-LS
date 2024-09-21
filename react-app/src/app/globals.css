@@ -1,9 +1,7 @@
-
-
 body.light {
 
   /* COLORS */
-  --background: #ffffff;
+  --background: #f7F8F9;
   --color-primary: #FF6600;
 
   /* ICONS */
@@ -11,16 +9,17 @@ body.light {
   --border-color-icon: #FF6600;
 
   /* CARDS */
-  --color-card: #F4F4F2;
-  --border-color-card: #BBBFCA;
-  --box-shadow-card: 5px 5px 0px rgba(0, 0, 0, 0.3);
+  --color-card: #DCDFE4;
+  --border-color-card: #44546F;
+  --box-shadow-card: 5px 5px 0px rgba(0, 0, 0, 0.8);
 
   /* SURFACE */
-  --color-surface: #BBBFCA;
+  --color-surface: #f7F8F9;
 
   /* TEXT */
-  --color-text: #18122B;
-  
+  --color-text: #000000;
+  --color-text-on-background: #000000;
+
 }
 
 body.dark {
@@ -71,21 +70,20 @@ html,
 body {
   max-width: 100vw;
   color: var(--color-text);
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 
 body {
   background: var(--background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  height: 100vh;
+
+  height: fit-content;
 
   display: flex;
   flex-direction: column;
-  
-
-
-
 }
 
 * {
@@ -98,3 +96,18 @@ body {
 
 
 
+@media screen and (min-width: 1440px) {
+
+  html{
+    margin: 0 auto;
+  }
+
+  html,
+  body {
+    color: var(--color-text);
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+}

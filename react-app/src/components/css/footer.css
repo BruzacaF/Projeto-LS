@@ -1,0 +1,82 @@
+
+
+.footer {
+    background-color: var(--color-surface);
+    border-top: var(--border-color-card);
+    
+    padding-top: 20px;
+    text-align: center;
+    height: fit-content;
+    width: 100%;
+    border-top: 2px solid rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    font-weight: 500;
+
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.link-area, .contato-area, .social-area {
+    flex: 1;
+    min-width: 200px;
+}
+
+.link-area ul, .contato-area ul, .social-area ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.link-area ul li, .contato-area ul li , .social-area ul li {
+    margin: 5px 0;
+}
+
+.link-area a , .contato-area a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.link-area a:hover, .contato-area a:hover {
+    text-decoration: underline;
+}
+
+.social-area p {
+    margin: 5px 0;
+}
+
+.copyright {
+    position: relative;
+    font-size: 14px;
+    color: var(--color-text);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.social-area ul{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+}
+
+
+.icons-brand {
+    font-size: 20px;
+    color: var(--color-text);
+}
+
+
+
+@media (min-width: 1440px) {
+    .footer {
+        width: 100vw;
+    }
+
+    .footer-content {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+}

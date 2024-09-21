@@ -1,3 +1,4 @@
+
 .main-content {
     display: flex;
     flex-direction: column;
@@ -5,17 +6,30 @@
     align-items: center;
     height: calc(100vh - 70px); /* 60px is the height of the header */
     width: 100%;
+    color: var(--color-text-on-background);
+    padding: 0 40px;
 }
 
 .main-page-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1000px;
     height: 100%;
-    margin: 0 auto;
+    border-bottom: 3px solid var(--color-primary);
 }
+
+.main-content:nth-child(2) .main-page-content {
+    flex-direction: row-reverse;
+    
+}
+
+.main-content:last-child .main-page-content {
+    border: none;
+}
+
+
+
 
 .main-page-content-left {
     flex: 1;
@@ -62,3 +76,11 @@
     cursor: pointer;
 }
 
+
+
+@media screen and (min-width: 1440px) {
+    .main-content {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+}

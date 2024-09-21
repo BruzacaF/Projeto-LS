@@ -4,6 +4,10 @@ import { Icon } from '@iconify/react';
 import { flushSync } from "react-dom";
 import '@/components/css/theme-change.css';
 
+//Não mexer no css
+//Não mexer neste componente
+//Não está com erro neste componente 
+
 
 
 function themeThoggle() {
@@ -63,7 +67,6 @@ function themeThoggle() {
     return (
         <div className='theme-switch-box' ref={iconLocation} onClick={() => toggleDarkMode(!isDarkMode)}>
             <Icon 
-            key={isDarkMode ? "dark-mode-icon" : "light-mode-icon"}
             icon={isDarkMode ? "line-md:moon-to-sunny-outline-loop-transition" : "line-md:sunny-outline-to-moon-loop-transition"} 
             width="2rem" 
             height="2rem"  
