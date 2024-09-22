@@ -33,11 +33,6 @@ export default function LoginPage() {
         setIsLogin(!isLogin);
     }
 
-
-    useEffect(() => {
-        console.log('IsLogin', isLogin);
-    }, [isLogin]);
-
     return (
         <UserProvider>
             <div className="forms-page">
