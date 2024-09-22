@@ -96,7 +96,8 @@ export default function Forms() {
                     </label>
                 </div>
 
-                <Button name='Entrar' buttonSize='medium' textSize='medium' />
+
+                <Button buttonSize='medium' textSize='medium' href='/dashboard' name='Entrar'/>
                     
             </form>
         </>

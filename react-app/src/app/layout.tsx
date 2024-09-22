@@ -14,12 +14,8 @@ export const metadata: Metadata = {
   description: "A simple game to help you learn the alphabet",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>)
+{
   return (
 
     <html lang="en">

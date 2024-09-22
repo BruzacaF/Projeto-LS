@@ -12,8 +12,6 @@ import Link from "next/link";
 // Organizar o css do button
 // Organizar o componente button
 
-
-
 interface ButtonProps {
     buttonSize: string;
     textSize: string;

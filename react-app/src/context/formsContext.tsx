@@ -57,6 +57,7 @@ export interface UserContextProps {
 }
 
 export const userContext = createContext<UserContextProps | undefined>(undefined);
+
 interface UserProviderProps {
     children: ReactNode;
 }
@@ -252,6 +253,3 @@ export const useUser = (): UserContextProps => {
 //         console.log('Dados do formulário', user);
 
 //     }
-
-
-
