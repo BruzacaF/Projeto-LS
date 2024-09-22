@@ -1,5 +1,6 @@
 'use client'
 
+
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import 'iconify-icon';
@@ -77,6 +78,7 @@ export default function MainPage() {
       </div>
 
     </>
+
 
   );
 

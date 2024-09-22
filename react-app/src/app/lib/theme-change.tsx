@@ -2,16 +2,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Icon } from '@iconify/react';
 import { flushSync } from "react-dom";
-import '@/components/css/theme-change.css';
+import '@/app/components/css/theme-change.css';
 
-
-//Não mexer no css
-//Não mexer neste componente
-//Não está com erro neste componente 
 
 
 function themeThoggle() {
-    
+    const darkIcon = <Icon icon="line-md:sunny-outline-to-moon-loop-transition" width="2rem" height="2rem" className="switch-theme black" />;
+    const lightIcon = <Icon icon="line-md:moon-to-sunny-outline-loop-transition" width="2rem" height="2rem" className="switch-theme white" />;
 
     const [isDarkMode, setIsDarkMode] = useState(false);
     const iconLocation = useRef<HTMLElement>(null);
@@ -44,7 +41,7 @@ function themeThoggle() {
                 ],
             },
             {
-                duration: 700,
+                duration: 500,
                 easing: 'ease-in-out',
                 pseudoElement: '::view-transition-new(root)'
             }
@@ -66,12 +63,7 @@ function themeThoggle() {
 
     return (
         <div className='theme-switch-box' ref={iconLocation} onClick={() => toggleDarkMode(!isDarkMode)}>
-            <Icon 
-            icon={isDarkMode ? "line-md:moon-to-sunny-outline-loop-transition" : "line-md:sunny-outline-to-moon-loop-transition"} 
-            width="2rem" 
-            height="2rem"  
-            className="theme-switch" 
-            />
+            {isDarkMode ? darkIcon : lightIcon}
         </div>
     );
 }

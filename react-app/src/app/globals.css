@@ -1,3 +1,4 @@
+
 body.light {
 
   /* COLORS */
@@ -73,6 +74,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
+
   overflow-x: hidden;
 }
 
@@ -85,6 +87,7 @@ body {
 
   display: flex;
   flex-direction: column;
+
 }
 
 * {
@@ -93,9 +96,6 @@ body {
   margin: 0;
   text-decoration: none;
 }
-
-
-
 
 @media screen and (min-width: 1440px) {
 
@@ -131,3 +131,4 @@ body {
   background-color:var(--background); /* Cor de fundo da scrollbar */
   border-radius: 6px;
 }
+
