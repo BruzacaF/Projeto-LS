@@ -1,10 +1,21 @@
-
-.main-content {
+.main-page{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 70px); /* 60px is the height of the header */
+    width: 100%;
+    background-color: var(--color-background);
+    color: var(--color-text-on-background);
+    padding: 0 40px;
+}
+
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100vh - 100px);
     width: 100%;
     color: var(--color-text-on-background);
     padding: 0 40px;
@@ -14,14 +25,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 1000px;
+    max-width: 1000px;
     height: 100%;
     border-bottom: 3px solid var(--color-primary);
 }
 
-.main-content:nth-child(2) .main-page-content {
+.main-page #MainContent:nth-child(2) .main-content .main-page-content {
     flex-direction: row-reverse;
-    
 }
 
 .main-content:last-child .main-page-content {

@@ -1,5 +1,8 @@
 
-import { motion } from "framer-motion";
+
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 import { Icon } from '@iconify/react';
 import Button from '@/components/button';
 
@@ -13,9 +16,33 @@ interface MainContentProps {
 }
 
 export default function MainContent(props: MainContentProps) {
+  const controls = useAnimation();
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+
 
   return (
-    <>
+
+    <motion.div
+      id="MainContent"
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={{
+        
+        visible: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: 100, transition: { duration: 0.6 } },
+      }}>
+
       <div className="main-content" >
         <div className="main-page-content">
           <div className="main-page-content-left">
@@ -28,8 +55,8 @@ export default function MainContent(props: MainContentProps) {
               {props.description}
             </p>
             {props.button && (
-                <Button buttonSize="medium" textSize="medium" name="Começar" href={props.link}/>
-              )}
+              <Button buttonSize="medium" textSize="medium" name="Começar" href={props.link} />
+            )}
           </div>
           <div className="main-page-content-right">
             {props.icon && <Icon icon={props.icon} className="main-page-content-icon" />}
@@ -38,6 +65,12 @@ export default function MainContent(props: MainContentProps) {
       </div>
 
 
-    </>
+
+
+    </motion.div>
+
+
+
+
   );
 }

@@ -73,6 +73,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 body {
@@ -110,4 +111,23 @@ body {
     flex-direction: column;
   }
 
+}
+
+
+/* -------------- scrollbar -------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px; /* Largura da barra de rolagem */
+}
+
+/* Estilizar o "thumb" da scrollbar (a parte que o usuário arrasta) */
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary); /* Cor da scrollbar */
+  border: var(--border-color-card); /* Espaçamento interno */
+}
+
+/* Estilizar o track da scrollbar (o fundo onde o "thumb" desliza) */
+::-webkit-scrollbar-track {
+  background-color:var(--background); /* Cor de fundo da scrollbar */
+  border-radius: 6px;
 }
