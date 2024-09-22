@@ -1,3 +1,4 @@
+
 import { createContext, useState, useContext, ChangeEvent, FormEvent } from 'react';
 import { ReactNode } from 'react';
 
@@ -252,5 +253,3 @@ export const useUser = (): UserContextProps => {
 //         console.log('Dados do formulário', user);
 
 //     }
-
-

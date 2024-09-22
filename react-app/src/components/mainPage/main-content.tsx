@@ -63,14 +63,7 @@ export default function MainContent(props: MainContentProps) {
           </div>
         </div>
       </div>
-
-
-
-
     </motion.div>
-
-
-
 
   );
 }

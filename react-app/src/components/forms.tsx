@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { ChangeEvent, FormEvent } from 'react';
 
@@ -94,6 +95,7 @@ export default function Forms() {
                         Aceito os termos e condições
                     </label>
                 </div>
+
 
                 <Button buttonSize='medium' textSize='medium' href='/dashboard' name='Entrar'/>
                     
