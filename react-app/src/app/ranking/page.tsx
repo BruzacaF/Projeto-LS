@@ -3,6 +3,7 @@
 import DataBase from '@/services/supabase';
 import React, { useEffect, useState } from 'react';
 import '@/components/css/ranking.css'; // Importa o CSS
+import LayoutMainPage from '../mainPage/layout';
 
 interface Player {
     name: string;
@@ -22,27 +23,29 @@ const RankingPage: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Ranking dos Jogadores</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Posição</th>
-                        <th>Nome</th>
-                        <th>Pontuação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {topPlayers.map((player, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{player.name}</td>
-                            <td>{player.score}</td>
+        <LayoutMainPage>
+            <div>
+                <h1>Ranking dos Jogadores</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Nome</th>
+                            <th>Pontuação</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {topPlayers.map((player, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{player.name}</td>
+                                <td>{player.score}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </LayoutMainPage>
     );
 };
 
