@@ -71,4 +71,19 @@ export default class DataBase {
             console.error('Error adding player to database:', err.message);
         }
     }
+
+    static async getTopPlayers() {
+      try {
+          const { data, error } = await supabase
+              .from('players')
+              .select('name, score')
+              .order('score', { ascending: false })
+              .limit(10);
+
+          if (error) throw error;
+          DataBase.topPlayers = data || [];  // Armazena os jogadores na variável da classe
+      } catch (err: any) {
+          console.error('Error retrieving top players:', err.message);
+      }
+    }
 }
