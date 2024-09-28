@@ -12,19 +12,16 @@ const saira = Saira({
 
 export const metadata: Metadata = {
   title: "Letra a Letra",
-  description: "A simple game to help you learn the alphabet",
+  description: "Um site para você se divertir com jogos de palavras",
 };
 
-export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>)
-{
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
 
     <html lang="en">
-        <body className={`${saira.className} light`}>
-          <Header />
-          {children}
-          <Footer />
-        </body>
+      <body className={`${saira.className} light`}>
+        {children}
+      </body>
     </html>
   );
 }

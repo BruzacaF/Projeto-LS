@@ -10,15 +10,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
 
     return (
-        <html lang="en">
-            <body>
-                <div className="dashboard">
-                    <Sidebar />
-                    <div className="dashboard__content">
-                        {children}
-                    </div>
-                </div>
-            </body>
-        </html>
+        <>
+            <Sidebar />
+            {children}
+        </>
+
     )
+            
 }

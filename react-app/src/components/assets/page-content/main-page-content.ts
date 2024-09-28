@@ -46,7 +46,7 @@ const content: ContentInterface = {
         description: "Comece agora mesmo a competir e aprender",
         icon: "material-symbols:person-play-outline-rounded",
         button: true,
-        link: "/login"
+        link: "/mainPage/login"
 
     }
 }
