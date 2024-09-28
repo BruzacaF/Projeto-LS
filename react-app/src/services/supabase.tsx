@@ -8,8 +8,6 @@ const supabase: SupabaseClient = createClient(API_URL, API_KEY);
 
 
 export default class DataBase {
-    // Array de objetos de todas as palavras e dicas
-    static allWordsAndHints: Array<{ word: string; hint: string }>;
 
     // Array de objetos com nome e score
     static topPlayers: Array<{ name: string; score: number }>;
@@ -74,32 +72,3 @@ export default class DataBase {
         }
     }
 }
-
-const nome: string = "Carlos";
-
-// Chame o método e use .then() para tratar o resultado da promessa
-DataBase.userExists(nome)
-  .then((result) => {
-    if (result !== null) {
-      console.log(`Usuário encontrado com o ID: ${result}`);
-    } else {
-      console.log("Usuário não encontrado.");
-    }
-  })
-  .catch((err) => {
-    console.error("Erro ao verificar a existência do usuário:", err);
-  });
-
-DataBase.authenticate(1, "password123")
-  .then((result) => {
-    if (result !== undefined) {
-      console.log(`Autenticado: ${result}`);
-    } else {
-      console.log("Usuário não encontrado.");
-    }
-  })
-  .catch((err) => {
-    console.error("Erro ao verificar a existência do usuário:", err);
-  });
-
-DataBase.addPlayerToDatabase('opa', 'jnjnsxnsjx')
