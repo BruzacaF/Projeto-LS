@@ -7,7 +7,6 @@ import NotebookIcon from '@/assets/icons/notebook-not-css.svg';
 import { UserProvider } from "@/context/formsContext";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
 
 
 
@@ -27,8 +26,6 @@ import { useRouter } from "next/router";
 
 
 export default function LoginPage() {
-
-     const router = useRouter();
 
     const[isLogin, setIsLogin] = useState(true);
 
