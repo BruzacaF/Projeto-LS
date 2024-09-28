@@ -1,6 +1,8 @@
 
 import { createContext, useState, useContext, ChangeEvent, FormEvent } from 'react';
 import { ReactNode } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 
 
@@ -65,6 +67,8 @@ interface UserProviderProps {
 
 export function UserProvider({ children }: UserProviderProps) {
 
+    const router = useRouter();
+
 
     const[isLoginBlock, setIsLoginBlock] = useState(true);
 
@@ -111,11 +115,24 @@ export function UserProvider({ children }: UserProviderProps) {
 
     }
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        calculateAge(Number(user.day), Number(user.month), Number(user.year));
-        whatDate(Number(user.day), Number(user.month), Number(user.year));
-        console.log('Form data:', user);
+
+        const result = await signIn('credentials', {
+            redirect: false,
+            email: user.email,
+            password: user.password
+        });
+
+        if (result?.error) {
+            console.log('Erro no login', result.error);
+        } else {
+            console.log('Usuário logado com sucesso', result);
+            router.push('/mainPage');
+        }
+
+        setUser({ ...initialUserState });
+        
     }
 
 
