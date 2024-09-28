@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+    margin: 10px auto;
+}
+
+table {
+    width: 70%;
+    border-collapse: collapse; /* Remove espaços entre as células */
+    margin: 20px auto; /* Espaço acima e abaixo da tabela */
+}
+
+th, td {
+    border: 2px solid #dddddd;
+    text-align: center; /* Centraliza o texto */
+    padding: 12px; /* Aumenta o espaçamento interno */
+}
+
+
+/* Estilo para aumentar o espaçamento entre as colunas */
+td {
+    padding-left: 20px; /* Espaçamento à esquerda */
+    padding-right: 20px; /* Espaçamento à direita */
+}
