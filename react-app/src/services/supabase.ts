@@ -5,7 +5,6 @@ const API_KEY: string = process.env.NEXT_PUBLIC_SUPABASE_KEY as string;
 
 // Cria o cliente Supabase com tipagem explícita
 const supabase: SupabaseClient = createClient(API_URL, API_KEY);
-
 export default class DataBase {
 
     // Array de objetos com nome e score

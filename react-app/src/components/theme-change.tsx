@@ -9,7 +9,6 @@ declare global {
 import { Icon } from '@iconify/react';
 import { flushSync } from "react-dom";
 import '@/components/css/theme-change.css';
-
 //Não mexer no css
 //Não mexer neste componente
 //Não está com erro neste componente 
@@ -17,13 +16,14 @@ import '@/components/css/theme-change.css';
 function ThemeToggle() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const iconLocation = useRef<HTMLDivElement>(null);
-
     const toggleDarkMode = async (isDarkMode: boolean) => {
         if (!iconLocation.current) return;
 
         await document.startViewTransition(() => {
             flushSync(() => {
                 setIsDarkMode(isDarkMode);
+                // Salva a preferência de tema no localStorage
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
             });
         }).ready;
 

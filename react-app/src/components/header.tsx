@@ -52,7 +52,7 @@ export default function Header() {
                         whileTap={whileTap}
                         whileHover={whileHover}
                     >
-                        <Link href="/" >
+                        <Link href="/mainPage" >
                             <h1 className={`${sairaStencial.className} logo-text`} >Letra a Letra</h1>
                         </Link>
                     </motion.div>

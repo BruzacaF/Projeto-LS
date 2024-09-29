@@ -1,4 +1,5 @@
 'use client';
+
 import DataBase from '@/services/supabase';
 import React, { useEffect, useState } from 'react';
 import '@/components/css/ranking.css'; // Importa o CSS do componente
