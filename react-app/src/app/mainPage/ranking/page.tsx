@@ -3,7 +3,7 @@
 import DataBase from '@/services/supabase';
 import React, { useEffect, useState } from 'react';
 import '@/components/css/ranking.css'; // Importa o CSS
-import LayoutMainPage from '../mainPage/layout';
+
 
 interface Player {
     name: string;
@@ -23,7 +23,6 @@ const RankingPage: React.FC = () => {
     }, []);
 
     return (
-        <LayoutMainPage>
             <div>
                 <h1>Ranking dos Jogadores</h1>
                 <table>
@@ -45,7 +44,6 @@ const RankingPage: React.FC = () => {
                     </tbody>
                 </table>
             </div>
-        </LayoutMainPage>
     );
 };
 
