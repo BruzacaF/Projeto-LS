@@ -10,7 +10,7 @@ interface Player {
     score: number;
 }
 
-const RankingPage: React.FC = () => {
+export default function RankingPage() {
     const [topPlayers, setTopPlayers] = useState<Player[]>([]); // Define o tipo do estado
 
     const fetchTopPlayers = async () => {
@@ -46,5 +46,3 @@ const RankingPage: React.FC = () => {
             </div>
     );
 };
-
-export default RankingPage;
