@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
+
 import { Icon } from '@iconify/react';
 import Button from '@/components/button';
 import { useUser, UserContextProps } from '@/context/formsContext';

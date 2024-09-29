@@ -1,21 +1,22 @@
 'use client';
 import { useState, useEffect, useRef } from "react";
+
+declare global {
+    interface Document {
+        startViewTransition(callback: () => void): { ready: Promise<void> };
+    }
+}
 import { Icon } from '@iconify/react';
 import { flushSync } from "react-dom";
 import '@/components/css/theme-change.css';
-
 
 //Não mexer no css
 //Não mexer neste componente
 //Não está com erro neste componente 
 
-
-function themeThoggle() {
-    
-
+function ThemeToggle() {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const iconLocation = useRef<HTMLElement>(null);
-
+    const iconLocation = useRef<HTMLDivElement>(null);
 
     const toggleDarkMode = async (isDarkMode: boolean) => {
         if (!iconLocation.current) return;
@@ -51,9 +52,6 @@ function themeThoggle() {
         );
     };
 
-
-
-
     useEffect(() => {
         if (isDarkMode) {
             document.body.classList.add('dark');
@@ -76,4 +74,4 @@ function themeThoggle() {
     );
 }
 
-export default themeThoggle;
+export default ThemeToggle;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+
 import '@/components/css/button.css';
 import { motion } from "framer-motion";
 import Link from "next/link";

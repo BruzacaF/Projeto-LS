@@ -5,7 +5,7 @@ import FormsRegister from "@/components/forms-register";
 import '@/components/css/forms.css';
 import NotebookIcon from '@/assets/icons/notebook-not-css.svg';
 import { UserProvider } from "@/context/formsContext";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { motion } from "framer-motion";
 
 

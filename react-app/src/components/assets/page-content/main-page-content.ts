@@ -1,5 +1,3 @@
-import { button } from "framer-motion/client";
-import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 
 interface ContentInterface {
     mainContent: {
