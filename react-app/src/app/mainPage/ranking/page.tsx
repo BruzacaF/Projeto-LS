@@ -2,47 +2,33 @@
 
 import DataBase from '@/services/supabase';
 import React, { useEffect, useState } from 'react';
-import '@/components/css/ranking.css'; // Importa o CSS
+import '@/components/css/ranking.css';
+import PlayerTable from './PlayerTable';
+import { Player } from './PlayerTable';
 
-
-interface Player {
-    name: string;
-    score: number;
-}
 
 export default function RankingPage() {
-    const [topPlayers, setTopPlayers] = useState<Player[]>([]); // Define o tipo do estado
+  const [topPlayers, setTopPlayers] = useState<Player[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-    const fetchTopPlayers = async () => {
-        await DataBase.getTopPlayers(); // Chama a função para buscar os jogadores
-        setTopPlayers(DataBase.topPlayers); // Armazena os jogadores no estado
-    };
+  const fetchTopPlayers = async () => {
+    await DataBase.getTopPlayers();
+    setTopPlayers(DataBase.topPlayers);
+    setLoading(false);
+    }
 
-    useEffect(() => {
-        fetchTopPlayers(); // Chama a função ao montar o componente
-    }, []);
+  useEffect(() => {
+    fetchTopPlayers();
+  }, []);
 
-    return (
-            <div>
-                <h1>Ranking dos Jogadores</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Posição</th>
-                            <th>Nome</th>
-                            <th>Pontuação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {topPlayers.map((player, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{player.name}</td>
-                                <td>{player.score}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-    );
-};
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  return (
+    <section>
+      <h1>Ranking dos Jogadores</h1>
+      <PlayerTable players={topPlayers} />
+    </section>
+  );
+}
