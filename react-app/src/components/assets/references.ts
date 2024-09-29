@@ -1,11 +1,5 @@
 
 
-interface Reference {
-    title: string;
-    link: string;
-}
-
-
 
 const linksToReferences = {
 

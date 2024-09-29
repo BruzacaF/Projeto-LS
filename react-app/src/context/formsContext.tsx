@@ -1,23 +1,11 @@
-
 import { createContext, useState, useContext, ChangeEvent, FormEvent } from 'react';
 import { ReactNode } from 'react';
-
-
-
-
-
-
 
 // Reorganizar o código para que fique mais limpo e organizado
 // Reformular a interface de props do Usuario
 // Reformular a interface de contexto do Usuario
 // Reformular a interface de contexto do UsuarioProvider
 // Reformular Css do Formulário(Media Queries) => Ilustração Muito grande em telas pequenas
-
-
-
-
-
 
 export interface User {
     name: string;
@@ -30,8 +18,6 @@ export interface User {
     month?: number;
     year?: number;
     date?: string;
-
-
 }
 
 export interface UserContextProps {
@@ -44,16 +30,12 @@ export interface UserContextProps {
     isShowPassword: boolean;
     togglePassword: () => void;
     getDaysInmonth: (month: number, year: number) => number;
-    handleSelectDays: (e: any) => void;
+    handleSelectDays: (e: ChangeEvent<HTMLSelectElement>) => void;
     calculateAge: (day: number, month: number, year: number) => number;
     handleDate: (day: number, month: number, year: number) => void;
     whatDate: (day: number, month: number, year: number) => string;
     isLoginBlock: boolean;
     toggleLoginBlock: () => void;
-
-
-
-
 }
 
 export const userContext = createContext<UserContextProps | undefined>(undefined);
@@ -62,17 +44,12 @@ interface UserProviderProps {
     children: ReactNode;
 }
 
-
 export function UserProvider({ children }: UserProviderProps) {
-
-
-    const[isLoginBlock, setIsLoginBlock] = useState(true);
+    const [isLoginBlock, setIsLoginBlock] = useState(true);
 
     const toggleLoginBlock = () => {
         setIsLoginBlock(!isLoginBlock);
     }
-
-
 
     const [isChecked, setIsCheck] = useState(false);
     const toggleCheckbox = () => {
@@ -83,7 +60,6 @@ export function UserProvider({ children }: UserProviderProps) {
     const togglePassword = () => {
         setIsShowPassword(!isShowPassword);
     }
-
 
     const initialUserState: User = {
         name: "",
@@ -99,16 +75,12 @@ export function UserProvider({ children }: UserProviderProps) {
 
     const [user, setUser] = useState<User>({ ...initialUserState });
 
-       
-
     const handleChanges = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type, checked } = e.target as HTMLInputElement;
         setUser((prevData) => ({
             ...prevData,
             [name]: type === 'checkbox' ? checked : value
-
         }));
-
     }
 
     const handleSubmit = (e: FormEvent) => {
@@ -118,13 +90,12 @@ export function UserProvider({ children }: UserProviderProps) {
         console.log('Form data:', user);
     }
 
-
     const getDaysInmonth = (month: number, year: number) => {
         return new Date(year, month, 0).getDate();
     }
 
-    const handleSelectDays = (e: any) => {
-        const { name, value } = e.target;
+    const handleSelectDays = (e: ChangeEvent<HTMLSelectElement>) => {
+        const { name } = e.target;
         handleChanges(e);
         if (name === 'month' || name === 'year') {
             const daysInMonth = getDaysInmonth(Number(user.month), Number(user.year));
@@ -140,7 +111,6 @@ export function UserProvider({ children }: UserProviderProps) {
             }
         }
     }
-
 
     const calculateAge = (day: number, month: number, year: number) => {
         const today = new Date();
@@ -167,9 +137,6 @@ export function UserProvider({ children }: UserProviderProps) {
         return date.toLocaleDateString('pt-BR', options);
     }
 
-
-
-
     return (
         <userContext.Provider value={{
             user,
@@ -187,8 +154,6 @@ export function UserProvider({ children }: UserProviderProps) {
             whatDate,
             isLoginBlock,
             toggleLoginBlock
-
-
         }}>
             {children}
         </userContext.Provider>
@@ -202,22 +167,6 @@ export const useUser = (): UserContextProps => {
     }
     return context;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ================================================================================================================================

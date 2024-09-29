@@ -1,18 +1,21 @@
 'use client';
 import { useState, useEffect, useRef } from "react";
+
+declare global {
+    interface Document {
+        startViewTransition(callback: () => void): { ready: Promise<void> };
+    }
+}
 import { Icon } from '@iconify/react';
 import { flushSync } from "react-dom";
 import '@/components/css/theme-change.css';
+//Não mexer no css
+//Não mexer neste componente
+//Não está com erro neste componente 
 
-// Não mexer no css
-// Não mexer neste componente
-// Não está com erro neste componente 
-
-function themeThoggle() {
+function ThemeToggle() {
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const iconLocation = useRef<HTMLElement>(null);
-
-    // Função que alterna o modo escuro/claro e salva no localStorage
+    const iconLocation = useRef<HTMLDivElement>(null);
     const toggleDarkMode = async (isDarkMode: boolean) => {
         if (!iconLocation.current) return;
 
@@ -49,15 +52,6 @@ function themeThoggle() {
         );
     };
 
-    // Recupera a preferência de tema do localStorage ao montar o componente
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setIsDarkMode(savedTheme === 'dark');
-        }
-    }, []);
-
-    // Aplica a classe de tema ao body conforme o estado do tema
     useEffect(() => {
         if (isDarkMode) {
             document.body.classList.add('dark');
@@ -80,4 +74,4 @@ function themeThoggle() {
     );
 }
 
-export default themeThoggle;
+export default ThemeToggle;

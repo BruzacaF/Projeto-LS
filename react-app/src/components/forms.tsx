@@ -1,6 +1,5 @@
 
 import { motion } from 'framer-motion';
-import { ChangeEvent, FormEvent } from 'react';
 
 import { Icon } from '@iconify/react';
 import '@/components/css/forms.css';
@@ -35,8 +34,9 @@ export default function Forms() {
           toggleCheckbox, 
           isShowPassword, 
           togglePassword,
-            isLoginBlock,
-            toggleLoginBlock } = useUser() as UserContextProps;
+            // isLoginBlock,
+            // toggleLoginBlock 
+            } = useUser() as UserContextProps;
 
 
     return (

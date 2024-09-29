@@ -1,12 +1,10 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const API_KEY: string = process.env.NEXT_PUBLIC_SUPABASE_KEY as string;
 const API_URL: string = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
+const API_KEY: string = process.env.NEXT_PUBLIC_SUPABASE_KEY as string;
 
 // Cria o cliente Supabase com tipagem explícita
 const supabase: SupabaseClient = createClient(API_URL, API_KEY);
-
-
 export default class DataBase {
 
     // Array de objetos com nome e score
@@ -29,8 +27,10 @@ export default class DataBase {
                 return data.id;
             }
             return null;
-        } catch (err: any) {
-            console.error('Error checking user existence:', err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                console.error('Error checking user existence:', err.message);
+            }
             return null;
         }
     }
@@ -54,8 +54,10 @@ export default class DataBase {
             } else {
                 return false;
             }
-        } catch (err: any) {
-            console.error('Error authenticating password:', err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                console.error('Error authenticating password:', err.message);
+            }
         }
     }
 
@@ -67,23 +69,27 @@ export default class DataBase {
                 .insert([{ name: userName, password: userPassword }]);
 
             if (error) throw error;
-        } catch (err: any) {
-            console.error('Error adding player to database:', err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                console.error('Error adding player to database:', err.message);
+            }
         }
     }
 
     static async getTopPlayers() {
-      try {
-          const { data, error } = await supabase
-              .from('players')
-              .select('name, score')
-              .order('score', { ascending: false })
-              .limit(10);
+        try {
+            const { data, error } = await supabase
+                .from('players')
+                .select('name, score')
+                .order('score', { ascending: false })
+                .limit(10);
 
-          if (error) throw error;
-          DataBase.topPlayers = data || [];  // Armazena os jogadores na variável da classe
-      } catch (err: any) {
-          console.error('Error retrieving top players:', err.message);
-      }
+            if (error) throw error;
+            DataBase.topPlayers = data || [];  // Armazena os jogadores na variável da classe
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                console.error('Error retrieving top players:', err.message);
+            }
+        }
     }
 }
